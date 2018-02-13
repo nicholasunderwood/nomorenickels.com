@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Text syling</title>
+    <title>Text Styling</title>
     <style>
         /*
         Nicholas Underwood
-        interactive website
+        interactive font styling
          */
         body{
             text-align: center;
         }
-        #input{
+        #input {
             width: 30%;
             text-start: top;
-        }
-        #text{
-            font-size:30px;
         }
     </style>
 </head>
@@ -26,10 +23,12 @@
     Text<br>
     <input id="input" type="text"><br>
     <div id="buttons">
-        Italic
+        <em>Italic</em>
         <input id="italic" type="checkbox"><br>
-        Underlined
+        <u>Underlined</u>
         <input id="underline" type="checkbox"><br>
+        <strong>Bold</strong>
+        <input id="bold" type="checkbox"><br>
         Text Color
         <input id="color" type="color"><br>
         Font size
@@ -60,23 +59,29 @@
         var usertext = document.getElementById("text");
         var cat = document.getElementById("submit");
         var isItalics = document.getElementById("italic");
+        var isUnderline = document.getElementById("underline")
+        var isBold = document.getElementById("bold")
         var textColor = document.getElementById("color");
         var fontSize = document.getElementById("fontSize")
         var font = document.getElementById("font");
+        var bold
         cat.addEventListener("click", function(){
             usertext.innerHTML = document.getElementById("input").value;
             if(isItalics.checked == true){
                 usertext.style.fontStyle = "italic";}
             else{
                 usertext.style.fontStyle = "none";}
-            if(isItalics.checked == true){
+            if(isUnderline.checked == true){
                 usertext.style.textDecoration = "underlined";}
             else{
-                usertext.style.fontStyle = "none";}
+                usertext.style.textDecoration = "none";}
+            if(isBold.checked == true){
+                usertext.style.fontWeight = "bold";}
+            else{
+                usertext.style.fontWeight = "none";}
             usertext.style.color = textColor.value;
             usertext.style.fontFamily = font.value;
             usertext.style.fontSize = fontSize.value + "px"
-
         })
     </script>
 </body>
