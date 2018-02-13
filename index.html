@@ -17,7 +17,6 @@
         }
         #text{
             font-size:30px;
-            font-family: Impact;
         }
     </style>
 </head>
@@ -34,7 +33,7 @@
         Text Color
         <input id="color" type="color"><br>
         Font size
-        <input id="fontSize" type="number" value="30"><br>
+        <input id="fontSize" type="number"><br>
         Font
         <input id="font" list="fonts">
         <datalist id="fonts">
@@ -51,8 +50,8 @@
             <option value="Bookman">
             <option value="Comic Sans MS">
             <option value="Trebuchet MS">
-            <option value="Arial Black">
             <option value="Impact">
+            <option value="Arial Black">
         </datalist>
     </div>
     <input id="submit" type="button" value="submit">
@@ -62,6 +61,7 @@
         var cat = document.getElementById("submit");
         var isItalics = document.getElementById("italic");
         var textColor = document.getElementById("color");
+        var fontSize = document.getElementById("fontSize")
         var font = document.getElementById("font");
         cat.addEventListener("click", function(){
             usertext.innerHTML = document.getElementById("input").value;
@@ -74,8 +74,8 @@
             else{
                 usertext.style.fontStyle = "none";}
             usertext.style.color = textColor.value;
-            usertext.innerHTML.style.fontFamily = "Impact,Charcoal,sans-serif"
-            console.log(font.value)
+            usertext.style.fontFamily = font.value;
+            usertext.style.fontSize = fontSize.value + "px"
 
         })
     </script>
