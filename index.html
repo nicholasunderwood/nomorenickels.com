@@ -31,6 +31,8 @@
         <input id="bold" type="checkbox"><br>
         Text Color
         <input id="color" type="color"><br>
+        Highlight
+        <input id="highlight" type="color"><br>
         Font size
         <input id="fontSize" type="number"><br>
         Font
@@ -64,7 +66,7 @@
         var textColor = document.getElementById("color");
         var fontSize = document.getElementById("fontSize")
         var font = document.getElementById("font");
-        var bold
+        var highlight = document.getElementById("highlight")
         cat.addEventListener("click", function(){
             usertext.innerHTML = document.getElementById("input").value;
             if(isItalics.checked == true){
@@ -80,8 +82,9 @@
             else{
                 usertext.style.fontWeight = "none";}
             usertext.style.color = textColor.value;
+            usertext.style.backgroundColor = highlight.value;
             usertext.style.fontFamily = font.value;
-            usertext.style.fontSize = fontSize.value + "px"
+            usertext.style.fontSize = fontSize.value + "px";
         })
     </script>
 </body>
