@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text syling</title>
+    <style>
+        /*
+        Nicholas Underwood
+        interactive website
+         */
+        body{
+            text-align: center;
+        }
+        #input{
+            width: 30%;
+            text-start: top;
+        }
+        #text{
+            font-size:30px;
+            font-family: Impact;
+        }
+    </style>
+</head>
+<body>
+    <h2>Text Editor</h2>
+    <h4>By Nicholas Underwood</h4></h4>
+    Text<br>
+    <input id="input" type="text"><br>
+    <div id="buttons">
+        Italic
+        <input id="italic" type="checkbox"><br>
+        Underlined
+        <input id="underline" type="checkbox"><br>
+        Text Color
+        <input id="color" type="color"><br>
+        Font size
+        <input id="fontSize" type="number" value="30"><br>
+        Font
+        <input id="font" list="fonts">
+        <datalist id="fonts">
+            <option value="Arial" style="font-family:Arial;">
+            <option value="Helvetica" style="font-family:Helvetica;">
+            <option value="Times" style="font-family:Times;">
+            <option value="Times New Roman" style="font-family:Times;">
+            <option value="Courier">
+            <option value="Courier New">
+            <option value="Verdana">
+            <option value="Georgia">
+            <option value="Palatino">
+            <option value="Garamond">
+            <option value="Bookman">
+            <option value="Comic Sans MS">
+            <option value="Trebuchet MS">
+            <option value="Arial Black">
+            <option value="Impact">
+        </datalist>
+    </div>
+    <input id="submit" type="button" value="submit">
+    <p id="text"></p>
+    <script>
+        var usertext = document.getElementById("text");
+        var cat = document.getElementById("submit");
+        var isItalics = document.getElementById("italic");
+        var textColor = document.getElementById("color");
+        var font = document.getElementById("font");
+        cat.addEventListener("click", function(){
+            usertext.innerHTML = document.getElementById("input").value;
+            if(isItalics.checked == true){
+                usertext.style.fontStyle = "italic";}
+            else{
+                usertext.style.fontStyle = "none";}
+            if(isItalics.checked == true){
+                usertext.style.textDecoration = "underlined";}
+            else{
+                usertext.style.fontStyle = "none";}
+            usertext.style.color = textColor.value;
+            usertext.innerHTML.style.fontFamily = "Impact,Charcoal,sans-serif"
+            console.log(font.value)
+
+        })
+    </script>
+</body>
+</html>
