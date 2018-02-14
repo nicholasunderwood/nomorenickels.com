@@ -15,6 +15,9 @@
             width: 30%;
             text-start: top;
         }
+        #TS{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -56,7 +59,10 @@
         </datalist>
         Text Shadow
         <input id="isTextShadow" type="checkbox">
-        <div id="TS"></div>
+        <div id="TS">
+        Text Shadow Color
+        <input id="textShadow" type="color">
+        </div>
     </div>
     <input id="submit" type="button" value="submit">
     <p id="text"></p>
@@ -71,24 +77,20 @@
         var font = document.getElementById("font");
         var highlight = document.getElementById("highlight")
         var isTextShadow = document.getElementById("isTextShadow")
-        var shadowLabel = document.createTextNode("Text Shadow Color")
-        var textShadow = document.createElement("INPUT")
+        var shadowDiv = document.getElementById("TS")
+        var textShadow = document.getElementById("textShadow")
         textShadow.setAttribute("type", "color")
         textShadow.setAttribute("id", "textShadow")
         isTextShadow.addEventListener("click", function(){
             if(isTextShadow.checked == true){
                 console.log("checked")
-                shadowLabel.style.display = "block"
-                textShadow.style.display = "block"
+                shadowLabel.style.display = "block";
+                textShadow.style.display = "block";
             }
-
             else {
                 console.log("not checked")
-                if (document.getElementById("TS").contains(textShadow)) {
-                    console.log("elements present")
-                    shadowLabel.style.display = "none"
-                    textShadow.style.display = "none"
-                }
+                shadowLabel.style.display = "none";
+                textShadow.style.display = "none";
             }
         })
         cat.addEventListener("click", function(){
