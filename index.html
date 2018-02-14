@@ -32,11 +32,11 @@
         Text Color
         <input id="color" type="color"><br>
         Highlight
-        <input id="highlight" type="color"><br>
+        <input id="highlight" type="color" value="#ffffff"><br>
         Font size
         <input id="fontSize" type="number"><br>
         Font
-        <input id="font" list="fonts">
+        <input id="font" list="fonts"><br>
         <datalist id="fonts">
             <option value="Arial" style="font-family:Arial;">
             <option value="Helvetica" style="font-family:Helvetica;">
@@ -54,6 +54,9 @@
             <option value="Impact">
             <option value="Arial Black">
         </datalist>
+        Text Shadow
+        <input id="isTextShadow" type="checkbox">
+        <div id="TS"></div>
     </div>
     <input id="submit" type="button" value="submit">
     <p id="text"></p>
@@ -67,6 +70,27 @@
         var fontSize = document.getElementById("fontSize")
         var font = document.getElementById("font");
         var highlight = document.getElementById("highlight")
+        var isTextShadow = document.getElementById("isTextShadow")
+        var shadowLabel = document.createTextNode("Text Shadow Color")
+        var textShadow = document.createElement("INPUT")
+        textShadow.setAttribute("type", "color")
+        textShadow.setAttribute("id", "textShadow")
+        isTextShadow.addEventListener("click", function(){
+            if(isTextShadow.checked == true){
+                console.log("checked")
+                shadowLabel.style.display = "block"
+                textShadow.style.display = "block"
+            }
+
+            else {
+                console.log("not checked")
+                if (document.getElementById("TS").contains(textShadow)) {
+                    console.log("elements present")
+                    shadowLabel.style.display = "none"
+                    textShadow.style.display = "none"
+                }
+            }
+        })
         cat.addEventListener("click", function(){
             usertext.innerHTML = document.getElementById("input").value;
             if(isItalics.checked == true){
