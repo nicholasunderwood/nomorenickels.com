@@ -90,13 +90,12 @@
         var isTextShadow = document.getElementById("isTextShadow")
         var shadowDiv = document.getElementById("TS")
         var textShadowC = document.getElementById("textShadow")
+        var textShadowP = document.getElementById("placement")
         isTextShadow.addEventListener("click", function(){
             if(isTextShadow.checked == true){
-                shadowDiv.style.display = "block";
-            }
+                shadowDiv.style.display = "block";}
             else {
-                shadowDiv.style.display = "none";
-            }
+                shadowDiv.style.display = "none";}
         })
         cat.addEventListener("click", function(){
             console.log(fontSize.value)
@@ -118,16 +117,24 @@
             usertext.style.fontFamily = font.value;
             usertext.style.fontSize = fontSize.value + "px";
             if(isTextShadow.checked == true){
-                var textShadowS = "1"
+                var textShadowS = 1
                 if (!fontSize.value == ""){
                     console.log("success")
-                    textShadowS = (parseInt(fontSize.value))/16
-                    /*add to string and position*/
-                }
-                console.log(textShadowS)
-                usertext.style.textShadow = "5px 5px 1px " + textShadowC.value;
+                    textShadowS = (parseInt(fontSize.value))/16}
+                var shadowX = textShadowS
+                var shadowY = textShadowS;
+                if (textShadowP.value == "Top Left"){
+                  shadowX = shadowX * -1;
+                  shadowY = shadowY * -1;}
+                if (textShadowP.value == "Top Right"){
+                  shadowY = shadowY * -1;}
+                if (textShadowP.value == "Bottom Left"){
+                  shadowX = shadowX * -1;}
+                shadowX = shadowX.toString();
+                shadowY = shadowY.toString();
+                console.log(shadowX, shadowY);
+                usertext.style.textShadow = shadowY + "px " + shadowX + "px 1px " + textShadowC.value;
             }
-
         })
     </script>
 </body>
