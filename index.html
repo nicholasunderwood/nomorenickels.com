@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Text Styling</title>
     <style>
         /*
@@ -22,60 +22,44 @@
             font-size: 16px;
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Text Editor</h2>
-    <h4>By Nicholas Underwood</h4></h4>
+    <h4>By Nicholas Underwood</h4>
     Text<br>
     <input id="input" type="text"><br>
-    <div id="buttons">
-        <em>Italic</em>
-        <input id="italic" type="checkbox"><br>
-        <u>Underlined</u>
-        <input id="underline" type="checkbox"><br>
-        <strong>Bold</strong>
-        <input id="bold" type="checkbox"><br>
-        Text Color
-        <input id="color" type="color"><br>
-        Highlight
-        <input id="highlight" type="color" value="#ffffff"><br>
-        Font size
-        <input id="fontSize" type="number"><br>
-        Font
-        <input id="font" list="fonts"><br>
-        <datalist id="fonts">
-            <option value="Arial">
-            <option value="Helvetica">
-            <option value="Times">
-            <option value="Times New Roman">
-            <option value="Courier">
-            <option value="Courier New">
-            <option value="Verdana">
-            <option value="Georgia">
-            <option value="Palatino">
-            <option value="Garamond">
-            <option value="Bookman">
-            <option value="Comic Sans MS">
-            <option value="Trebuchet MS">
-            <option value="Impact">
-            <option value="Arial Black">
-        </datalist>
-        Text Shadow
-        <input id="isTextShadow" type="checkbox">
-        <div id="TS">
-            Text Shadow Color
-            <input id="textShadow" type="color"><br>
-            Position
-            <input id="placement" list="where">
-            <datalist id="where">
-                <option value="Top Left">
-                <option value="Top Right">
-                <option value="Bottom Left">
-                <option value="Bottom Right">
-            </datalist>
-        </div>
+    <div id="buttons"> <em>Italic</em> <input id="italic" type="checkbox"><br>
+      <u>Underlined</u> <input id="underline" type="checkbox"><br>
+      <strong>Bold</strong> <input id="bold" type="checkbox"><br>
+      Text Color <input id="color" type="color"><br>
+      Highlight <input id="highlight" value="#ffffff" type="color"><br>
+      Font size <input id="fontSize" type="number"><br>
+      
+      Font<select id="font">
+        <option value="Arial">Arial</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier">Courier</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Palatino">Palatino</option>
+        <option value="Garamond">Garamond</option>
+        <option value="Bookman">Bookman</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+        <option value="Trebuchet MS">Trebuchet MS</option>
+        <option value="Impact">Impact</option>
+        <option value="Arial Black">Arial Black</option>
+      </select><br>
+      Text Shadow
+      <input id="isTextShadow" type="checkbox">
+      <div id="TS"> Text Shadow Color <input id="textShadow" type="color"><br>
+        Position <select id="placement">
+          <option value="Top Left">Top Left</option>
+          <option value="Top Right">Top Right</option>
+          <option value="Bottom Left">Bottom Left</option>
+          <option value="Bottom Right">Bottom Right</option>
+        </select> </div>
     </div>
-    <input id="submit" type="button" value="apply">
+    <input id="submit" value="apply" type="button">
     <p><span id="text"></span></p>
     <script>
         var usertext = document.getElementById("text");
@@ -91,6 +75,7 @@
         var shadowDiv = document.getElementById("TS")
         var textShadowC = document.getElementById("textShadow")
         var textShadowP = document.getElementById("placement")
+        var list = document.getElementsByClassName("list")
         isTextShadow.addEventListener("click", function(){
             if(isTextShadow.checked == true){
                 shadowDiv.style.display = "block";}
@@ -98,7 +83,6 @@
                 shadowDiv.style.display = "none";}
         })
         cat.addEventListener("click", function(){
-            console.log(fontSize.value)
             usertext.innerHTML = document.getElementById("input").value;
             if(isItalics.checked == true){
                 usertext.style.fontStyle = "italic";}
@@ -117,11 +101,10 @@
             usertext.style.fontFamily = font.value;
             usertext.style.fontSize = fontSize.value + "px";
             if(isTextShadow.checked == true){
-                var textShadowS = 1
+                var textShadowS = 1;
                 if (!fontSize.value == ""){
-                    console.log("success")
-                    textShadowS = (parseInt(fontSize.value))/16}
-                var shadowX = textShadowS
+                    textShadowS = (parseInt(fontSize.value))/16;}
+                var shadowX = textShadowS;
                 var shadowY = textShadowS;
                 if (textShadowP.value == "Top Left"){
                   shadowX = shadowX * -1;
@@ -135,7 +118,10 @@
                 console.log(shadowX, shadowY);
                 usertext.style.textShadow = shadowY + "px " + shadowX + "px 1px " + textShadowC.value;
             }
+            else{
+                usertext.style.textShadow = "";
+            }
         })
     </script>
-</body>
+  </body>
 </html>
