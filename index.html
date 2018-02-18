@@ -33,7 +33,7 @@
             width: 30%;
         }
         #text{
-            font-size: 16px;
+            font-size: 30px;
         }
         #white{
             color:white;
@@ -97,7 +97,7 @@
         <tr><td><strong>Bold</strong></td> <td><input id="bold" type="checkbox"></td></tr>
         <tr><td>Text Color</td> <td><input id="color" type="color"></td></tr>
         <tr><td>Highlight</td> <td><input id="highlight" value="#ffffff" type="color"></td></tr>
-        <tr><td>Font size</td> <td><input id="fontSize" type="number"></td></tr>
+        <tr><td>Font size</td> <td><input id="fontSize" type="number" min="1"></td></tr>
         <tr><td>Font</td> <td><select id="font">
         <option value="Arial">Arial</option>
         <option value="Times New Roman">Times New Roman</option>
@@ -155,7 +155,7 @@
             else{
                 usertext.style.fontStyle = "none";}
             if(isUnderline.checked == true){
-                usertext.style.textDecoration = "underlined";}
+                usertext.style.textDecoration = "underline";}
             else{
                 usertext.style.textDecoration = "none";}
             if(isBold.checked == true){
