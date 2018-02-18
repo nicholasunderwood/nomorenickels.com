@@ -11,15 +11,6 @@
         body{
             text-align: center;
         }
-        #input {
-            width: 30%;
-        }
-        #text{
-            font-size: 16px;
-        }
-        #white{
-            color:white;
-        }
         table{
             margin-left:auto;
             margin-right:auto;
@@ -31,7 +22,6 @@
         td{
             white-space: nowrap;
             padding-right: 4px;
-             
         }
         tr{
             border-bottom: 2px solid lightgray;
@@ -39,7 +29,61 @@
         td.ts{
             display: none;
         }
-        
+        #input {
+            width: 30%;
+        }
+        #text{
+            font-size: 16px;
+        }
+        #white{
+            color:white;
+        }
+        #bar{
+            width:150px;
+            height: 5px;
+            border:2px solid black;
+            border-radius: 12px;
+            background-color: darkgray;
+        }
+        #circle{
+            width: 11px;
+            height: 11px;
+            border-radius: 11px;
+            border: 1.5px solid black;
+            background-color: lightgray;
+            position: relative;
+            top:11px;
+            left: 70px;
+        }
+        #slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        #slider:hover{
+            opacity: 1;
+        }
+        #slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            background: black;
+            cursor: pointer;
+        }
+        #slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            background: black;
+            cursor: pointer;
+        }
     </style>
     </head>
     <body>
@@ -76,6 +120,7 @@
             <option value="Bottom Left">Bottom Left</option>
             <option value="Bottom Right">Bottom Right</option>
         </select></td></tr>
+        <tr><td class="ts">Text Shadow Blur</td><td class="ts"><input id="slider" type="range" min="0" max="10" value="0"></td></tr>
     </table>
     <input id="submit" value="apply" type="button">
     <p><span id="text"></span></p>
@@ -83,20 +128,18 @@
         var usertext = document.getElementById("text");
         var cat = document.getElementById("submit");
         var isItalics = document.getElementById("italic");
-        var isUnderline = document.getElementById("underline")
-        var isBold = document.getElementById("bold")
+        var isUnderline = document.getElementById("underline");
+        var isBold = document.getElementById("bold");
         var textColor = document.getElementById("color");
-        var fontSize = document.getElementById("fontSize")
+        var fontSize = document.getElementById("fontSize");
         var font = document.getElementById("font");
-        var highlight = document.getElementById("highlight")
-        var isTextShadow = document.getElementById("isTextShadow")
-        var shadowRs = document.getElementsByClassName("ts")
-        for(i=0; i<10; i++){
-            console.log(document.getElementById("row").attributes[i]);
-        }
+        var highlight = document.getElementById("highlight");
+        var isTextShadow = document.getElementById("isTextShadow");
+        var shadowRs = document.getElementsByClassName("ts");
         var textShadowC = document.getElementById("textShadow")
         var textShadowP = document.getElementById("placement")
-        var list = document.getElementsByClassName("list")
+        var slide = document.getElementById("slider");
+        var isDown = false;
         isTextShadow.addEventListener("click", function(){
             if(isTextShadow.checked == true){
                 for(i=0; i<shadowRs.length; i++){
@@ -139,7 +182,7 @@
                 shadowX = shadowX.toString();
                 shadowY = shadowY.toString();
                 console.log(shadowX, shadowY);
-                usertext.style.textShadow = shadowY + "px " + shadowX + "px 1px " + textShadowC.value;
+                usertext.style.textShadow = shadowY + "px " + shadowX + "px " + slide.value + "px " + textShadowC.value;
             }
             else{
                 usertext.style.textShadow = "";
