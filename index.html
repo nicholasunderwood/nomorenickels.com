@@ -1,41 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+    <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Text Styling</title>
     <style>
         /*
         Nicholas Underwood
         interactive font styling
-         */
+            */
         body{
             text-align: center;
         }
         #input {
             width: 30%;
-            text-start: top;
-        }
-        #TS{
-            display: none;
         }
         #text{
             font-size: 16px;
         }
+        #white{
+            color:white;
+        }
+        table{
+            margin-left:auto;
+            margin-right:auto;
+            text-align: left;
+            margin: 20px 40%;
+            padding-left:4px;
+            border-left: 4px double grey;
+        }
+        td{
+            white-space: nowrap;
+            padding-right: 4px;
+             
+        }
+        tr{
+            border-bottom: 2px solid lightgray;
+        }
+        td.ts{
+            display: none;
+        }
+        
     </style>
-  </head>
-  <body>
+    </head>
+    <body>
     <h2>Text Editor</h2>
     <h4>By Nicholas Underwood</h4>
     Text<br>
     <input id="input" type="text"><br>
-    <div id="buttons"> <em>Italic</em> <input id="italic" type="checkbox"><br>
-      <u>Underlined</u> <input id="underline" type="checkbox"><br>
-      <strong>Bold</strong> <input id="bold" type="checkbox"><br>
-      Text Color <input id="color" type="color"><br>
-      Highlight <input id="highlight" value="#ffffff" type="color"><br>
-      Font size <input id="fontSize" type="number"><br>
-      
-      Font<select id="font">
+    <table id="buttons">
+        <tr><td><em>Italic</em></td> <td><input id="italic" type="checkbox"></td></tr>
+        <tr><td><u>Underlined</u></td> <td><input id="underline" type="checkbox"></td></tr>
+        <tr><td><strong>Bold</strong></td> <td><input id="bold" type="checkbox"></td></tr>
+        <tr><td>Text Color</td> <td><input id="color" type="color"></td></tr>
+        <tr><td>Highlight</td> <td><input id="highlight" value="#ffffff" type="color"></td></tr>
+        <tr><td>Font size</td> <td><input id="fontSize" type="number"></td></tr>
+        <tr><td>Font</td> <td><select id="font">
         <option value="Arial">Arial</option>
         <option value="Times New Roman">Times New Roman</option>
         <option value="Courier">Courier</option>
@@ -48,17 +67,16 @@
         <option value="Trebuchet MS">Trebuchet MS</option>
         <option value="Impact">Impact</option>
         <option value="Arial Black">Arial Black</option>
-      </select><br>
-      Text Shadow
-      <input id="isTextShadow" type="checkbox">
-      <div id="TS"> Text Shadow Color <input id="textShadow" type="color"><br>
-        Position <select id="placement">
-          <option value="Top Left">Top Left</option>
-          <option value="Top Right">Top Right</option>
-          <option value="Bottom Left">Bottom Left</option>
-          <option value="Bottom Right">Bottom Right</option>
-        </select> </div>
-    </div>
+        </select></td></tr>
+        <tr><td>Text Shadow<span id="white"> Color </span></td> <td><input id="isTextShadow" type="checkbox"></td></tr>
+        <tr><td id="row" class="ts">Text Shadow Color</td> <td class="ts"><input id="textShadow" type="color"></td></tr>
+        <tr><td class="ts">Position</td> <td class="ts"><select id="placement">
+            <option value="Top Left">Top Left</option>
+            <option value="Top Right">Top Right</option>
+            <option value="Bottom Left">Bottom Left</option>
+            <option value="Bottom Right">Bottom Right</option>
+        </select></td></tr>
+    </table>
     <input id="submit" value="apply" type="button">
     <p><span id="text"></span></p>
     <script>
@@ -72,15 +90,20 @@
         var font = document.getElementById("font");
         var highlight = document.getElementById("highlight")
         var isTextShadow = document.getElementById("isTextShadow")
-        var shadowDiv = document.getElementById("TS")
+        var shadowRs = document.getElementsByClassName("ts")
+        for(i=0; i<10; i++){
+            console.log(document.getElementById("row").attributes[i]);
+        }
         var textShadowC = document.getElementById("textShadow")
         var textShadowP = document.getElementById("placement")
         var list = document.getElementsByClassName("list")
         isTextShadow.addEventListener("click", function(){
             if(isTextShadow.checked == true){
-                shadowDiv.style.display = "block";}
+                for(i=0; i<shadowRs.length; i++){
+                    shadowRs[i].style.display = "table-cell";}}
             else {
-                shadowDiv.style.display = "none";}
+                for(i=0; i<shadowRs.length; i++){
+                    shadowRs[i].style.display = "none";}}
         })
         cat.addEventListener("click", function(){
             usertext.innerHTML = document.getElementById("input").value;
@@ -107,12 +130,12 @@
                 var shadowX = textShadowS;
                 var shadowY = textShadowS;
                 if (textShadowP.value == "Top Left"){
-                  shadowX = shadowX * -1;
-                  shadowY = shadowY * -1;}
+                    shadowX = shadowX * -1;
+                    shadowY = shadowY * -1;}
                 if (textShadowP.value == "Top Right"){
-                  shadowY = shadowY * -1;}
+                    shadowY = shadowY * -1;}
                 if (textShadowP.value == "Bottom Left"){
-                  shadowX = shadowX * -1;}
+                    shadowX = shadowX * -1;}
                 shadowX = shadowX.toString();
                 shadowY = shadowY.toString();
                 console.log(shadowX, shadowY);
@@ -123,5 +146,5 @@
             }
         })
     </script>
-  </body>
+    </body>
 </html>
