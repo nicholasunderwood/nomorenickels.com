@@ -20,27 +20,20 @@ var number = ["100", "0", "0", "0", "100", "0", "0", "100", "0", "0px 0px 0", "1
 var prop = ["contrast", "blur", "sepia", "invert", "opacity", "hue-rotate", "greyscale", "brightness", "drop-shadow", "saturate"];
 var unit = ["%", "px", "%", "%", "%", "deg", "%", "%", "px", "%"];
 var cat = function(){
-    console.log("hello");
     img.style.filter = 'contrast('+contrast.value+'%) blur('+blur.value+'px) sepia('+sepia.value+'%) invert('+invert.value+'%) opacity('+opacity.value+'%) hue-rotate('+huerotate.value+'deg) grayscale('+greyscale.value+'%) brightness('+brightness.value+'%) drop-shadow('+dropshadow.value+'px '+dropshadow.value+'px '+dropshadowblur.value+'px) saturate('+saturate.value+'%)';
 };
 submit.addEventListener("click", function () {
     img.style.backgroundImage = 'url('+url.value+')';
-    console.log(img.src);
 });
 filet.addEventListener('change', function (){
-    console.log("file append");
     var file = filet.files[0];
-    console.log(file);
     var reader = new FileReader();
     reader.onloadend = function(){
-        console.log(reader.result);
         img.src = reader.result;
     };
     if(file){
         reader.readAsDataURL(file);
-        console.log("readAsDataURL");
     }else{
-        console.log("else");
     }
 }, true);
 
