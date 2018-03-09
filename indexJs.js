@@ -70,7 +70,6 @@ cat.addEventListener("click", function(){
             shadowX = shadowX * -1;}
         shadowX = shadowX.toString();
         shadowY = shadowY.toString();
-        console.log(shadowX, shadowY);
         usertext.style.textShadow = shadowY + "px " + shadowX + "px " + slide.value + "px " + textShadowC.value;
     }
     else{
