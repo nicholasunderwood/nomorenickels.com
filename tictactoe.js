@@ -1,6 +1,6 @@
-var player = "X";
+var player = 'X';
 var board = [];
-var winner = 'Y';
+var winner = 'O';
 var restart = document.getElementById('restart');
 restart.addEventListener('click', function () {
     board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]];
@@ -20,12 +20,12 @@ var handleClick = function(row, col) {
     if(board[row][col] === ' '){
         board[row][col] = player;
         if(player === 'X'){
-            player = 'Y';
+            player = 'O';
             winner = 'X'
         }
         else{
             player = 'X';
-            winner = 'Y'
+            winner = 'O'
         }
     }
     updateBoardDisplay();
@@ -81,10 +81,13 @@ var updateBoardDisplay = function() {
 };
 
 var updateStatusDisplay = function() {
+    console.log(board, board.includes(" "), !board.includes(" "))
     var statusDiv = document.getElementById("status");
     var winner = checkForWinner();
     if (winner) {
-        statusDiv.innerHTML = "Winner is " + winner;
+        statusDiv.innerHTML = winner + ' Wins!';
+    }else if(!board[0].includes(' ') && !board[1].includes(' ') && !board[2].includes(' ')){
+        statusDiv.innerHTML = 'Tie!'
     }else {
         statusDiv.innerHTML = "Current player is " + player;
     }
