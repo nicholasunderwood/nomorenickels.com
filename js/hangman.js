@@ -51,7 +51,7 @@ $(document).ready(function () {
     }
     $('#ur_input').on('submit', function(e){
         e.preventDefault();
-        if($('#letter').val() >= 'a') && ($('#letter').val() <= 'z'){
+        if(($('#letter').val() >= 'a') && ($('#letter').val() <= 'z')){
             for(i=0;i<word.length;i++){
                 if ($('#letter').val() === word[i]){
                     if(!letters.includes(word[i])){
