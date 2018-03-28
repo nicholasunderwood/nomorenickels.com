@@ -74,6 +74,14 @@ var updateBoardDisplay = function() {
             cellTd.innerHTML = board[row][col];
             cellTd.setAttribute("data-row", row);
             cellTd.setAttribute("data-col", col);
+            if(col === 1){
+                cellTd.style.borderLeft = 'solid';
+                cellTd.style.borderRight = 'solid';
+            }
+            if(row === 1){
+                cellTd.style.borderTop = 'solid';
+                cellTd.style.borderBottom = 'solid';
+            }
             tableRow.appendChild(cellTd);
         }
         boardTable.appendChild(tableRow);
