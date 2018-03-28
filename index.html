@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Nicholas Underwood</title>
+    <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
+    <style>
+        ul .list{
+            list-style-type:disc;
+        }
+        #menu{
+            width:fit-content;
+            border-left: solid grey;
+        }
+        .button{
+            cursor: pointer;
+            border: ridge black;
+            padding: 10px 20px;
+            margin: 10px;
+        }
+        .button:hover{
+            background: black;
+            color:white;
+        }
+        p{
+            margin:0;
+        }
+        a:visited{
+            color:blue;
+        }
+        #title{
+            font-family: Cinzel Decorative;
+            font-size: 50px;
+            padding-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <marquee id='title' direction="left" scrollamount="30" behavior="scroll">Nicholas Underwood</marquee>
+    <div id='menu'>
+            <div class='button' id='hangmanWrapper'>
+                <p id="hangman">Hangman</p>
+                <ul class='list' id="hangmanList">
+                    <li><a href='hangman.html'>Webpage</a></li>
+                    <li><a>HTML</a></li>
+                    <li><a href="js/hangman.js">Javascript</a></li>
+                </ul>
+            </div>
+            <div class='button' id='imgsWrapper'>
+                <p id="imgs" >Image Styling</p>
+                <ul class="list" id="imgsList">
+                    <li><a href="img-styling.html">Webpage</a></li>
+                    <li><a>HTML</a></li>
+                    <li><a href="js/img-styling.js">Javascript</a></li>
+                </ul>
+            </div>
+            <div class='button' id='textsWrapper'>
+                <p id="texts">Text Styling</p>
+                <ul class="list" id="textsList">
+                    <li><a href="text-styling.html">Webpage</a></li>
+                    <li><a>HTML</a></li>
+                    <li><a href="js/text-styling.js">Javascript</a></li>
+                </ul>
+            </div>
+    </div>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
