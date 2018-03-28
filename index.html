@@ -14,14 +14,21 @@
             border-left: solid grey;
         }
         .button{
-            cursor: pointer;
             border: ridge black;
             padding: 10px 20px;
             margin: 10px;
+            height: 18.4px;
+            width: 90.2125px;
+            transition: 1s;
+            overflow: hidden;
         }
         .button:hover{
-            background: black;
-            color:white;
+            /*background: black;
+            color:white;*/
+            height: 105.6px;
+            width: 103.988px;
+
+            
         }
         p{
             margin:0;
@@ -63,8 +70,22 @@
                     <li><a href="js/text-styling.js">Javascript</a></li>
                 </ul>
             </div>
+            <div class='button' id='tttWrapper'>
+                <p id="ttt">Tic-Tac-Toe</p>
+                <ul class="list" id="tttList">
+                    <li><a href="tictactoe.html">Webpage</a></li>
+                    <li><a>HTML</a></li>
+                    <li><a href="js/tictactoe.js">Javascript</a></li>
+                </ul>
+            </div>
+            <div class='button' id='clockWrapper'>
+                <p id="clock">Text Styling</p>
+                <ul class="list" id="clockList">
+                    <li><a href="clock.html">Webpage</a></li>
+                    <li><a>HTML</a></li>
+                    <li><a href="js/clock.js">Javascript</a></li>
+                </ul>
+            </div>
     </div>
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/index.js"></script>
 </body>
 </html>
