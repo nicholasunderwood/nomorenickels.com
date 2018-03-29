@@ -12,18 +12,6 @@
             font-family: monospace;
             font-size: 50px;
         }
-        #board{
-            margin: 0 auto;
-            margin-bottom: 10px;
-            border-collapse:collapse;
-        }
-        #board td {
-            width: 100px;
-            height: 100px;
-            font-size: 3em;
-            cursor: pointer;
-            border-collapse:collapse;   
-        }
         #status{
             font-family: monospace;
             font-size: 2em;
@@ -33,14 +21,67 @@
             height: 22px;
             width: 58.9625px;
         }
+        #lines{
+            width: fit-content;
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;   
+        }
+        #lines, #lines td{
+            z-index: -1;
+            border-collapse: collapse;
+            padding: 0;
+        }
+        .hor{
+            width: 51.6px;
+            height: 103.2px;
+        }
+        .ver{
+            width: 103.2px;
+            height: 50px;
+        }
+        .cor{
+            width: 51.6px;
+            height: 50px;
+        }
+        #board{
+            z-index: 2;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            border-collapse:collapse;
+        }
+        #board td {
+            z-index: 2;
+            width: 100px;
+            height: 100px;
+            font-size: 3em;
+            cursor: pointer;
+            border-collapse:collapse;   
+        }
     </style>
-
 </head>
 <body>
 <h1>TIC TAC TOE</h1>
+<div>
+    <table id='lines'>
+            <tr>
+                <td class='cor line' id='a'></td><td class='ver line' id='b'></td><td class='ver line' id='c'></td><td class='cor line' id='d'></td>
+            </tr>
+            <tr>
+                <td class='hor line' id='e'></td><td class='mid line' id='f'></td><td class='mid line' id='g'></td><td class='hor line' id='h'></td>
+            </tr>
+            <tr>
+                <td class='hor line' id='i'></td><td class='mid line' id='j'></td><td class='mid line' id='k'></td><td class='hor line' id='l'></td>
+            </tr>
+            <tr>
+                <td class='cor line' id='m'></td><td class='ver line' id='n'></td><td class='ver line' id='o'></td><td class='cor line' id='p'></td>
+            </tr>
+        </table>
 <table id="board">
 </table>
-
+</div>
 <div id="status">
 </div>
 <button id="restart">Restart</button>
