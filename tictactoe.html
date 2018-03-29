@@ -60,11 +60,22 @@
             cursor: pointer;
             border-collapse:collapse;   
         }
+        #diag{
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            width: 310.4px;
+            margin: 0 auto;
+            height: 310.4px;
+            background: transparent;
+        }
     </style>
 </head>
 <body>
 <h1>TIC TAC TOE</h1>
 <div>
+    <div id='diag'></div>
     <table id='lines'>
             <tr>
                 <td class='cor line' id='a'></td><td class='ver line' id='b'></td><td class='ver line' id='c'></td><td class='cor line' id='d'></td>

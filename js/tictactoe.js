@@ -23,7 +23,7 @@ restart.addEventListener('click', function () {
         lines[x].style.border = 'none';
         console.log(x)
     }
-    console.log(isWinner, player, winner)
+    document.getElementById("diag").style.background = 'transparent';
     drawLines();
     setupClickListener();
     updateBoardDisplay();
@@ -128,7 +128,7 @@ var updateStatusDisplay = function() {
 
 var drawLines = function(){
     console.log('drawLines')
-    for(i=0;i<7;i++){
+    for(i=0;i<8;i++){
         if(
         [
         board[0][0] === board[0][1] && board[0][0] === board[0][2] && board[0][0] !== " " ,
@@ -177,6 +177,13 @@ var drawLines = function(){
                 lines[7].style.borderLeft = 'solid';
                 lines[11].style.borderLeft = 'solid';
                 lines[15].style.borderLeft = 'solid';
+            }
+            if(i===6){
+                document.getElementById("diag").style.background = "url('diag1.png')";
+            }
+            if(i===7){
+                document.getElementById("diag").style.background = "url('diag2.png')";
+                console.log('test')
             }
         }
     }   
