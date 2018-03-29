@@ -27,6 +27,7 @@
             color:white;*/
             height: 105.6px;
             width: 103.988px;
+            
         }
         p{
             margin:0;
@@ -48,7 +49,7 @@
                 <p id="hangman">Hangman</p>
                 <ul class='list' id="hangmanList">
                     <li><a href='hangman.html'>Webpage</a></li>
-                    <li><a href='HTML\hangman.txt'>HTML</a></li>
+                    <li><a>HTML</a></li>
                     <li><a href="js/hangman.js">Javascript</a></li>
                 </ul>
             </div>
@@ -56,7 +57,7 @@
                 <p id="imgs" >Image Styling</p>
                 <ul class="list" id="imgsList">
                     <li><a href="img-styling.html">Webpage</a></li>
-                    <li><a href='HTML\img-styling.txt'>HTML</a></li>
+                    <li><a>HTML</a></li>
                     <li><a href="js/img-styling.js">Javascript</a></li>
                 </ul>
             </div>
@@ -64,7 +65,7 @@
                 <p id="texts">Text Styling</p>
                 <ul class="list" id="textsList">
                     <li><a href="text-styling.html">Webpage</a></li>
-                    <li><a href='HTML\text-styling.txt'>HTML</a></li>
+                    <li><a>HTML</a></li>
                     <li><a href="js/text-styling.js">Javascript</a></li>
                 </ul>
             </div>
@@ -72,7 +73,7 @@
                 <p id="ttt">Tic-Tac-Toe</p>
                 <ul class="list" id="tttList">
                     <li><a href="tictactoe.html">Webpage</a></li>
-                    <li><a href='HTML\tictactoe.txt'>HTML</a></li>
+                    <li><a>HTML</a></li>
                     <li><a href="js/tictactoe.js">Javascript</a></li>
                 </ul>
             </div>
@@ -80,7 +81,7 @@
                 <p id="clock">Clock</p>
                 <ul class="list" id="clockList">
                     <li><a href="clock.html">Webpage</a></li>
-                    <li><a href='HTML\clock.txt'>HTML</a></li>
+                    <li><a>HTML</a></li>
                     <li><a href="js/clock.js">Javascript</a></li>
                 </ul>
             </div>
