@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Snake</title>
+    <style>
+        #board td{
+            border: solid 1px;
+            width:50px;
+            height: 50px;
+            padding:0;
+            border-spacing: 30px;
+            border-collapse: collapse;
+        }
+        #board{
+            width:884;
+            margin: 0 auto;
+        }
+        #score{
+            text-align: center;
+            font-size: 50px;
+            font-family: monospace;
+        }
+        .apple{
+            background-color: red;
+        }
+        .snake{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div id='score'></div>
+<table id='board'>
+</table>
+<script src="js/snake.js"></script>
+</body>
+</html>
