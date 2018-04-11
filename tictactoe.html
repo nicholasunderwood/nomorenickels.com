@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width">
     <title>TicTacToe</title>
     <style>
+        @keyframes pulse {
+            from{
+                opacity: 1;
+            }
+            to{
+                opacity: 0;
+            }
+        }
         body{
             text-align: center;
         }
@@ -58,7 +66,11 @@
             height: 100px;
             font-size: 3em;
             cursor: pointer;
-            border-collapse:collapse;   
+            border-collapse:collapse;
+            animation-direction: alternate;
+            animation-duration: 0.4s;
+            animation-iteration-count: 4;
+
         }
         #diag{
             position: absolute;
