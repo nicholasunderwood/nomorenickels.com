@@ -1,6 +1,7 @@
 var isWinner = false;
 var player = 'X';
 var board = [];
+var layout = [];
 var winner = 'O';
 var restart = document.getElementById('restart');
 var lines = document.getElementsByClassName('line');
@@ -85,10 +86,12 @@ var setupClickListener = function() {
 
 var updateBoardDisplay = function() {
     console.log('updateBoardDisplay')
+    layout = [];
     var boardTable = document.getElementById("board");
     boardTable.innerHTML = "";
     for (var row = 0; row < board.length; row++) {
         var tableRow = document.createElement("tr");
+        var layoutRow = []
         for (var col = 0; col < board[row].length; col++) {
             var cellTd = document.createElement("td");
             cellTd.innerHTML = board[row][col];
@@ -103,16 +106,17 @@ var updateBoardDisplay = function() {
                 cellTd.style.borderBottom = 'solid';
             }
             tableRow.appendChild(cellTd);
+            layoutRow.push(cellTd)
         }
         boardTable.appendChild(tableRow);
+        layout.push(layoutRow);
     }
 };
 
 var updateStatusDisplay = function() {
-    console.log('updateStatusDisplay')
+    console.log('updateStatusDisplay');
     var statusDiv = document.getElementById("status");
     var winner = checkForWinner();
-    console.log('test ')
     if (winner) {
         console.log('win')
         statusDiv.innerHTML = winner + ' Wins!';
@@ -127,67 +131,49 @@ var updateStatusDisplay = function() {
 };
 
 var drawLines = function(){
-    console.log('drawLines')
-    for(i=0;i<8;i++){
-        if(
-        [
-        board[0][0] === board[0][1] && board[0][0] === board[0][2] && board[0][0] !== " " ,
-        board[1][0] === board[1][1] && board[1][0] === board[1][2] && board[1][0] !== " " ,
-        board[2][0] === board[2][1] && board[2][0] === board[2][2] && board[2][0] !== " " ,
-        board[0][0] === board[1][0] && board[0][0] === board[2][0] && board[0][0] !== " " ,
-        board[0][1] === board[1][1] && board[0][1] === board[2][1] && board[0][1] !== " " ,
-        board[0][2] === board[1][2] && board[0][2] === board[2][2] && board[0][2] !== " " ,
-        board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== " " ,
-        board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== " "
-        ][i]){
-            console.log(i);
-            if(i===0){
-                lines[0].style.borderBottom = 'solid';
-                lines[1].style.borderBottom = 'solid';
-                lines[2].style.borderBottom = 'solid';
-                lines[3].style.borderBottom = 'solid';
-                console.log(lines, lines[0])
-            }
-            if(i===1){
-                lines[4].style.borderBottom = 'solid';
-                lines[5].style.borderBottom = 'solid';
-                lines[6].style.borderBottom = 'solid';
-                lines[7].style.borderBottom = 'solid';
-            }
-            if(i===2){
-                lines[8].style.borderBottom = 'solid';
-                lines[9].style.borderBottom = 'solid';
-                lines[10].style.borderBottom = 'solid';
-                lines[11].style.borderBottom = 'solid';
-            }
-            if(i===3){
-                lines[1].style.borderLeft = 'solid';
-                lines[5].style.borderLeft = 'solid';
-                lines[9].style.borderLeft = 'solid';
-                lines[13].style.borderLeft = 'solid';
-            }
-            if(i===4){
-                lines[2].style.borderLeft = 'solid';
-                lines[6].style.borderLeft = 'solid';
-                lines[10].style.borderLeft = 'solid';
-                lines[14].style.borderLeft = 'solid';
-            }
-            if(i===5){
-                lines[3].style.borderLeft = 'solid';
-                lines[7].style.borderLeft = 'solid';
-                lines[11].style.borderLeft = 'solid';
-                lines[15].style.borderLeft = 'solid';
-            }
-            if(i===6){
-                document.getElementById("diag").style.background = "url('diag1.png')";
-            }
-            if(i===7){
-                document.getElementById("diag").style.background = "url('diag2.png')";
-                console.log('test')
-            }
-        }
-    }   
-}
+    console.log('drawLines');
+    if(board[0][0] === board[0][1] && board[0][0] === board[0][2] && board[0][0] !== " "){
+        layout[0][0].style.animationName = 'pulse';
+        layout[0][1].style.animationName = 'pulse';
+        layout[0][2].style.animationName = 'pulse';
+    }
+    else if(board[1][0] === board[1][1] && board[1][0] === board[1][2] && board[1][0] !== " "){
+        layout[1][0].style.animationName = 'pulse';
+        layout[1][1].style.animationName = 'pulse';
+        layout[1][2].style.animationName = 'pulse';
+    }
+    else if(board[2][0] === board[2][1] && board[2][0] === board[2][2] && board[2][0] !== " "){
+        layout[2][0].style.animationName = 'pulse';
+        layout[2][1].style.animationName = 'pulse';
+        layout[2][2].style.animationName = 'pulse';
+    }
+    else if(board[0][0] === board[1][0] && board[0][0] === board[2][0] && board[0][0] !== " "){
+        layout[0][0].style.animationName = 'pulse';
+        layout[1][0].style.animationName = 'pulse';
+        layout[2][0].style.animationName = 'pulse';
+    }
+    else if(board[1][0] === board[1][1] && board[1][0] === board[1][2] && board[1][0] !== " "){
+        layout[1][0].style.animationName = 'pulse';
+        layout[1][1].style.animationName = 'pulse';
+        layout[1][2].style.animationName = 'pulse';
+    }
+    else if(board[0][2] === board[1][2] && board[0][2] === board[2][2] && board[0][2] !== " "){
+        layout[0][2].style.animationName = 'pulse';
+        layout[1][2].style.animationName = 'pulse';
+        layout[2][2].style.animationName = 'pulse';
+    }
+    else if(board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== " "){
+        layout[0][0].style.animationName = 'pulse';
+        layout[1][1].style.animationName = 'pulse';
+        layout[2][2].style.animationName = 'pulse';
+    }
+    else if(board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== " "){
+        layout[0][2].style.animationName = 'pulse';
+        layout[1][1].style.animationName = 'pulse';
+        layout[2][0].style.animationName = 'pulse';
+    }
+
+};
 setupClickListener();
 updateBoardDisplay();
 updateStatusDisplay();
