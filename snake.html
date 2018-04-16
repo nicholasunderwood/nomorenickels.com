@@ -6,18 +6,36 @@
     <style>
         #board td{
             border: solid 1px;
-            width:50px;
-            height: 50px;
+            width: 35px;
+            height: 35px;
             padding:0;
-            border-spacing: 30px;
-            border-collapse: collapse;
+
         }
         #board{
-            width:884;
             margin: 0 auto;
+            border-collapse: collapse;
         }
         #score{
             text-align: center;
+            font-size: 50px;
+            font-family: monospace;
+        }
+        #restart{
+            width:100px;
+            height: 50px;
+            border-radius: 10px;
+            border: 2px solid;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            font-family: monospace;
+        }
+        #deathMessage{
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            top: 45%;
+            font-weight: bold;
             font-size: 50px;
             font-family: monospace;
         }
@@ -30,9 +48,17 @@
     </style>
 </head>
 <body>
+
 <div id='score'></div>
-<table id='board'>
-</table>
+<div id="wrapper">
+    <div id="deathMessage">
+        You Died<br>
+        <form>
+            <button id="restart">Restart</button>
+        </form>
+    </div>
+    <table id='board'></table>
+</div>
 <script src="js/snake.js"></script>
 </body>
 </html>
