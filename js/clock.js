@@ -1,20 +1,25 @@
-var tod = 'AM'
-var x = 1
-getTime()
-setInterval(getTime, 1000)
+var tod = 'AM';
+var x = 1;
+getTime();
+setInterval(getTime, 1000);
     
 function getTime(){
     var date = new Date();
-    var hours = date.getHours()
-    var minutes = getNumber(date.getMinutes())
-    var seconds = getNumber(date.getSeconds())
-    console.log(hours, hours>12)
+    var hours = date.getHours();
+    var minutes = getNumber(date.getMinutes());
+    var seconds = getNumber(date.getSeconds());
+    var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
+    var day = date.getDate();
+    var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'][date.getDay()];
+    var year = date.getFullYear();
+    console.log(month, day, week, year);
     if(hours>12){
-        hours-=12
+        hours-=12;
         tod = 'PM'
     }
-    $('#div').text(hours + ':' + minutes + ':' + seconds + ' ' + tod)
+    $('#time').text(hours + ':' + minutes + ':' + seconds + ' ' + tod);
     console.log(hours + ':' + minutes + ':' + seconds + ' ' + tod)
+    $('#day').text(week + ', ' + month + ' ' + day + ', ' + year)
 }
 
 function getNumber(t){
