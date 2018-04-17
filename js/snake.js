@@ -4,6 +4,7 @@ var dir = [0,0];
 var snake = [[0, 0, [0, 0]]];
 var apple = [];
 var score = 0;
+var sameFrame = true;
 
 function moveSnake(x){
     for(i=0;i<snake.length;i++){
@@ -20,14 +21,19 @@ function moveSnake(x){
         var lastSnake = snake[snake.length-1];
         snake.push([lastSnake[0]-lastSnake[2][0], lastSnake[1]-lastSnake[2][1], lastSnake[2]]);
     }
+
     for(i=0;i<layout.length;i++){
         for(x=0;x<layout[i].length;x++){
             layout[i][x].className = '';
         }
     }
-    
-    for(i=0;i<snake.length;i++){
-        layout[snake[i][0]][snake[i][1]].classList.add('snake');
+    try{
+        for(i=0;i<snake.length;i++){
+            layout[snake[i][0]][snake[i][1]].classList.add('snake');
+        }
+    }
+    catch(err){
+        console.warn('out of bounds')
     }
     layout[apple[0]][apple[1]].classList.add('apple');
 }
@@ -50,33 +56,17 @@ function isDead(){
     var tail = false;
     for (i=1; i<snake.length; i++){
         if(snake[i][0] === snake[0][0] && snake[i][1] === snake[0][1]){
-            var tail = true
+            tail = true
         }
     }
-    if(
-        (!snake[0][0] + dir[0] > 17) || 
-        (!snake[0][1] + dir[0] < 0) || 
-        (!snake[0][1] + dir[1]> 17) || 
-        (!snake[0][1] + dir[1] < 0) || 
-        (tail)
-    ){
-        console.log(
-        snake[0][0] + dir[0] < 17,
-        snake[0][0] + dir[0] > 0,
-        snake[0][1] + dir[1] < 17,
-        snake[0][1] + dir[1] < 0,
-        tail);
-        return true;
-    }
-    return false;
+    return((snake[0][0] > 25) || (snake[0][0] < 0) || (snake[0][1] > 25) || (snake[0][1] < 0) || (tail));
 }
 
-
 document.getElementById('score').innerHTML = score;
-for(y=0;y<17;y++){
+for(y=0;y<25;y++){
     var tr = document.createElement('TR');
     var layArr = [];
-    for(x=0;x<17;x++){
+    for(x=0;x<25;x++){
         td = document.createElement('TD');
         td.setAttribute('col', y);
         td.setAttribute('row', x);
@@ -90,28 +80,30 @@ layout[0][0].classList.add('snake');
 moveApple();
 
 window.addEventListener("keydown", function (event) {
-    if(event.key === "ArrowUp" && (!(dir[0] === 1 && dir[1] === 0) || snake.length === 1)){
-        dir = [-1,0];
+    if(sameFrame = true) {
+        sameFrame = false;
+        if (event.key === "ArrowUp" && (!(dir[0] === 1 && dir[1] === 0) || snake.length === 1)) {
+            dir = [-1, 0];
+        }
+        if (event.key === "ArrowDown" && (!(dir[0] === -1 && dir[1] === 0) || snake.length === 1)) {
+            dir = [1, 0];
+        }
+        if (event.key === "ArrowLeft" && (!(dir[0] === 0 && dir[1] === 1) || snake.length === 1)) {
+            dir = [0, -1];
+        }
+        if (event.key === "ArrowRight" && (!(dir[0] === 0 && dir[1] === -1) || snake.length === 1)) {
+            dir = [0, 1];
+        }
+        snake[0][2] = dir;
     }
-    if(event.key === "ArrowDown" && (!(dir[0] === -1 && dir[1] === 0) || snake.length === 1)){
-        dir = [1,0];
-    }
-    if(event.key === "ArrowLeft" && (!(dir[0] === 0 && dir[1] === 1) || snake.length === 1)){
-        console.log(dir[0] === 0 && dir[1] === 1);
-        dir = [0,-1];
-        
-    }
-    if(event.key === "ArrowRight" && (!(dir[0] === 0 && dir[1] === -1) || snake.length === 1)){
-        console.log(dir[0] === 0 && dir[1] === -1);
-        dir = [0,1];
-    }
-    snake[0][2] = dir;
 }, true);
 
 var gameLoop = setInterval(function(){
-    console.log(isDead());
+    sameFrame = true;
+    moveSnake(dir);
     if(isDead()){
         clearInterval(gameLoop);
+        document.getElementById('deathMessage').style.display = 'block';
+        console.log('you died');
     }
-    moveSnake(dir)
-},250)
+},125);
