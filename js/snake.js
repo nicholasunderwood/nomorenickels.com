@@ -4,7 +4,8 @@ var dir = [0,0];
 var snake = [[0, 0, [0, 0]]];
 var apple = [];
 var score = 0;
-var sameFrame = true;
+var dead = false;
+var sameFrame = false;
 
 function moveSnake(x){
     for(i=0;i<snake.length;i++){
@@ -80,30 +81,34 @@ layout[0][0].classList.add('snake');
 moveApple();
 
 window.addEventListener("keydown", function (event) {
-    if(sameFrame = true) {
-        sameFrame = false;
-        if (event.key === "ArrowUp" && (!(dir[0] === 1 && dir[1] === 0) || snake.length === 1)) {
+    dir = snake[0][2];
+    if(!sameFrame) {
+        sameFrame = true;
+        if ((event.key === "ArrowUp" || event.key === 'w') && (!(dir[0] === 1 && dir[1] === 0) || snake.length === 1)) {
             dir = [-1, 0];
         }
-        if (event.key === "ArrowDown" && (!(dir[0] === -1 && dir[1] === 0) || snake.length === 1)) {
+        if ((event.key === "ArrowDown" || event.key === 's') && (!(dir[0] === -1 && dir[1] === 0) || snake.length === 1)) {
             dir = [1, 0];
         }
-        if (event.key === "ArrowLeft" && (!(dir[0] === 0 && dir[1] === 1) || snake.length === 1)) {
+        if ((event.key === "ArrowLeft" || event.key === 'a') && (!(dir[0] === 0 && dir[1] === 1) || snake.length === 1)) {
             dir = [0, -1];
         }
-        if (event.key === "ArrowRight" && (!(dir[0] === 0 && dir[1] === -1) || snake.length === 1)) {
+        if ((event.key === "ArrowRight" || event.key === 'd') && (!(dir[0] === 0 && dir[1] === -1) || snake.length === 1)) {
             dir = [0, 1];
+        }
+        if (event.key === "Enter" && dead) {
+            location.reload()
         }
         snake[0][2] = dir;
     }
 }, true);
 
 var gameLoop = setInterval(function(){
-    sameFrame = true;
+    sameFrame = false;
     moveSnake(dir);
     if(isDead()){
+        dead = true;
         clearInterval(gameLoop);
         document.getElementById('deathMessage').style.display = 'block';
-        console.log('you died');
     }
 },125);
