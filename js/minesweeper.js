@@ -12,10 +12,10 @@ function click(td){
         var count = 0;
         if(testForBomb(x, y)){
             dead = true;
-            console.log('you died')
-            board[x][y].style.backgroundImage = "url('png/bomb.png')"
+            console.log('you died');
+            board[x][y].style.backgroundImage = "url('png/bomb.png')";
             for(i=0;i<bombs.length;i++){
-                board[bombs[i][0]][bombs[i][1]].style.backgroundImage = "url('png/bomb2.png')"  
+                board[bombs[i][0]][bombs[i][1]].style.backgroundImage = "url('png/bomb2.png')"
             }
             board[x][y].style.backgroundImage = "url('png/bomb.png')"
         }
@@ -27,15 +27,17 @@ function click(td){
             }
             else{
                 for(w=0;w<around.length;w++){
-                    around[w].style.backgroundImage = ''
+                    around[w].style.backgroundImage = '';
                     if(getCount(around[w])>0){
-                        console.log(around[w])
-                        around[w].innerText = getCount(around[w])
+                        console.log(around[w]);
+                        around[w].innerText = getCount(around[w]);
+                        around[w].style.backgroundImage = '';
                     }
                     else{
                         var around2 = getSorounding(around[w]);
                         for(f=0;f<around2.length;f++){
-                            if(!isTD(around2[f], around) && getCount(around2[f])<1){
+                            if(!isTD(around2[f], around)){
+                                console.log(around2[f]);
                                 around.push(around2[f]);
                             }
                         }
@@ -64,7 +66,7 @@ function getCount(td){
     var count = 0
     for(q=0;q<li.length;q++){
         var x = parseInt(li[q].getAttribute('row'));
-        var y = parseInt(li[q].getAttribute('col')); 
+        var y = parseInt(li[q].getAttribute('col'));
         if(testForBomb(x,y)){
             count ++
         }
@@ -77,25 +79,25 @@ function getSorounding(td){
     var x = parseInt(td.getAttribute('row'));
     var y = parseInt(td.getAttribute('col'));
     if(x>0){
-        around.push(board[x-1][y])
+        around.push(board[x-1][y]);
         if(y>0){
             around.push(board[x-1][y-1])
         }
     }
     if(x<17){
-        around.push(board[x+1][y])
+        around.push(board[x+1][y]);
         if(y<31){
             around.push(board[x+1][y+1])
         }
     }
     if(y>0){
-        around.push(board[x][y-1])
+        around.push(board[x][y-1]);
         if(x<17){
             around.push(board[x+1][y-1])
         }
     }
     if(y<31){
-        around.push(board[x][y+1])
+        around.push(board[x][y+1]);
         if(x>0){
             around.push(board[x-1][y+1])
         }
@@ -119,19 +121,19 @@ function testForBomb(x, y){
         if(bombs[i][0] === x && bombs[i][1] === y){
             return true;
         }
-    }   
+    }
     return false;
 }
 
 bombs.push([Math.floor(Math.random()*16), Math.floor(Math.random()*30)]);
-for(i=0;i<40;i++){
+for(i=0;i<100;i++){
     var x = Math.floor(Math.random()*16);
     var y = Math.floor(Math.random()*30);
     var bomb = [x,y];
     while(testBombs(bomb)){
-        var x = Math.floor(Math.random()*16);
-        var y = Math.floor(Math.random()*30);
-        var bomb = [x,y];
+        x = Math.floor(Math.random()*16);
+        y = Math.floor(Math.random()*30);
+        bomb = [x,y];
     }
     bombs.push(bomb);
 }
@@ -146,7 +148,7 @@ for(i=0;i<17;i++){
         td.style.backgroundImage = "url('png/square.png')";
         td.addEventListener('click', function(e){
             click(e.path[0])
-        })
+        });
         tr.appendChild(td);
     }
     table.appendChild(tr);
