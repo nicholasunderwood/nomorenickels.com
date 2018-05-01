@@ -1,11 +1,28 @@
 var board = [];
 var table = document.getElementById('board');
-var bombs = []
+var bombs = [];
 var dead = false;
 
 
+function isWin(){
+    var bombsFlagged = true;
+    var allClicked = true;
+    for(i=0;i<bombs.length;i++){
+        if(bombs[i].getAttribute('flag') === 'false'){
+            bombsFlagged = false;
+            break;
+        }
+    }
+    for(i=0;i<board.length;i++){
+        if(!testForBomb(parseInt(board[i].getAttribute('row')), parseInt(board[i].getAttribute('col'))) && 
+            !board[i].style.backgroundImage === "url('png/square.png')"){
+            
+        }
+    }
+}
+
 function click(td){
-    if(!dead){
+    if(!dead && td.getAttribute('flag') === 'false'){
         var x = parseInt(td.getAttribute('row'));
         var y = parseInt(td.getAttribute('col'));
         var around = getSorounding(td);
@@ -63,7 +80,7 @@ function isTD(td, li){
 
 function getCount(td){
     var li = getSorounding(td);
-    var count = 0
+    var count = 0;
     for(q=0;q<li.length;q++){
         var x = parseInt(li[q].getAttribute('row'));
         var y = parseInt(li[q].getAttribute('col'));
@@ -145,16 +162,31 @@ for(i=0;i<17;i++){
         boardRow.push(td);
         td.setAttribute('row', i);
         td.setAttribute('col', f);
+        td.setAttribute('flag', 'false');
         td.style.backgroundImage = "url('png/square.png')";
         td.addEventListener('click', function(e){
+            console.log(e.button);
             click(e.path[0])
+        });
+        td.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            console.log(typeof(e.path[0].getAttribute('flag')));
+            if(e.path[0].getAttribute('flag') === 'true'){
+                console.log('if');
+                e.path[0].style.backgroundImage = "url(png/square.png)";
+                e.path[0].setAttribute('flag', 'false')
+            }
+            else{
+                console.log('else');
+                e.path[0].style.backgroundImage = "url('png/flag.png')";
+                e.path[0].setAttribute('flag', 'true');
+            }
         });
         tr.appendChild(td);
     }
     table.appendChild(tr);
     board.push(boardRow);
 }
-console.log(board);
 for(i=0;i<bombs.length;i++){
     board[bombs[i][0]][bombs[i][1]].style.backgroundImage = 'url(png/bomb2.png)'
 }
