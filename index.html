@@ -5,13 +5,25 @@
     <meta name="viewport" content="width=device-width">
     <title>Nicholas Underwood</title>
     <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Roboto" rel="stylesheet">
     <style>
+        body{
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+        }
         ul .list{
             list-style-type:disc;
         }
         #menu{
             width:fit-content;
             border-left: solid grey;
+            float: left;
+            text-align: left;
+        }
+        #header{
+            margin: 5px 10px;
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 20px;
         }
         .button{
             border: ridge black;
@@ -23,10 +35,7 @@
             overflow: hidden;
         }
         .button:hover{
-            /*background: black;
-            color:white;*/
             height: 105.6px;
-            width: 103.988px;
         }
         p{
             margin:0;
@@ -35,63 +44,96 @@
             color:blue;
         }
         #title{
-            font-family: Cinzel Decorative;
-            font-size: 50px;
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 80px;
+            font-weight: 100;
             padding-right: 0;
         }
+        #links{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        #links div{
+            display: block;
+            flex-grow: 1;
+        }
+        #body{
+            font-size:larger;
+        }
+        
     </style>
 </head>
 <body>
-    <marquee id='title' direction="left" scrollamount="30" behavior="scroll">Nicholas Underwood</marquee>
+    <marquee id='title' direction="left" scrollamount="30" behavior="scroll" style="font-weight: 100;">Nicholas Underwood</marquee>
+
     <div id='menu'>
-            <div class='button' id='hangmanWrapper'>
-                <p id="hangman">Hangman</p>
-                <ul class='list' id="hangmanList">
-                    <li><a href='hangman.html'>Webpage</a></li>
-                    <li><a href='txt/hangman.txt'>HTML</a></li>
-                    <li><a href="js/hangman.js">Javascript</a></li>
-                </ul>
+        <span id='header'>Projects</span>
+        <div class='button' id='hangmanWrapper'>
+            <p id="hangman">Hangman</p>
+            <ul class='list' id="hangmanList">
+                <li><a href='hangman.html'>Webpage</a></li>
+                <li><a href='txt/hangman.txt'>HTML</a></li>
+                <li><a href="js/hangman.js">Javascript</a></li>
+            </ul>
+        </div>
+        <div class='button' id='imgsWrapper'>
+            <p id="imgs" >Image Styling</p>
+            <ul class="list" id="imgsList">
+                <li><a href="img-styling.html">Webpage</a></li>
+                <li><a href='txt/img-styling.txt'>HTML</a></li>
+                <li><a href="js/img-styling.js">Javascript</a></li>
+            </ul>
+        </div>
+        <div class='button' id='textsWrapper'>
+            <p id="texts">Text Styling</p>
+            <ul class="list" id="textsList">
+                <li><a href="text-styling.html">Webpage</a></li>
+                <li><a href='txt/text-styling.txt'>HTML</a></li>
+                <li><a href="js/text-styling.js">Javascript</a></li>
+            </ul>
+        </div>
+        <div class='button' id='tttWrapper'>
+            <p id="ttt">Tic-Tac-Toe</p>
+            <ul class="list" id="tttList">
+                <li><a href="tictactoe.html">Webpage</a></li>
+                <li><a href='txt/tictactoe.txt'>HTML</a></li>
+                <li><a href="js/tictactoe.js">Javascript</a></li>
+            </ul>
+        </div>
+        <div class='button' id='clockWrapper'>
+            <p id="clock">Clock</p>
+            <ul class="list" id="clockList">
+                <li><a href="clock.html">Webpage</a></li>
+                <li><a href='txt/clock.txt'>HTML</a></li>
+                <li><a href="js/clock.js">Javascript</a></li>
+            </ul>
+        </div>
+        <div class='button' id='snakeWrapper'>
+            <p id="snake">Snake</p>
+            <ul class='list' id="snakeList">
+                <li><a href='snake.html'>Webpage</a></li>
+                <li><a href=''>HTML</a></li>
+                <li><a href="js/snake.js">Javascript</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id='body'>
+            <div style="width:70%; margin-left:auto;margin-right:auto;">
+            <p>
+                I currently atend Berkeley High School, and enjoy programming and web disign as a hobby. 
+                I also particapate in Debate, Tennis, and Robotics, and I am a member of FRC <a href="https://team5499.org/">team 5499</a>.
+            </p>
+            <div id='links'>
+                <div></div>
+                <div><a href="https://github.com/nicholasunderwood"><img src="png/github.png" alt="Github" height="60px" width="60px"></a></div>
+                <div><a href="mailto:nicholasdunderwood@gmail.com"><img src="png/gmail.png" alt="Email" height="60px" width="60px"></a></div>
+                <div></div>
             </div>
-            <div class='button' id='imgsWrapper'>
-                <p id="imgs" >Image Styling</p>
-                <ul class="list" id="imgsList">
-                    <li><a href="img-styling.html">Webpage</a></li>
-                    <li><a href='txt/img-styling.txt'>HTML</a></li>
-                    <li><a href="js/img-styling.js">Javascript</a></li>
-                </ul>
-            </div>
-            <div class='button' id='textsWrapper'>
-                <p id="texts">Text Styling</p>
-                <ul class="list" id="textsList">
-                    <li><a href="text-styling.html">Webpage</a></li>
-                    <li><a href='txt/text-styling.txt'>HTML</a></li>
-                    <li><a href="js/text-styling.js">Javascript</a></li>
-                </ul>
-            </div>
-            <div class='button' id='tttWrapper'>
-                <p id="ttt">Tic-Tac-Toe</p>
-                <ul class="list" id="tttList">
-                    <li><a href="tictactoe.html">Webpage</a></li>
-                    <li><a href='txt/tictactoe.txt'>HTML</a></li>
-                    <li><a href="js/tictactoe.js">Javascript</a></li>
-                </ul>
-            </div>
-            <div class='button' id='clockWrapper'>
-                <p id="clock">Clock</p>
-                <ul class="list" id="clockList">
-                    <li><a href="clock.html">Webpage</a></li>
-                    <li><a href='txt/clock.txt'>HTML</a></li>
-                    <li><a href="js/clock.js">Javascript</a></li>
-                </ul>
-            </div>
-            <div class='button' id='snakeWrapper'>
-                <p id="snake">Snake</p>
-                <ul class='list' id="snakeList">
-                    <li><a href='snake.html'>Webpage</a></li>
-                    <li><a href=''>HTML</a></li>
-                    <li><a href="js/snake.js">Javascript</a></li>
-                </ul>
-            </div>
+        </div>
     </div>
 </body>
 </html>
