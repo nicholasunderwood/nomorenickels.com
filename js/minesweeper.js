@@ -2,17 +2,18 @@ var board = [];
 var table = document.getElementById('board');
 var bombs = [];
 var dead = false;
-
+var rows = 16;
+var cols = 16;
 
 function isWin(){
-    for(i=0;i<board.length;i++){ 
-        for(q=0;q<board[i].length;q++){
-            console.log(board[i]);
-            var td = board[i][q];
+    for(v=0;v<board.length;v++){
+        for(q=0;q<board[v].length;q++){
+            var td = board[v][q];
+            console.log(td, !testForBomb(parseInt(td.getAttribute('row')), parseInt(td.getAttribute('col'))), !td.getAttribute('tile') !== "none");
             if(!testForBomb(parseInt(td.getAttribute('row')), parseInt(td.getAttribute('col'))) &&
-            !td.getAttribute('tile') !== "none"){
+                !td.getAttribute('tile') !== "none"){
                 console.log('false');
-                //return false;
+                return false;
             }
         }
     }
@@ -20,7 +21,7 @@ function isWin(){
 }
 
 function click(td){
-    var win = isWin();
+    var win = !isWin();
     if(!dead && win && td.getAttribute('tile') !== 'flag'){
         var x = parseInt(td.getAttribute('row'));
         var y = parseInt(td.getAttribute('col'));
@@ -100,26 +101,25 @@ function getSorounding(td){
     var around = [];
     var x = parseInt(td.getAttribute('row'));
     var y = parseInt(td.getAttribute('col'));
-    console.log(x, y);
     if(x>0){
         around.push(board[x-1][y]);
         if(y>0){
             around.push(board[x-1][y-1])
         }
     }
-    if(x<16){
+    if(x<rows){
         around.push(board[x+1][y]);
-        if(y<30){
+        if(y<cols){
             around.push(board[x+1][y+1])
         }
     }
     if(y>0){
         around.push(board[x][y-1]);
-        if(x<16){
+        if(x<rows){
             around.push(board[x+1][y-1])
         }
     }
-    if(y<30){
+    if(y<cols){
         around.push(board[x][y+1]);
         if(x>0){
             around.push(board[x-1][y+1])
@@ -148,22 +148,22 @@ function testForBomb(x, y){
     return false;
 }
 
-bombs.push([Math.floor(Math.random()*16), Math.floor(Math.random()*30)]);
-for(i=0;i<100;i++){
-    var x = Math.floor(Math.random()*16);
-    var y = Math.floor(Math.random()*30);
+bombs.push([Math.floor(Math.random()*rows), Math.floor(Math.random()*cols)]);
+for(i=0;i<40;i++){
+    var x = Math.floor(Math.random()*rows);
+    var y = Math.floor(Math.random()*cols);
     var bomb = [x,y];
     while(testBombs(bomb)){
-        x = Math.floor(Math.random()*16);
-        y = Math.floor(Math.random()*30);
+        x = Math.floor(Math.random()*rows);
+        y = Math.floor(Math.random()*cols);
         bomb = [x,y];
     }
     bombs.push(bomb);
 }
-for(i=0;i<17;i++){
+for(i=0;i<rows+1;i++){
     var boardRow = [];
     var tr = document.createElement('TR');
-    for(f=0;f<31;f++){
+    for(f=0;f<cols+1;f++){
         var td = document.createElement('TD');
         boardRow.push(td);
         td.setAttribute('row', i);
@@ -195,3 +195,4 @@ for(i=0;i<17;i++){
 for(i=0;i<bombs.length;i++){
     board[bombs[i][0]][bombs[i][1]].style.backgroundImage = 'url(png/bomb2.png)'
 }
+
