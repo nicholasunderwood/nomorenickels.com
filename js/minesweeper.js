@@ -4,14 +4,21 @@ var bombs = [];
 var dead = false;
 var rows = 16;
 var cols = 16;
+var firClick = true;
+var win = false;
+var done = false;
+
+function img(td) {
+    td.style.backgroundImage = "url('png/" + getCount(td) + ".png')"
+}
 
 function isWin(){
     for(v=0;v<board.length;v++){
         for(q=0;q<board[v].length;q++){
             var td = board[v][q];
-            console.log(td, !testForBomb(parseInt(td.getAttribute('row')), parseInt(td.getAttribute('col'))), !td.getAttribute('tile') !== "none");
+            console.log(td, td.getAttribute('tile') !== "none", td.getAttribute('tile'));
             if(!testForBomb(parseInt(td.getAttribute('row')), parseInt(td.getAttribute('col'))) &&
-                !td.getAttribute('tile') !== "none"){
+                td.getAttribute('tile') !== 'none'){
                 console.log('false');
                 return false;
             }
@@ -20,11 +27,46 @@ function isWin(){
     return true;
 }
 
+function  contains(li, x) {
+    for(v=0;v<li.length;v++){
+        if(li[v][0] === x[0] && li[v][1] === x[1]){
+            console.log(li[v], x);
+            return true;
+        }
+    }
+    return false;
+}
+
 function click(td){
-    var win = !isWin();
-    if(!dead && win && td.getAttribute('tile') !== 'flag'){
-        var x = parseInt(td.getAttribute('row'));
-        var y = parseInt(td.getAttribute('col'));
+    var x = parseInt(td.getAttribute('row'));
+    var y = parseInt(td.getAttribute('col'));
+    if(firClick){
+        firClick = false;
+        var firLi = [[x,y]];
+        for(b=0;b<getSorounding(td).length;b++){
+            firLi.push([parseInt(getSorounding(td)[b].getAttribute('row')), parseInt(getSorounding(td)[b].getAttribute('col'))])
+        }
+        console.log(firLi);
+        bombs.push([Math.floor(Math.random()*rows), Math.floor(Math.random()*cols)]);
+        for(bo=0;bo<40;bo++){
+            var r = Math.floor(Math.random()*rows);
+            var c = Math.floor(Math.random()*cols);
+            var bomb = [r,c];
+            console.log(bomb);
+            while((testBombs(bomb) || bombs.length===0) || contains(firLi, bomb)){
+                r = Math.floor(Math.random()*rows);
+                c = Math.floor(Math.random()*cols);
+                bomb = [r,c];
+                console.log(bombs);
+            }
+            bombs.push(bomb);
+        }
+        console.log(bombs);
+        for(a=0;a<bombs.length;a++){
+            board[bombs[a][0]][bombs[a][1]].style.backgroundImage = 'url(png/bomb2.png)'
+        }
+    }
+    if(!dead && !win && td.getAttribute('tile') !== 'flag'){
         var around = getSorounding(td);
         var count = 0;
         if(testForBomb(x, y)){
@@ -41,15 +83,17 @@ function click(td){
             td.setAttribute('tile', 'none');
             console.log(getCount(td));
             if(getCount(td)>0){
-                td.innerText = getCount(td);
+                //td.innerText = getCount(td);
+                getCount(td)
             }
             else{
                 for(w=0;w<around.length;w++){
                     around[w].style.backgroundImage = '';
                     around[w].setAttribute('tile', 'none');
                     if(getCount(around[w])>0){
-                        around[w].innerText = getCount(around[w]);
-                        around[w].style.backgroundImage = '';
+                        //around[w].innerText = getCount(around[w]);
+                        img(around[w]);
+                        //around[w].style.backgroundImage = '';
                     }
                     else{
                         var around2 = getSorounding(around[w]);
@@ -64,10 +108,16 @@ function click(td){
         }
     }
     else if(dead){
+        done=true;
         console.log('You died')
     }
-    else if(win){
-        console.log('You Win')
+    if(isWin()){
+        done=true;
+        win=true;
+        console.log('You Win');
+        for(bo=0;bo<bombs.length;bo++){
+            board[bombs[a][0]][bombs[a][1]].style.backgroundImage = 'url(png/flag.png)'
+        }
     }
 }
 
@@ -131,7 +181,7 @@ function getSorounding(td){
 function testBombs (bomb){
     var rep = false;
     for(f=0;f<bombs.length;f++){
-        if(bombs[i][0] === bomb[0] && bombs[i][1] === bomb[1]){
+        if(bombs[f][0] === bomb[0] && bombs[f][1] === bomb[1]){
             rep = true;
         }
     }
@@ -148,18 +198,7 @@ function testForBomb(x, y){
     return false;
 }
 
-bombs.push([Math.floor(Math.random()*rows), Math.floor(Math.random()*cols)]);
-for(i=0;i<40;i++){
-    var x = Math.floor(Math.random()*rows);
-    var y = Math.floor(Math.random()*cols);
-    var bomb = [x,y];
-    while(testBombs(bomb)){
-        x = Math.floor(Math.random()*rows);
-        y = Math.floor(Math.random()*cols);
-        bomb = [x,y];
-    }
-    bombs.push(bomb);
-}
+
 for(i=0;i<rows+1;i++){
     var boardRow = [];
     var tr = document.createElement('TR');
@@ -171,8 +210,9 @@ for(i=0;i<rows+1;i++){
         td.setAttribute('tile', 'square');
         td.style.backgroundImage = "url('png/square.png')";
         td.addEventListener('click', function(e){
-            console.log(e.button);
-            click(e.path[0])
+            if(!done){
+                click(e.path[0])
+            }
         });
         td.addEventListener('contextmenu', function (e) {
             e.preventDefault();
@@ -192,7 +232,3 @@ for(i=0;i<rows+1;i++){
     table.appendChild(tr);
     board.push(boardRow);
 }
-for(i=0;i<bombs.length;i++){
-    board[bombs[i][0]][bombs[i][1]].style.backgroundImage = 'url(png/bomb2.png)'
-}
-
