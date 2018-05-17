@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Mine Sweeper</title>
-	<style>
-		#board td{
-			width: 30px;
-			height: 30px;
-			border: 1px solid black;
-			text-align: center;
-			background-size: 100%;
-			font-size:25px;
-			font-family: monospace;
-		}
-		#board{
-			border-collapse: collapse;
-			z-index: 0;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		#death{
-			display: none;
-			position: absolute;
-			width: fit-content;
-			margin: 0 auto;
-			top: 30%;
-			left: 45%;
-			font-family: monospace;
-			font-size: 40px;
-			z-index: 1;
-		}
-		#clock{
-			font-family: comic sans-serif;
-			font-size: 30px;
-		}
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Mine Sweeper</title>
+    <style>
+        #game{
+            font-family: monospace;
+            width: fit-content;
+            text-align: center;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #board td{
+            width: 25px;
+            height: 25px;
+            border: 1px solid silver;
+            text-align: center;
+            background-size: 100%;
+            font-size: 20px;
+            font-family: monospace;
+        }
+        #board{
+            border-collapse: collapse;
+            z-index: 0;
+
+        }
+        #death{
+            display: none;
+            position: absolute;
+            width: fit-content;
+            margin: 0 auto;
+            top: 30%;
+            left: 45%;
+            font-family: monospace;
+            font-size: 40px;
+            z-index: 1;
+        }
+        #clock{
+            font-size: 25px;
+        }
+        #difSel{
+            width: 100%;
+        }
+        .dif{
+            border-collapse: collapse;
+            background-color: silver;
+            width: 33%;
+            margin: 0;
+            display: inline-flex;
+        }
+    </style>
 </head>
 <body>
-<div id='clock'></div>
-<div id='death'>
-    You Died
-    <form>
-        <button>Restart</button>
-    </form>
+
+<div id="game">
+    <div id='clock'>00:00</div>
+    <table id='board'>
+    </table>
+    <div id="difSel">
+        <div id="easy" class="dif">Easy</div>
+        <div id="med" class="dif selected">Medium</div>
+        <div id="hard" class="dif">Hard</div>
+    </div>
 </div>
-<table id='board'>
-</table>
-<script src="js/minesweeper.js"></script>
+
+<script src="minesweeper.js"></script>
 </body>
 </html>
