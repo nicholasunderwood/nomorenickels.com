@@ -4,48 +4,54 @@ var bombs = [];
 var dead = false;
 var rows = 16;
 var cols = 16;
-var firClick = true;
+var gameStart = true;
 var win = false;
 var done = false;
 
+var sec = 0;
+var min = 0;
+var secStr = '00';
+var minStr = '00';
+var timer;
+var time;
+
+
 function num(td) {
-	var count = getCount(td)
-	td.style.backgroundImage = '';
-    td.innerText = count
-	switch(count){
-		case 1:
-			td.style.color = 'blue';
-			break;
-		case 2:
-			td.style.color = 'green';
-			break;
-		case 3:
-			td.style.color = 'red';
-			break;
-		case 4:
-			td.style.color = 'purple';
-			break;
-		case 5:
-			td.style.color = 'maroon';
-			break;
-		case 6:
-			td.style.color = 'turquoise';
-			break;
-		case 8:
-			td.style.color = 'grey';
-			break;
-	}
-	
+    var count = getCount(td);
+    td.style.backgroundImage = '';
+    td.innerText = count;
+    switch(count){
+        case 1:
+            td.style.color = 'blue';
+            break;
+        case 2:
+            td.style.color = 'green';
+            break;
+        case 3:
+            td.style.color = 'red';
+            break;
+        case 4:
+            td.style.color = 'purple';
+            break;
+        case 5:
+            td.style.color = 'maroon';
+            break;
+        case 6:
+            td.style.color = 'turquoise';
+            break;
+        case 8:
+            td.style.color = 'grey';
+            break;
+    }
+
 }
 
 function isWin(){
     for(v=0;v<board.length;v++){
         for(q=0;q<board[v].length;q++){
             var td = board[v][q];
-            console.log(td, td.getAttribute('tile') !== "none", td.getAttribute('tile'));
             if(!testForBomb(parseInt(td.getAttribute('row')), parseInt(td.getAttribute('col'))) &&
                 td.getAttribute('tile') !== 'none'){
-                console.log('false');
                 return false;
             }
         }
@@ -55,7 +61,6 @@ function isWin(){
 function  contains(li, x) {
     for(v=0;v<li.length;v++){
         if(li[v][0] === x[0] && li[v][1] === x[1]){
-            console.log(li[v], x);
             return true;
         }
     }
@@ -64,8 +69,8 @@ function  contains(li, x) {
 function click(td){
     var x = parseInt(td.getAttribute('row'));
     var y = parseInt(td.getAttribute('col'));
-    if(firClick){
-        firClick = false;
+    if(gameStart){
+        gameStart = false;
         var firLi = [[x,y]];
         for(b=0;b<getSorounding(td).length;b++){
             firLi.push([parseInt(getSorounding(td)[b].getAttribute('row')), parseInt(getSorounding(td)[b].getAttribute('col'))])
@@ -82,16 +87,12 @@ function click(td){
             }
             bombs.push(bomb);
         }
-        /*for(a=0;a<bombs.length;a++){
-            board[bombs[a][0]][bombs[a][1]].style.backgroundImage = 'url(png/bomb2.png)'
-        }*/
     }
     if(!dead && !win && td.getAttribute('tile') !== 'flag'){
         var around = getSorounding(td);
         var count = 0;
         if(testForBomb(x, y)){
             dead = true;
-            console.log('you died');
             board[x][y].style.backgroundImage = "url('png/bomb.png')";
             for(i=0;i<bombs.length;i++){
                 board[bombs[i][0]][bombs[i][1]].style.backgroundImage = "url('png/bomb2.png')"
@@ -123,7 +124,7 @@ function click(td){
             }
         }
     }
-    else if(dead){
+    if(dead){
         done=true;
         console.log('You died')
     }
@@ -135,6 +136,12 @@ function click(td){
             board[bombs[a][0]][bombs[a][1]].style.backgroundImage = 'url(png/flag.png)'
         }
     }
+    if(done){
+        console.log('stop');
+        clearInterval(timer);
+        time = sec + min * 60;
+    }
+    console.log(time);
 }
 
 function isTD(td, li){
@@ -215,6 +222,7 @@ function testForBomb(x, y){
 }
 
 
+
 for(i=0;i<rows+1;i++){
     var boardRow = [];
     var tr = document.createElement('TR');
@@ -226,6 +234,24 @@ for(i=0;i<rows+1;i++){
         td.setAttribute('tile', 'square');
         td.style.backgroundImage = "url('png/square.png')";
         td.addEventListener('click', function(e){
+            if(gameStart){
+                sec ++;
+                if(sec>59){
+                    sec = 0;
+                    min ++;
+                }
+                timer = setInterval(function () {
+                    secStr = sec;
+                    minStr = min;
+                    if(sec<10){
+                        secStr = '0' + sec;
+                    }
+                    if(min<10){
+                        minStr = '0' + min;
+                    }
+                    document.getElementById('clock').innerText = minStr + ':' + secStr;
+                }, 1000);
+            }
             if(!done){
                 click(e.path[0])
             }
