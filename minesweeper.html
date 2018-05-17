@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Mine Sweeper</title>
-  <style>
-      #board td{
-          width: 30px;
-          height: 30px;
-          border: 1px solid;
-          text-align: center;
-          background-size: 100%;
-      }
-      #board{
-          border-collapse: collapse;
-          position: absolute;
-          z-index: 0;
-      }
-      #death{
-        display: none;
-        position: absolute;
-        width: fit-content;
-        margin: 0 auto;
-        top: 30%;
-        left: 45%;
-        font-family: monospace;
-        font-size: 40px;
-        z-index: 1;
-      }
-      #clock{
-            font-family: comic sans-serif;
-            font-size: 30px;
-      }
-  </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Mine Sweeper</title>
+	<style>
+		#board td{
+			width: 30px;
+			height: 30px;
+			border: 1px solid black;
+			text-align: center;
+			background-size: 100%;
+			font-size:25px;
+			font-family: monospace;
+		}
+		#board{
+			border-collapse: collapse;
+			z-index: 0;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		#death{
+			display: none;
+			position: absolute;
+			width: fit-content;
+			margin: 0 auto;
+			top: 30%;
+			left: 45%;
+			font-family: monospace;
+			font-size: 40px;
+			z-index: 1;
+		}
+		#clock{
+			font-family: comic sans-serif;
+			font-size: 30px;
+		}
+	</style>
 </head>
 <body>
 <div id='clock'></div>
@@ -42,8 +45,8 @@
         <button>Restart</button>
     </form>
 </div>
-<board id='board'>
-</board>
+<table id='board'>
+</table>
 <script src="js/minesweeper.js"></script>
 </body>
 </html>
