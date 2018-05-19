@@ -260,7 +260,7 @@ hard.addEventListener('click', function () {
 
 function makeBoard() {
     console.log(rows, cols);
-    var board = [];
+    board = [];
     table.innerHTML = '';
     for(i=0;i<rows+1;i++){
         var boardRow = [];
