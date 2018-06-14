@@ -42,13 +42,26 @@
         }
         #difSel{
             width: 100%;
+            display: flex;
+            text-align: center;
         }
         .dif{
-            border-collapse: collapse;
+            text-align: center;
+            border-left: 3px solid hsl(0, 0%, 90%);
+            border-top: 3px solid hsl(0, 0%, 90%);
+            border-bottom: 3px solid hsl(0, 0%, 60%);
+            border-right: 3px solid hsl(0, 0%, 60%);
             background-color: silver;
             width: 33%;
-            margin: 0;
-            display: inline-flex;
+            margin:10px 0 0 0 ;
+            display: inline-block;
+        }
+        .dif:active{
+            background-color: hsl(0, 0%, 40%);
+            border-left: 3px solid hsl(0, 0%, 70%);
+            border-top: 3px solid hsl(0, 0%, 70%);
+            border-bottom: 3px solid hsl(0, 0%, 50%);
+            border-right: 3px solid hsl(0, 0%, 50%);
         }
     </style>
 </head>
@@ -60,11 +73,11 @@
     </table>
     <div id="difSel">
         <div id="easy" class="dif">Easy</div>
-        <div id="med" class="dif selected">Medium</div>
+        <div id="med" class="dif">Medium</div>
         <div id="hard" class="dif">Hard</div>
     </div>
 </div>
 
-<script src="js/minesweeper.js"></script>
+<script src="minesweeper.js"></script>
 </body>
 </html>
