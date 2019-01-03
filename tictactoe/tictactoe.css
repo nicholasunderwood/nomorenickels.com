@@ -1,0 +1,77 @@
+@keyframes pulse {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+body{
+    text-align: center;
+}
+h1{
+    font-family: monospace;
+    font-size: 50px;
+}
+#status{
+    font-family: monospace;
+    font-size: 2em;
+    margin:10px;
+}
+button{
+    height: 22px;
+    width: 58.9625px;
+}
+#lines{
+    width: fit-content;
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;   
+}
+#lines, #lines td{
+    z-index: -1;
+    border-collapse: collapse;
+    padding: 0;
+}
+.hor{
+    width: 51.6px;
+    height: 103.2px;
+}
+.ver{
+    width: 103.2px;
+    height: 50px;
+}
+.cor{
+    width: 51.6px;
+    height: 50px;
+}
+#board{
+    z-index: 2;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-collapse:collapse;
+}
+#board td {
+    z-index: 2;
+    width: 100px;
+    height: 100px;
+    font-size: 3em;
+    cursor: pointer;
+    border-collapse:collapse;
+    animation-direction: alternate;
+    animation-duration: 0.4s;
+    animation-iteration-count: 4;
+
+}
+#diag{
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    width: 310.4px;
+    margin: 0 auto;
+    height: 310.4px;
+    background: transparent;
+}

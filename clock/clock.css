@@ -1,0 +1,12 @@
+#time, #day{
+    font-family: monospace;
+    font-size: 100px
+}
+#wrapper{
+    position: absolute;
+    text-align: center;
+    vertical-align: center;
+    width: 100%;
+    height: fit-content;
+    margin: 10% 0;
+}
