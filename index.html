@@ -3,32 +3,50 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Nicholas Underwood</title>
+    <title> Nicholas Underwood</title>
     <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Roboto" rel="stylesheet">
     <link href="index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <marquee id='title' direction="left" scrollamount="30" behavior="scroll">Nicholas Underwood</marquee>
-    <div id="menu">
-        <div id="games" class="button">
-            Games
-            <ul>
-                <a href="hangman/hangman.html"><li>Hangman</li></a>
-                <a href="minesweeper/minesweeper.html"><li>Minesweeper</li></a>
-                <a href="snake/snake.html"><li>Snake</li></a>
-                <a href="tictactoe/tictactoe.html"><li>Tic Tac Toe</li></a>
-            </ul>
+        <div id="btnWrapper">
+            <button class="btn" id="gamesBtn">Games</button>
+            <button class="btn" id="programsBtn">Programs</button>
         </div>
-        <div id="programs" class="button">
-            Programs
-            <ul>
-                <a href="textStyling/textStyling.html"><li>Text Styler</li></a>
-                <a href="imgStyling/imgStyling.html"><li>Image Styler</li></a>
-                <a href="clock/clock.html"><li>Clock</li></a>
-            </ul>
+        <div id="menu">
+            <div id="games" class="nav">
+                <div class="link"><a href="hangman/hangman.html"></a>
+                    <span class="name">Hangman</span>
+                    <iframe width="560" height="315" src="hangman/hangman.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>                </a></div>
+                <div class="link"><a href="minesweeper/minesweeper.html"></a>
+                    <span class="name">Minesweeper</span>
+
+                </a></div>
+                <div class="link"><a href="snake/snake.html"></a>
+                    <span class="name">Snake</span>
+
+                </a></div>
+                <div class="link"><a href="tictactoe/tictactoe.html"></a>
+                    <span class="name">Snake</span>
+
+                </a></div>
+            </div>        
+            <div id="programs" class="nav">
+                <div class="link"><a href="textStyling/textStyling.html"></a>
+                    <span>Text Styler</span>
+
+                </a></div>
+                <div class="link"><a href="imgStyling/imgStyling.html"></a>
+                    <span>Image Styler</span>
+
+                </a></div>
+                <div class="link"><a href="clock/clock.html"></a>
+                    <span>Clock</span>
+
+                </a></div>
+            </div>
         </div>
-        <div></div>
     </div>
     <div style="width:70%; margin-left:auto;margin-right:auto;">
         <div id='links'>
