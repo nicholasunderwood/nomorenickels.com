@@ -3,12 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="minesweeper.css">
     <title>Mine Sweeper</title>
 </head>
 <body>
 
 <div id="game">
-    <div id='clock'>00:00</div>
+    <div id='score'>
+        <div id="clock">00:00</div>
+        <div id="flags">
+            <span id="flagsNum">0</span>/<span id="flagsMax">40</span><img src="../png/flag.png">
+        </div>
+    </div>
     <table id='board'>
     </table>
     <div id="difSel">
