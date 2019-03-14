@@ -9,51 +9,61 @@
     <link href="index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <marquee id='title' direction="left" scrollamount="30" behavior="scroll">Nicholas Underwood</marquee>
-        <div id="btnWrapper">
-            <button class="btn" id="gamesBtn">Games</button>
-            <button class="btn" id="programsBtn">Programs</button>
-        </div>
-        <div id="menu">
-            <div id="games" class="nav">
+    <div id='title'>
+        <marquee height="50px" direction="left" scrollamount="30" behavior="scroll">Nicholas Underwood</marquee>
+    </div>
+    <nav>
+        <div id="gamesBtn" class="navBtn" onclick="render(0)">Games</div>
+        <div id="programsBtn" class="navBtn" onclick="render(1)">Programs</div>
+        <div id="aboutBtn" class="navBtn" onclick="render(2)">About</div>
+    </nav>
+    <div id='container'>
+        <div id="games" class="wrapper 0">
+            <div class="nav">
                 <div class="link"><a href="hangman/hangman.html"></a>
                     <span class="name">Hangman</span>
-                    <iframe width="560" height="315" src="hangman/hangman.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>                </a></div>
+                </a></div>
                 <div class="link"><a href="minesweeper/minesweeper.html"></a>
                     <span class="name">Minesweeper</span>
-
+        
                 </a></div>
                 <div class="link"><a href="snake/snake.html"></a>
                     <span class="name">Snake</span>
-
+        
                 </a></div>
                 <div class="link"><a href="tictactoe/tictactoe.html"></a>
                     <span class="name">Snake</span>
-
-                </a></div>
-            </div>        
-            <div id="programs" class="nav">
-                <div class="link"><a href="textStyling/textStyling.html"></a>
-                    <span>Text Styler</span>
-
-                </a></div>
-                <div class="link"><a href="imgStyling/imgStyling.html"></a>
-                    <span>Image Styler</span>
-
-                </a></div>
-                <div class="link"><a href="clock/clock.html"></a>
-                    <span>Clock</span>
-
+        
                 </a></div>
             </div>
         </div>
-    </div>
-    <div style="width:70%; margin-left:auto;margin-right:auto;">
-        <div id='links'>
-            <div><a href="https:///instagram.com/"><img src="png/instagram.png/"></a></div>
-            <div><a href="https://github.com/nicholasunderwood"><img src="png/github.png" alt="Github"></a></div>
-            <div><a href="mailto:nicholasdunderwood@gmail.com"><img src="png/gmail.png" alt="Email"></a></div>
+        <div id="programs" class="wrapper 1">
+            <div class="nav">
+                <div class="link"><a href="textStyling/textStyling.html"></a>
+                    <span>Text Styler</span>
+        
+                </a></div>
+                <div class="link"><a href="imgStyling/imgStyling.html"></a>
+                    <span>Image Styler</span>
+        
+                </a></div>
+                <div class="link"><a href="clock/clock.html"></a>
+                    <span>Clock</span>
+        
+                </a></div>
+            </div>
+        </div>
+        <div id="about" class="wrapper 3">
+            <div class="nav">
+                <div id='links'>
+                    <div><a href="https:///instagram.com/"><img src="png/instagram.png/"></a></div>
+                    <div><a href="https://github.com/nicholasunderwood"><img src="png/github.png" alt="Github"></a></div>
+                    <div><a href="mailto:nicholasdunderwood@gmail.com"><img src="png/gmail.png" alt="Email"></a></div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src='jquery-3.3.1.js'></script>
+    <script src='index.js'></script>
 </body>
 </html>
