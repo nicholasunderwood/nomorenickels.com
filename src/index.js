@@ -46,41 +46,42 @@ function exportToCsv(filename, rows) {
 
 $('form').submit((e)=>{
     e.preventDefault();
-    console.log('submit')
-    let match = [];
-    let tr = $('<tr></tr>');
-    for(let i in [...Array(23)]){
-        match.push(inputs[i].value);
-        console.log(inputs[i], i);
-        if(i>4 && i<21){
-            inputs[i].value = '0';
+    if(confirm("are you sure you want to submit?")){
+        let match = [];
+        let tr = $('<tr></tr>');
+        for(let i in [...Array(22)]){
+            match.push(inputs[i].value);
+            console.log(inputs[i], i);
+            if(i>3 && i<20){
+                inputs[i].value = '0';
+            }
+            else if(i>21){
+                inputs[i].value = '1';
+            }
+            tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
+            $('#data tbody').append(tr);
         }
-        else if(i>20){
-            inputs[i].value = '1';
-        }
-        tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
-        $('#data tbody').append(tr);
+        matches.push(match);
+        $('.dataCell').click((e)=>{
+            $('#dataSave').attr('disabled', false);
+            let newValue = prompt("new value");
+            if(e.currentTarget.cellIndex != 0){
+                let max = parseInt(inputs[e.currentTarget.cellIndex].max);
+                let min = parseInt(inputs[e.currentTarget.cellIndex].min);
+                if(isNaN(newValue)){
+                    alert("Please enter an integer between " + min + " and " + max)
+                }
+                else if(parseInt(newValue) >= min && parseInt(newValue) <= max){
+                    $(e.currentTarget).text(newValue);       
+                }
+                else {
+                    alert("Please enter an integer between " + min + " and " + max)
+                }
+            } else{
+                $(e.currentTarget).text(newValue);
+            }
+        });
     }
-    matches.push(match);
-    $('.dataCell').click((e)=>{
-        $('#dataSave').attr('disabled', false);
-        let newValue = prompt("new value");
-        if(e.currentTarget.cellIndex != 0){
-            let max = parseInt(inputs[e.currentTarget.cellIndex].max);
-            let min = parseInt(inputs[e.currentTarget.cellIndex].min);
-            if(isNaN(newValue)){
-                alert("Please enter an integer between " + min + " and " + max)
-            }
-            else if(parseInt(newValue) >= min && parseInt(newValue) <= max){
-                $(e.currentTarget).text(newValue);       
-            }
-            else {
-                alert("Please enter an integer between " + min + " and " + max)
-            }
-        } else{
-            $(e.currentTarget).text(newValue);
-        }
-    });
 });
 
 $('#download').on('click', ()=>{
@@ -162,10 +163,6 @@ $('.minus').click((e)=>{
     }
 })
 
-function displayData(){
-    
-}
-
 function save(){
     $('#dataSave').attr('disabled', true);
     for(let i in matches){
@@ -179,30 +176,30 @@ let scanner = new Instascan.Scanner({
     video: document.getElementById('preview'),
 });
 
-scanner.addListener('scan', function (e) {
-    let result = e.content;
-    let data = [''];
-    let x = 0;
-    console.log(result);
-    for(let i in result){
-        if(i != ','){
-            data[x] += result[i];
+function loadCamera(){
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+        } else {
+            console.error('No cameras found.');
         }
-        else{
-            x++;
-            data[x].push('');
+    }).catch(function (e) {console.error(e);});
+    scanner.addListener('scan', function (e) {
+        let result = e.content;
+        let data = [''];
+        let x = 0;
+        console.log(result);
+        for(let i in result){
+            if(i != ','){
+                data[x] += result[i];
+            }
+            else{
+                x++;
+                data[x].push('');
+            }
         }
-    }
-});
-
-Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-        scanner.start(cameras[0]);
-    } else {
-        console.error('No cameras found.');
-    }
-}).catch(function (e) {console.error(e);});
-scanner.stop();
+    });
+}
 
 $('#data thead').append($('<tr id="headRow"></tr>'))
 for(let i in [...Array(23)]){
