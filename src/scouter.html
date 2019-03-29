@@ -5,32 +5,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="jquery-3.3.1.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scouter.css">
 </head>
 <body>
     <form id='form'>
       <div class="form-group">
         <h3>Pre Match</h3>
         <table>
-            <tr><td><label>Scout's Name</label></td><td><input value="0" class="form-control" required="true" name="sName"></td></tr>
-            <tr><td><label>Scout's Number</label></td><td><input value="0" class="form-control" required="true" type="number" name="sNum"></td></tr>
             <tr><td><label>Match Number</label></td><td><input value="1" class="form-control" required="true" type="number" name="matchNum" min="1" max="100"></td></tr>
-            <tr><td><label>Team Number</label></td><td><input class="form-control" value="0" required="true" type="number" name="num" min="0" max="7915"></td></tr>
-            <tr><td><label>Starting level</label></td><td><input id="short" value="1" class="form-control" required="true" type="number" name="habSt" min="1" max="3"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>Scout's Name</label></td><td><input value="Nicholas" class="form-control" required="true" name="sName"></td></tr>
+            <tr><td><label>Scout's Number</label></td><td><input value="5499" class="form-control" required="true" type="number" name="sNum"></td></tr>
+            <tr><td><label>Team Number</label></td><td><input value="254" class="form-control" required="true" type="number" name="num" min="0" max="7915"></td></tr>
         </table>
       </div>
       <div class="form-group">
         <h3>Sandstrom</h3>
-        <h5>Cargo</h5>
+        <h4>Cargo</h4>
         <table>
           <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoShipCargo" min="0" max="6"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
         </table>
-        <h5>Hatch Panels</h5>
+        <h4>Hatch Panels</h4>
         <table>
           <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
@@ -40,14 +39,14 @@
       </div>
       <div class="form-group">
         <h3>Teleop</h3>
-        <h5>Cargo</h5>
+        <h4>Cargo</h4>
         <table>
           <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="6"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
         </table>
-        <h5>Hatch Panels</h5>
+        <h4>Hatch Panels</h4>
         <table>
           <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo1" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
           <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo2" min="0" max="2"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
@@ -69,8 +68,7 @@
           <button type="button" class="form-control">Download</button>
         </a>
         <button type="button" class="form-control" data-toggle="modal" data-target="#qrModal" onclick="generateQR()">Generate QR</button>
-        <button type="button" class="form-control" data-toggle="modal" data-target="#dataModal" onclick="displayData()">Manage Data</button>
-        <button type="button" class="form-control" data-toggle="modal" data-target="#scannerModal" onclick="() => {scanner.start()}">Scan a code</button>
+        <button type="button" class="form-control" data-toggle="modal" data-target="#dataModal">Manage Data</button>
       </div>
     </form>
     <div>
@@ -82,7 +80,14 @@
               <h4 class="modal-title">QR Code</h4>
             </div>
             <div class="modal-body">
-              <div id="qrcode"></div>
+              <h3 id="matchNumber">
+                <div id="qrTitle">
+                  <button onclick="changeQR(this, -1)" class="btn QRbtn"><</button>
+                  <span id="matchName"></span>
+                  <button onclick="changeQR(this, 1)" class="btn QRbtn">></button>
+                </div>
+              </h3>
+              <div id="qrcode">No Data</div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -113,28 +118,7 @@
         </div>
       </div>
     </div>
-    
-    <div>
-      <div class="modal fade" id="scannerModal" role="dialog">
-        <div class="modal-dialog" id="scanDialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Scanner</h4>
-            </div>
-            <div class="modal-body" id="scanWrapper">
-              <video id="preview"></video>
-              <button class="btn btn-default">Scan</button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="instascan.min.js"></script>
     <script src="qrcode.min.js"></script>
-    <script src="index.js"></script>
+    <script src="scouter.js"></script>
 </body>
 </html>

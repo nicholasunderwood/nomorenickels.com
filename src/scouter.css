@@ -1,4 +1,4 @@
-h3{
+form h3{
     border-bottom: 1px black solid;
 }
 form div{
@@ -31,15 +31,15 @@ form div:first-child input:not(#short){
     display: inline-block !important;
     width: 79.6px !important;
 }
-form .input-long
 label{
     float: left;
     margin-right: 5px;
 }
 #qrcode{
-    width: 50 0px;
+    width: 500px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 form .btn{
     width: 90%;
@@ -66,4 +66,13 @@ form .btn{
 }
 #dataModal .modal-dialog{
     width: 75% !important;
+}
+#matchName{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#qrTitle{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }

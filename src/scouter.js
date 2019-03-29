@@ -1,8 +1,10 @@
 let matches = [];
+let matchNums = [];
 let file;
 let url;
 let inputs = document.getElementsByTagName('input');
 let link = document.getElementById('download');
+let QRindex = -1;
 //$(window).resizeTo(607.7, 1080);
 
 function exportToCsv(filename, rows) {
@@ -44,24 +46,28 @@ function exportToCsv(filename, rows) {
     }
 }
 
-$('form').submit((e)=>{
+$('form').submit((e)=>{ 
     e.preventDefault();
     if(confirm("are you sure you want to submit?")){
         let match = [];
         let tr = $('<tr></tr>');
+        matchNums.push(inputs[2].value);
         for(let i in [...Array(22)]){
             match.push(inputs[i].value);
-            console.log(inputs[i], i);
+            tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
+            $('#data tbody').append(tr);
+            if(i == 2){
+                inputs[i].value++;
+            }
             if(i>3 && i<20){
                 inputs[i].value = '0';
             }
             else if(i>21){
                 inputs[i].value = '1';
             }
-            tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
-            $('#data tbody').append(tr);
         }
         matches.push(match);
+        QRindex = matches.length-1;
         $('.dataCell').click((e)=>{
             $('#dataSave').attr('disabled', false);
             let newValue = prompt("new value");
@@ -82,6 +88,7 @@ $('form').submit((e)=>{
             }
         });
     }
+    console.log('submit')
 });
 
 $('#download').on('click', ()=>{
@@ -125,20 +132,23 @@ $('#download').on('click', ()=>{
     }
     link.setAttribute("href", url);
     document.getElementById('download').setAttribute('download', prompt("File name") + '.csv');
-})
+});
 
-function generateQR(){
-    $('#qrcode').empty()
-    let div = $('#qrcode');
-    console.log(qrcode)
-    let str = ''
-    //e.preventDefault();
-    console.log(matches);
-    matches.forEach(match => {
-        match.forEach(data => {
-            str += data + ','
-        })
-    });
+function changeQR(btn, dir){
+    if(QRindex+dir <= matches.length-1 && QRindex+dir >= 0){
+        QRindex += dir
+        generateQR();
+    }
+}
+
+function generateQR(index){
+    let str = '';
+    let matchNum = matches[QRindex][0]
+    $('#matchName').text('Match ' + matchNum);
+    $('#qrcode').empty();
+    for(let i in matches[QRindex]){
+        str += matches[QRindex][i] + ',';
+    }
     var qrcode = new QRCode(document.getElementById('qrcode'), {
         text: str,
         width: 500,
@@ -170,35 +180,6 @@ function save(){
             matches[i][f] = ($('#data td')[i])
         }
     }
-}
-
-let scanner = new Instascan.Scanner({
-    video: document.getElementById('preview'),
-});
-
-function loadCamera(){
-    Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-            scanner.start(cameras[0]);
-        } else {
-            console.error('No cameras found.');
-        }
-    }).catch(function (e) {console.error(e);});
-    scanner.addListener('scan', function (e) {
-        let result = e.content;
-        let data = [''];
-        let x = 0;
-        console.log(result);
-        for(let i in result){
-            if(i != ','){
-                data[x] += result[i];
-            }
-            else{
-                x++;
-                data[x].push('');
-            }
-        }
-    });
 }
 
 $('#data thead').append($('<tr id="headRow"></tr>'))
