@@ -51,7 +51,7 @@ $('form').submit((e)=>{
         let match = [];
         let tr = $('<tr></tr>');
         matchNums.push(inputs[2].value);
-        for(let i in [...Array(22)]){
+        for(let i in [...Array(20)]){
             match.push(inputs[i].value);
             tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
             $('#data tbody').append(tr);
@@ -61,10 +61,11 @@ $('form').submit((e)=>{
             if(i>3 && i<20){
                 inputs[i].value = '0';
             }
-            else if(i>21){
-                inputs[i].value = '1';
-            }
         }
+        match.push($('#comments').val())
+        console.log($('#comments').val())
+        console.log(match);
+        $('#comments').val('')
         matches.push(match);
         QRindex = matches.length-1;
         $('.dataCell').click((e)=>{
