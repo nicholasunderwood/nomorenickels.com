@@ -21,19 +21,19 @@ form div:last-child{
 }
 form div:last-child input, form div:last-child button{
     display: inline-block;
-    min-width: 10%;
-    max-width: fit-content;
-    width: 15%;
+    width: 20%;
     margin-left: auto;
     margin-right: auto;
 }
-form div:first-child input:not(#short){
+form div:first-child input:not(#short), textarea{
     display: inline-block !important;
     width: 100px !important;
 }
 @media only screen and (max-width: 1080px) {
     form, form div{
         display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }  
 label{
@@ -41,7 +41,7 @@ label{
     margin-right: 5px;
 }
 #qrcode{
-    width: 500px;
+    width: 300px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -80,4 +80,8 @@ form .btn{
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+}
+textarea{
+    display: inline-block;
+    
 }

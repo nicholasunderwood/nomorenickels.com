@@ -7,12 +7,12 @@ let link = document.getElementById('download');
 let QRindex = -1;
 //$(window).resizeTo(607.7, 1080);
 
-function exportToCsv(filename, rows) {
-    let processRow = function (row) {
-        let finalVal = '';
-        for (let j = 0; j < row.length; j++) {
-            let innerValue = row[j] === null ? '' : row[j].toString();
-            let result = innerValue.replace(/"/g, '""');
+function exportToCSV(filename) {
+    var processRow = function (row) {
+        var finalVal = '';
+        for (var j = 0; j < row.length; j++) {
+            var innerValue = row[j] === null ? '' : row[j].toString();
+            var result = innerValue.replace(/"/g, '""');
             if (result.search(/("|,|\n)/g) >= 0)
                 result = '"' + result + '"';
             if (j > 0)
@@ -21,18 +21,20 @@ function exportToCsv(filename, rows) {
         }
         return finalVal + '\n';
     };
-    let csvFile = '';
-    for (let i = 0; i < rows.length; i++) {
-        csvFile += processRow(rows[i]);
+
+    var csvFile = '';
+    for (var i = 0; i < matches.length; i++) {
+        csvFile += processRow(matches[i]);
     }
-    file = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+
+    var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, filename);
     } else {
-        let link = document.createElement("a");
+        var link = document.createElement("a");
         if (link.download !== undefined) { // feature detection
             // Browsers that support HTML5 download attribute
-            let url = URL.createObjectURL(file);
+            var url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
             link.setAttribute("download", filename);
             link.style.visibility = 'hidden';
@@ -86,49 +88,6 @@ $('form').submit((e)=>{
         });
     }
     console.log('submit')
-});
-
-$('#download').on('click', ()=>{
-    let csvFile = '';
-    for (let i in matches) {
-        let row = matches[i];
-        let finalVal = '';
-        for (let j = 0; j < row.length; j++) {
-            let innerValue = row[j] === null ? '' : row[j].toString();
-            if (row[j] instanceof Date) {
-                innerValue = row[j].toLocaleString();
-            };
-            let result = innerValue.replace(/"/g, '""');
-            if (result.search(/("|,|\n)/g) >= 0)
-                result = '"' + result + '"';
-            if (j > 0)
-                finalVal += ',';
-            finalVal += result;
-        }
-        console.log(finalVal)
-        csvFile += finalVal + '\n';
-    }
-    blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
-    if (navigator.msSaveBlob) { // IE 10+
-        navigator.msSaveBlob(blob, filename);
-    } else {
-        if (link.download !== undefined) { // feature detection
-            // Browsers that support HTML5 download attribute
-            let link = document.createElement("a");
-            let url = URL.createObjectURL(file);
-            link.setAttribute("href", url);
-            link.setAttribute("download", filename);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-        else{
-            alert("download is not supported")
-        }
-    }
-    link.setAttribute("href", url);
-    document.getElementById('download').setAttribute('download', prompt("File name") + '.csv');
 });
 
 function changeQR(btn, dir){
