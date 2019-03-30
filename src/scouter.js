@@ -107,8 +107,8 @@ function generateQR(index){
     }
     var qrcode = new QRCode(document.getElementById('qrcode'), {
         text: str,
-        width: $(window).width()/3,
-        height: $(window).width()/3,
+        width: Math.round($(window).width()/3),
+        height: Math.round($(window).width()/3),
         colorDark : "#000000",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
