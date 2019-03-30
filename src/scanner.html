@@ -9,12 +9,19 @@
   <link rel="stylesheet" href="scanner.css">
 </head>
 <body>
-  <div id='ui'>
+  <div id='ui' class='sidebar'>
+    <section>
       <button id="pause" onclick="toggleScanner(this)" class="btn">Start Scanner</button>
+    </section>
+    <section>
+      <h2>Data</h2>
       <table class="table" id="table">
       </table>
+    </section>
   </div>
-  <video id="preview"></video>
+  <div class="preview-container">
+    <video id="preview"></video>
+  </div>
   <script src="instascan.min.js"></script>
   <script src="scanner.js"></script>
   <script src="jquery.csv.min.js"></script>

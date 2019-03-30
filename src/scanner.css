@@ -1,23 +1,45 @@
-video{
-    float: right;
-    width: 70%;
-    margin: 8px;
-    border: 2px black solid;
+body, html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Helvetica Neue', 'Calibri', Arial, sans-serif;
+    height: 100%;
 }
-button, table{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-table{
-    overflow: scroll;
-}
-body{
-    overflow: hidden;
+body {
+    background: #263238;
     display: flex;
-    justify-content: space-around;
+    align-items: stretch;
+    justify-content: stretch;
+    height: 100%;
 }
-#ui{
-    margin: 10px;
-    width: 25%;
+.sidebar {
+    background: #eceff1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: auto;
+}
+.sidebar h2 {
+    font-weight: normal;
+    font-size: 1.0rem;
+    background: #607d8b;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+}
+.preview-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+.btn{
+    width: 92%;
+    margin: 6px 8px;
+    padding: 0;
+}
+section:first{
+    text-align: center;
 }
