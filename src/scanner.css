@@ -45,8 +45,13 @@ body {
 section:first{
     text-align: center;
 }
+table{
+    overflow-x: scroll;
+}
 td{
     min-width: 30px;
+    width: fit-content;
+    word-wrap: none;
     text-align: start;
     padding: 2px 8px;
 }
