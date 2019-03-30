@@ -55,7 +55,7 @@ $('form').submit((e)=>{
             match.push(inputs[i].value);
             tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
             $('#data tbody').append(tr);
-            if(i == 2){
+            if(i == 0){
                 inputs[i].value++;
             }
             if(i>3 && i<20){
