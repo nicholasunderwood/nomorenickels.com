@@ -13,7 +13,7 @@ body {
 }
 .sidebar {
     background: #eceff1;
-    min-width: 250px;
+    width: 25%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -26,6 +26,7 @@ body {
     color: #fff;
     padding: 10px;
     margin: 0;
+    position: sticky;
 }
 .preview-container {
     flex-direction: column;
@@ -36,10 +37,19 @@ body {
     overflow: hidden;
 }
 .btn{
-    width: 92%;
+    width: 95%;
     margin: 6px 8px;
     padding: 0;
+    position: sticky;
 }
 section:first{
     text-align: center;
+}
+td{
+    min-width: 30px;
+    text-align: start;
+    padding: 2px 8px;
+}
+td:not(tr:last-child){
+    border-left: 1px #ccc solid;
 }

@@ -11,7 +11,10 @@
 <body>
   <div id='ui' class='sidebar'>
     <section>
-      <button id="pause" onclick="toggleScanner(this)" class="btn">Start Scanner</button>
+      <button id="pause" onclick="toggleScanner(this)" class="btn">Stop Scanner</button>
+    </section>
+    <section>
+      <button id="download" onclick="exportToCSV(prompt('Enter Your File Name') + '.csv')" class="btn">Download Data</button>
     </section>
     <section>
       <h2>Data</h2>
