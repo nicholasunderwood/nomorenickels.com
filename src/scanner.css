@@ -17,7 +17,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow: auto;
 }
 .sidebar h2 {
     font-weight: normal;
@@ -27,6 +26,9 @@ body {
     padding: 10px;
     margin: 0;
     position: sticky;
+}
+section{
+    overflow: auto;
 }
 .preview-container {
     flex-direction: column;
@@ -51,7 +53,7 @@ table{
 td{
     min-width: 30px;
     width: fit-content;
-    word-wrap: none;
+    white-space: nowrap;
     text-align: start;
     padding: 2px 8px;
 }

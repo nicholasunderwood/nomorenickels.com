@@ -14,9 +14,7 @@ let scanner = new Instascan.Scanner({
 });
 
 scanner.addListener('scan', function (e) {
-    console.log(e)
-    let match = e.split(',');
-    console.log(match)
+    let match = e.split(';');
     data.push(match)
     let tr = $('<tr></tr>');
     for(let i in match){
@@ -24,6 +22,7 @@ scanner.addListener('scan', function (e) {
         tr.append(td);
     }
     $('#table').append(tr);
+    
 });
 
 function toggleScanner(btn){

@@ -63,8 +63,6 @@ $('form').submit((e)=>{
             }
         }
         match.push($('#comments').val())
-        console.log($('#comments').val())
-        console.log(match);
         $('#comments').val('')
         matches.push(match);
         QRindex = matches.length-1;
@@ -88,7 +86,8 @@ $('form').submit((e)=>{
             }
         });
     }
-    console.log('submit')
+    console.log('submit');
+    $('#QRbutton').click();
 });
 
 function changeQR(btn, dir){
@@ -104,12 +103,12 @@ function generateQR(index){
     $('#matchName').text('Match ' + matchNum);
     $('#qrcode').empty();
     for(let i in matches[QRindex]){
-        str += matches[QRindex][i] + ',';
+        str += matches[QRindex][i] + ';';
     }
     var qrcode = new QRCode(document.getElementById('qrcode'), {
         text: str,
-        width: 300,
-        height: 300,
+        width: $(window).width()/4,
+        height: $(window).width()/4,
         colorDark : "#000000",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
