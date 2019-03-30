@@ -24,8 +24,10 @@ form div:last-child input, form div:last-child button{
     width: 20%;
     margin-left: auto;
     margin-right: auto;
+    word-wrap: none;
+    min-width: fit-content;
 }
-form div:first-child input:not(#short), textarea{
+form div:first-child input:not(#short){
     display: inline-block !important;
     width: 100px !important;
 }
