@@ -13,51 +13,56 @@
     <form id='form'>
       <div class="form-group">
         <h3>Pre Match</h3>
-        <table>
-            <tr><td><label>Match Number</label></td><td><input value="1" class="form-control" required="true" type="number" name="matchNum" min="1"></td></tr>
-            <tr><td><label>Scout's Name</label></td><td><input class="form-control" required="true" name="sName"></td></tr>
-            <tr><td><label>Scout's Number</label></td><td><input class="form-control" required="true" type="number" name="sNum"></td></tr>
-            <tr><td><label>Team Number</label></td><td><input class="form-control" required="true" type="number" name="num" min="1"></td></tr>
-        </table>
+        <div>
+          <table>
+              <tr><td><label>Scout's Name</label></td><td><input class="form-control" required="true" name="sName"></td></tr>
+              <tr><td><label>Scout's Number</label></td><td><input class="form-control" required="true" type="number" name="sNum"></td></tr>
+              <tr><td><label>Match Number</label></td><td><input value="1" class="form-control" required="true" type="number" name="matchNum" min="1"></td></tr>
+              <tr><td><label>Team Number</label></td><td><input class="form-control" required="true" type="number" name="num" min="1"></td></tr>
+          </table>
+        </div>
       </div>
       <div class="form-group">
-        <h3>Sandstrom</h3>
-        <h4>Cargo</h4>
-        <table>
-          <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-        </table>
-        <h4>Hatch Panels</h4>
-        <table>
-          <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-        </table>
+        <h3>Sandstorm</h3>
+        <div>
+          <h4>Hatch Panels</h4>
+          <table>
+            <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+          </table>
+          <h4>Cargo</h4>
+          <table>
+            <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+          </table>
+        </div>
       </div>
       <div class="form-group">
         <h3>Teleop</h3>
-        <h4>Cargo</h4>
-        <table>
-          <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="6"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-        </table>
-        <h4>Hatch Panels</h4>
-        <table>
-          <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-          <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-        </table>
+        <div>
+          <h4>Hatch Panels</h4>
+          <table>
+            <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+          </table>
+          <h4>Cargo</h4>
+          <table>
+            <tr><td><label>level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+            <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="6"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+          </table>
+        </div>
       </div>
-      <div>
+      <div class="form-group">
         <h3>Comments</h3>
-        <textarea id="comments" cols="50" rows="10"></textarea> 
-        
+        <textarea id="comments" cols="30" rows="5"></textarea> 
       </div>
       <div class="form-group">
         <input class="form-control" required="true" id="submit" type="submit">

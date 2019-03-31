@@ -1,8 +1,9 @@
 form h3{
     border-bottom: 1px black solid;
 }
-form div{
+form .form-group{
     height: fit-content;
+    width: fit-content !important;
     padding-left: 5px;
 }
 form{
@@ -15,11 +16,11 @@ form{
     flex-direction: row;
     justify-content: space-evenly;
 }
-form div:last-child{
+form .form-group:last-child{
     flex-basis: 100%;
     text-align: center;
 }
-form div:last-child input, form div:last-child button{
+form .form-group:last-child input, form .form-group:last-child button{
     display: inline-block;
     width: 20%;
     margin-left: auto;
@@ -27,12 +28,12 @@ form div:last-child input, form div:last-child button{
     word-wrap: none;
     min-width: fit-content;
 }
-form div:first-child input:not(#short){
+form .form-group:first-child input:not(#short){
     display: inline-block !important;
     width: 100px !important;
 }
 @media only screen and (max-width: 1080px) {
-    form, form div{
+    form, form .form-group{
         display: block;
         margin-left: auto;
         margin-right: auto;

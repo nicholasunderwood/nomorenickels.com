@@ -45,6 +45,12 @@ function exportToCSV(filename) {
     }
 }
 
+$('h3').click(function() {
+    $(this).width($(this).next().width())
+    console.log($(this))
+    $(this).next().slideToggle(500)
+})
+
 $('form').submit((e)=>{ 
     e.preventDefault();
     if(confirm("are you sure you want to submit?")){
@@ -55,7 +61,7 @@ $('form').submit((e)=>{
             match.push(inputs[i].value);
             tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
             $('#data tbody').append(tr);
-            if(i == 0){
+            if(i == 2){
                 inputs[i].value++;
             }
             if(i>3 && i<20){

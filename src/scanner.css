@@ -27,7 +27,7 @@ body {
     margin: 0;
     position: sticky;
 }
-section{
+.sidebar:last-child{
     overflow: auto;
 }
 .preview-container {
@@ -40,9 +40,8 @@ section{
 }
 .btn{
     width: 95%;
-    margin: 6px 8px;
+    margin: 8px px 0 6px;
     padding: 0;
-    position: sticky;
 }
 section:first{
     text-align: center;
