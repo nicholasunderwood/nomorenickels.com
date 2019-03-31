@@ -7,6 +7,9 @@ form h3{
     max-width: 25%;
     padding-left: 5px;
 }
+.inputs input{
+    margin: 2px 0;
+}
 .inputs>div{
     border-top: 2px #6d6d6d ridge;
     padding-top: 4px;
@@ -52,8 +55,10 @@ form{
     }
 }  
 label{
-    float: left;
-    margin-right: 5px;
+    width: 100%;
+    padding-right: 8px;
+    vertical-align: baseline;
+    text-align: right;
 }
 #qrcode{
     width: fit-content;
