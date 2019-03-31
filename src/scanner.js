@@ -21,8 +21,7 @@ scanner.addListener('scan', function (e) {
         let td = $('<td>'+match[i]+'</td>')
         tr.append(td);
     }
-    $('#table').append(tr);
-    
+    $('#table').prepend(tr);
 });
 
 function toggleScanner(btn){
