@@ -8,6 +8,7 @@ let QRindex = -1;
 //$(window).resizeTo(607.7, 1080);
 
 function exportToCSV(filename) {
+    if(filename == null){return;}
     var processRow = function (row) {
         var finalVal = '';
         for (var j = 0; j < row.length; j++) {

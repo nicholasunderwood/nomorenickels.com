@@ -55,10 +55,8 @@ form{
     }
 }  
 label{
-    width: 100%;
-    padding-right: 8px;
-    vertical-align: baseline;
-    text-align: right;
+    float: left;
+    margin-right: 5px;
 }
 #qrcode{
     width: fit-content;
