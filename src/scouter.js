@@ -143,10 +143,3 @@ function save(){
         }
     }
 }
-
-$('#data thead').append($('<tr id="headRow"></tr>'))
-for(let i in [...Array(23)]){
-    let th = $('<th></th>');
-    th.text($($('label')[i]).text());
-    $('#headRow').append(th);
-}
