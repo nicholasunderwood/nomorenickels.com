@@ -6,35 +6,49 @@
     <title> Nicholas Underwood</title>
     <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Roboto" rel="stylesheet">
+    <link href="./bootstrap.min.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id='title'>
         <marquee height="50px" direction="left" scrollamount="30" behavior="scroll">Nicholas Underwood</marquee>
     </div>
-    <nav>
-        <div id="gamesBtn" class="navBtn" onclick="render(0)">Games</div>
-        <div id="programsBtn" class="navBtn" onclick="render(1)">Programs</div>
-        <div id="aboutBtn" class="navBtn" onclick="render(2)">About</div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div id="nav-wrapper">
+            <div class="nav-item active"><button id="gamesBtn" class="btn nav-link" onclick="render(0)">Games</button></div>
+            <div class="nav-item active"><button id="programsBtn" class="btn nav-link" onclick="render(1)">Programs</button></div>
+            <div class="nav-item active"><button id="aboutBtn" class="btn nav-link" onclick="render(2)">About</button></div>
+        </div>
     </nav>
+    <div id="under-wrapper">
+        <div id='underline'></div>
+    </div>
     <div id='container'>
         <div id="games" class="wrapper 0">
             <div class="nav">
-                <div class="link"><a href="hangman/hangman.html"></a>
-                    <span class="name">Hangman</span>
-                </a></div>
-                <div class="link"><a href="minesweeper/minesweeper.html"></a>
-                    <span class="name">Minesweeper</span>
-        
-                </a></div>
-                <div class="link"><a href="snake/snake.html"></a>
-                    <span class="name">Snake</span>
-        
-                </a></div>
-                <div class="link"><a href="tictactoe/tictactoe.html"></a>
-                    <span class="name">Snake</span>
-        
-                </a></div>
+                <a class="box" href="hangman/hangman.html">
+                    <div class="link">
+                        <h6 class="name">Hangman</h6><br>
+                        <span>The classic game Hangman. Guess the correct word</span>
+                    </div>
+                </a>
+                <a class="box" href="minesweeper/minesweeper.html">
+                    <div class="link">
+                        <h6 class="name">Minesweeper</h6><br>
+                        <span>The classic game Minesweeper. Find all the mines, but make sure not to step on one.</span>
+                    </div>
+                </a>
+                <a class="box" href="snake/snake.html">
+                <div class="link">
+                    <h6 class="name">Snake</h6><br>
+                    <span>The classic game Snake. Eat the apples, but don't run into your self.</span>
+                </div></a>
+                <a class="box" href="tictactoe/tictactoe.html">
+                    <div class="link">
+                        <h6 class="name">Tic Tac Toe</h6><br>
+                        <span>The classic game TicTacToe. Play with a friend or with your self (coming soon)</span>
+                    </div>
+                </a>
             </div>
         </div>
         <div id="programs" class="wrapper 1">

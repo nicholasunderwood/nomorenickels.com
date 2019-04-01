@@ -2,32 +2,30 @@ body{
     font-family: 'Roboto', sans-serif;
     text-align: center;
     overflow: hidden;
-    background-color: #5CDB95;
     margin: 0;
 }
-span{
+h6{
     display: inline-block;
     text-align: left;
     padding: 5px 0;
 }
-nav{
+#nav-wrapper{
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     height: 50px;
-    background-color: #05386B;
     color: #EDF5E1;
     font-size: 30px;
-
 }
-
-#title{
+marquee{
     font-family: 'Do Hyeon', sans-serif;
     font-size: 50px;
     font-weight: 100;
     padding-right: 0;
     color: #EDF5E1;
     background-color: #05386B;
+    height: 100%;
 }
 #gameBtn{
     flex-grow: 2;
@@ -45,31 +43,47 @@ nav{
 }
 .wrapper{
     position: absolute;
-    width: 50%;
-    left: 50%;
+    width: 80%;
+    left: 10%;
     top: 100px;
-    margin-left: -25%;
 }
 .nav{
     display: flex;
     justify-content: space-between;
 }
-a{
-    display: inline-block;
-}
 iframe{
     display: block;
     width: 100%;
 }
-.btn:focus{
-    background-color: black;
-    color: white;
+#underwrapper{
+    flex-basis: 100%
 }
-.link{
+#underline{
+    width: 33%;
+    border: 2px solid #6d6d6d;
+    display: block;
+}
+.nav-item{
     width: 20%;
-    height: fit-content;
-    border: 2px black solid;
+}
+.btn{
+    margin: 0;
+    width: 100%
+}
+.box{
+    border: 2px #6d6d6d solid;
     display: inline-block;
+    padding: 8px 4px;
+    width: 11em;
+    height: 54px;
+    transition: 1s ease;
+    max-height: fit-content;
+}
+.box:hover{
+    height: 200px;
+}
+.box span{
+    opacity: 0;
 }
 a, a:visited{
     color:black;
@@ -87,6 +101,7 @@ a, a:visited{
     flex-grow: 1;
     margin-top: 100px;
 }
-#links div img{
-    height: 75px;
+.cover{
+    height: 150px;
+    background-color:white;
 }
