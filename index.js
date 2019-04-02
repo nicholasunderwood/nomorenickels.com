@@ -1,20 +1,19 @@
 let lastIndex = 0
-$('#programs').css('left', '150%');
-$('#about').css('left', '300%');
+$('#programs').css('left', '120%');
+$('#about').css('left', '240%');
 function render(index){
     let margin = 33*index + '%';
     $('#underline').animate({marginLeft: margin}, 500)
     let bodies = ['#games', '#programs', '#about']
     if(index !== lastIndex){
         if(index>lastIndex){
-            $(bodies[lastIndex]).animate({left: '-150%'}, 500);
-            $(bodies[index]).animate({left: '50%'}, 500);
+            $(bodies[lastIndex]).animate({left: '-120%'}, 500);
         }
         else{
-            $(bodies[lastIndex]).animate({left: '150%'}, 500);
-            $(bodies[index]).animate({left: '50%'}, 500);
-
+            $(bodies[lastIndex]).animate({left: '120%'}, 500);
         }
+        $(bodies[index]).animate({left: '10%'}, 500);
+
         lastIndex = index;
     }
 }
