@@ -10,7 +10,8 @@ function getTime(){
     var seconds = getNumber(date.getSeconds());
     var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
     var day = date.getDate();
-    var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'][date.getDay()];
+	console.log(date.getDay())
+    var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturady', 'Sunday'][date.getDay()];
     var year = date.getFullYear();
     console.log(month, day, week, year);
     if(hours>12){
@@ -18,7 +19,6 @@ function getTime(){
         tod = 'PM'
     }
     $('#time').text(hours + ':' + minutes + ':' + seconds + ' ' + tod);
-    console.log(hours + ':' + minutes + ':' + seconds + ' ' + tod)
     $('#day').text(week + ', ' + month + ' ' + day + ', ' + year)
 }
 

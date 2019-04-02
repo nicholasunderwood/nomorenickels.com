@@ -9,6 +9,7 @@ var gameStart = true;
 var win = false;
 var done = false;
 
+var flags = 0;
 var sec = 0;
 var min = 0;
 var secStr = '00';
@@ -59,7 +60,7 @@ function isWin(){
     }
     return true;
 }
-function  contains(li, x) {
+function contains(li, x) {
     for(v=0;v<li.length;v++){
         if(li[v][0] === x[0] && li[v][1] === x[1]){
             return true;
@@ -94,11 +95,11 @@ function click(td){
         var count = 0;
         if(testForBomb(x, y)){
             dead = true;
-            board[x][y].style.backgroundImage = "url('png/bomb.png')";
+            board[x][y].style.backgroundImage = "url('../png/bomb.png')";
             for(i=0;i<bombs.length;i++){
-                board[bombs[i][0]][bombs[i][1]].style.backgroundImage = "url('png/bomb2.png')"
+                board[bombs[i][0]][bombs[i][1]].style.backgroundImage = "url('../png/bomb2.png')"
             }
-            board[x][y].style.backgroundImage = "url('png/bomb.png')"
+            board[x][y].style.backgroundImage = "url('../png/bomb.png')"
         }
         else{
             td.style.backgroundImage = '';
@@ -134,7 +135,7 @@ function click(td){
         win=true;
         console.log('You Win');
         for(bo=0;bo<bombs.length;bo++){
-            board[bombs[a][0]][bombs[a][1]].style.backgroundImage = 'url(png/flag.png)'
+            board[bombs[a][0]][bombs[a][1]].style.backgroundImage = 'url(../png/flag.png)'
         }
     }
     if(done){
@@ -259,6 +260,7 @@ hard.addEventListener('click', function () {
 });
 
 function makeBoard() {
+    document.getElementById('flagsMax').innerHTML = numBombs;
     console.log(rows, cols);
     board = [];
     table.innerHTML = '';
@@ -271,7 +273,7 @@ function makeBoard() {
             td.setAttribute('row', i);
             td.setAttribute('col', f);
             td.setAttribute('tile', 'square');
-            td.style.backgroundImage = "url('png/square.png')";
+            td.style.backgroundImage = "url('../png/square.png')";
             td.addEventListener('click', function(e){
                 if(gameStart){
                     timer = setInterval(function () {
@@ -298,12 +300,21 @@ function makeBoard() {
             td.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
                 if(e.path[0].getAttribute('tile') === 'square'){
-                    e.path[0].style.backgroundImage = "url('png/flag.png')";
+                    e.path[0].style.backgroundImage = "url('../png/flag.png')";
                     e.path[0].setAttribute('tile', 'flag');
+                    flags++;
                 }
                 else if(e.path[0].getAttribute('tile') === 'flag'){
-                    e.path[0].style.backgroundImage = "url(png/square.png)";
+                    e.path[0].style.backgroundImage = "url(../png/square.png)";
                     e.path[0].setAttribute('tile', 'square')
+                    flags--;
+                }
+                document.getElementById('flagsNum').innerHTML = flags;
+                if(flags>numBombs){
+                    document.getElementById('flags').style.color = 'red';
+                }
+                else if(flags<=numBombs) {
+                    document.getElementById('flags').style.color = '';
                 }
             });
             tr.appendChild(td);
