@@ -75,10 +75,12 @@ iframe{
     border-radius: 5px;
     display: inline-block;
     padding: 8px 4px;
-    width: 11em;
+    width: 15%;
+    min-width: 10em;
     transition: 1s ease;
     height: 54px;
     max-height: fit-content;
+    margin-bottom: 20px;
 }
 a{
     color: black;
@@ -92,7 +94,7 @@ a{
     opacity: 100%;
 }
 .box span{
-    transition: 2s;
+    transition: 1s;
     opacity: 0%;
     display: none;
 }
