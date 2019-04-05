@@ -1,4 +1,4 @@
-form h3{
+#form h3{
     width: 100%;
 }
 .inputs{
@@ -17,7 +17,7 @@ form h3{
 h4{
     display: inline-block;
 }
-form{
+#form{
     width: 100%;
     height: 100vh;
     margin-left: auto;
@@ -64,7 +64,7 @@ label{
     margin-right: auto;
     text-align: center;
 }
-form .btn{
+#form .btn{
     width: 90%;
     text-align: center;
     margin-left: 5px;

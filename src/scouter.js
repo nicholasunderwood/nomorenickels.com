@@ -5,7 +5,26 @@ let url;
 let inputs = document.getElementsByTagName('input');
 let link = document.getElementById('download');
 let QRindex = -1;
-//$(window).resizeTo(607.7, 1080);
+let teams; let pos;
+
+function loadAPI(){
+    console.log('post');
+    teams = []
+    $('#info').attr('src', './img/loadingGIF.gif').css('display', 'initial');
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://www.thebluealliance.com/api/v3/event/2019casj/matches/simple");
+    xhr.setRequestHeader("X-TBA-Auth-Key", 'XL8fgNqovBJ2yo79NeRFMAWEFbyWiUvsHI8v3sDFDeRdQNx5fH4nepBbh4Ns19vL');
+    xhr.onload = function(){
+        let data = JSON.parse(this.responseText)
+        data.forEach(match => {
+            teams.push(match.alliances.blue.team_keys.concat(match.alliances.red.team_keys))
+        })
+        console.log($('#matchNum'));
+        $('#matchNum').change();
+        console.log(teams)
+    }
+    xhr.send();
+}
 
 function exportToCSV(filename) {
     if(filename == null){return;}
@@ -43,6 +62,40 @@ function exportToCSV(filename) {
             link.click();
             document.body.removeChild(link);
         }
+    }
+}
+
+function save(){
+    $('#dataSave').attr('disabled', true);
+    for(let i in matches){
+        for(let f in matches){
+            matches[i][f] = ($('#data td')[i])
+        }
+    }
+}
+
+function generateQR(index){
+    let str = '';
+    let matchNum = matches[QRindex][0]
+    $('#matchName').text('Match ' + matchNum);
+    $('#qrcode').empty();
+    for(let i in matches[QRindex]){
+        str += matches[QRindex][i] + ';';
+    }
+    var qrcode = new QRCode(document.getElementById('qrcode'), {
+        text: str,
+        width: Math.round($(window).width()/3),
+        height: Math.round($(window).width()/3),
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+}
+
+function changeQR(btn, dir){
+    if(QRindex+dir <= matches.length-1 && QRindex+dir >= 0){
+        QRindex += dir
+        generateQR();
     }
 }
 
@@ -97,31 +150,6 @@ $('form').submit((e)=>{
     $('#QRbutton').click();
 });
 
-function changeQR(btn, dir){
-    if(QRindex+dir <= matches.length-1 && QRindex+dir >= 0){
-        QRindex += dir
-        generateQR();
-    }
-}
-
-function generateQR(index){
-    let str = '';
-    let matchNum = matches[QRindex][0]
-    $('#matchName').text('Match ' + matchNum);
-    $('#qrcode').empty();
-    for(let i in matches[QRindex]){
-        str += matches[QRindex][i] + ';';
-    }
-    var qrcode = new QRCode(document.getElementById('qrcode'), {
-        text: str,
-        width: Math.round($(window).width()/3),
-        height: Math.round($(window).width()/3),
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-}
-
 $('.plus').click((e)=>{
     let input = $($($($($(e.currentTarget).parent()).parent()).children()[1]).children()[0]);
     if(input.val()<parseInt(input.attr('max'))){
@@ -134,13 +162,36 @@ $('.minus').click((e)=>{
     if(input.val()>parseInt(input.attr('min'))){
         input.val(parseInt(input.val())-1);
     }
-})
+});
 
-function save(){
-    $('#dataSave').attr('disabled', true);
-    for(let i in matches){
-        for(let f in matches){
-            matches[i][f] = ($('#data td')[i])
-        }
+$('#matchNum').change(function(){
+    console.log('change')
+    if(teams != null && pos != null){
+        let match = parseInt($(this).val())-1
+        let team = teams[match][pos]
+        let teamNum = team.substring(3, team.length)
+        console.log(team)
+        $('#teamNum').val(teamNum);
     }
+});
+
+$('#apiSave').click(()=>{
+    pos = $('#pos').val();
+    loadAPI();
+});
+
+window.onbeforeunload = (e)=>{
+    if(!confirm('are you sure you want to continue? you may lose your data')){
+        e.preventDefault()
+    }
+    localStorage.setItem('data', matches)
+    return null;
+}
+
+window.onload = ()=>{
+    console.log('load')
+    if(!localStorage.getItem('data') == null){
+        matches = localStorage.getItem('data');
+    }
+    console.log(localStorage.getItem('data'))
 }
