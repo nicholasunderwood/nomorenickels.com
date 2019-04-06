@@ -1,3 +1,19 @@
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+.arrow-right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+  
+.arrow-left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
 #form h3{
     width: 100%;
 }
@@ -103,7 +119,8 @@ label{
     width: fit-content !important;
 }
 #dataModal .modal-dialog{
-    width: 75% !important;
+    width: 90vw;
+    max-width: 90vw;
 }
 #matchName{
     margin-left: 10px;
@@ -114,6 +131,23 @@ label{
     margin-left: auto;
     margin-right: auto;
 }
+#qrTitle .btn{
+    padding-top: 3px;
+}
 textarea{
     display: inline-block;
+}
+#data .delMatch{
+    position: sticky;
+    text-align: center;
+    padding: 0;
+    border: none;
+    position: fixed;
+}
+#data .dataCell{
+    border: none;
+}
+#data .delMatch button{
+    width: 40px;
+    height: 40px;
 }

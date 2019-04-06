@@ -15,10 +15,10 @@
         <h3>Pre Match</h3>
         <div>
           <table>
-            <tr><td><label>Scout's Name</label></td><td><input class="form-control" required="true" name="sName"></td></tr>
-            <tr><td><label>Scout's Number</label></td><td><input class="form-control" required="true" type="number" name="sNum"></td></tr>
-            <tr><td><label>Match Number</label></td><td><input value="1" class="form-control" required="true" type="number" id="matchNum" min="1"></td></tr>
-            <tr><td><label>Team Number</label></td><td><input class="form-control" required="true" type="number" id="teamNum" min="1"></td><td><button data-toggle="modal" data-target="#apiModal" type="button" class="btn btn-light"><img src='../png/settings.png' height="29px"></button></td></tr>
+            <tr><td><label>Scout's Name</label></td><td><input class="form-control data" required="false" name="sName"></td></tr>
+            <tr><td><label>Scout's Number</label></td><td><input class="form-control data" required="false" type="number" name="sNum"></td></tr>
+            <tr><td><label>Match Number</label></td><td><input value="1" class="form-control data" required="true" type="number" id="matchNum" min="1"></td></tr>
+            <tr><td><label>Team Number</label></td><td><input class="form-control data" required="false" type="number" id="teamNum" min="1"></td><td><button data-toggle="modal" data-target="#apiModal" type="button" class="btn btn-light"><img src='../png/settings.png' height="29px"></button></td></tr>
           </table>
         </div>
       </div>
@@ -28,19 +28,19 @@
           <div class="table-section">
             <h4>Hatch Panels</h4>
             <table>
-              <tr><td><label>Level 1</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 2</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 3</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 1</label></td><td><input class="form-control data" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 2</label></td><td><input class="form-control data" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 3</label></td><td><input class="form-control data" value="0" required="true" type="number" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Cargo ship</label></td><td><input class="form-control data" value="0" required="true" type="number" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
             </table>
           </div>
           <div class="table-section">
             <h4>Cargo</h4>
             <table>
-              <tr><td><label>Level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 1</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 2</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 3</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Cargo ship</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
             </table>
           </div>
         </div>
@@ -51,19 +51,19 @@
           <div class="table-section">
             <h4>Hatch Panels</h4>
             <table>
-              <tr><td><label>Level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" name="teleShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 1</label></td><td><input class="form-control data" value="0" required="true" type="number" name="teleRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 2</label></td><td><input class="form-control data" value="0" required="true" type="number" name="teleRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 3</label></td><td><input class="form-control data" value="0" required="true" type="number" name="teleRocketCargo3" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Cargo ship</label></td><td><input class="form-control data" value="0" required="true" type="number" name="teleShipCargo" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
             </table>
           </div>
           <div class="table-section">
             <h4>Cargo</h4>
             <table>
-              <tr><td><label>Level 1</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 2</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Level 3</label></td><td><input class="form-control" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
-              <tr><td><label>Cargo ship</label></td><td><input class="form-control" value="0" required="true" type="number" min="0" max="6"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 1</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoRocketCargo1" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 2</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoRocketCargo2" min="0" max="4"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Level 3</label></td><td><input class="form-control data" value="0" required="true" type="number" name="autoRocketCargo3" min="0" max="8"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
+              <tr><td><label>Cargo ship</label></td><td><input class="form-control data" value="0" required="true" type="number" min="0" max="6"></td><td><button type="button" class="plus btn btn-lg">+</button></td><td><button type="button" class="minus btn btn-lg">-</button></td></tr>
             </table>
           </div>
         </div>
@@ -71,7 +71,7 @@
       <div class="inputs form-group">
         <h3>Comments</h3>
         <div>
-          <textarea class='form-control' id="comments" cols="30" rows="5"></textarea> 
+          <textarea class='form-control data' id="comments" cols="30" rows="5"></textarea> 
         </div>
       </div>
       <div class="btn-control form-group">
@@ -86,15 +86,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">QR Code</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <h3 id="matchNumber">
                 <div id="qrTitle">
-                  <button onclick="changeQR(this, -1)" class="btn QRbtn"><</button>
+                  <button onclick="changeQR(-1)" class="btn QRbtn"><i class="arrow-left"></i></button>
                   <span id="matchName"></span>
-                  <button onclick="changeQR(this, 1)" class="btn QRbtn">></button>
+                  <button onclick="changeQR(1)" class="btn btn-arrow-right QRbtn"><i class="arrow-right"></i></button>
                 </div>
               </h3>
               <div id="qrcode">No Data</div>
@@ -108,7 +108,7 @@
     </div>
     <div>
       <div class="modal fade" id="dataModal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">View/Edit data</h4>
@@ -118,6 +118,7 @@
               <table id="data" class="table">
                 <thead>
                   <tr>
+                    <th>Remove</th>
                     <th>Scout's Name</th><th>Scout's Number</th><th>Match Number</th><th>Team Number</th>
                     <th>Hatch 1</th><th>Hatch 2</th><th>Hatch 3</th><th>Hatch ship</th>
                     <th>Cargo 1</th><th>Cargo 2</th><th>Cargo 3</th><th>Cargo ship</th>
@@ -125,14 +126,12 @@
                     <th>Cargo 1</th><th>Cargo 2</th><th>Cargo 3</th><th>Cargo ship</th>
                     <th>Comments</th>
                   </tr>
-                  <tr>
-                  </tr>
                 </thead>
                 <tbody></tbody>
               </table>
             </div>
             <div class="modal-footer">
-              <button id="dataSave" disabled="true" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+              <button id="dataSave" disabled="true" type="button" class="btn btn-success" data-dismiss="modal" onclick="save()">Save</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -148,10 +147,10 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form id="apiForm">
+              <form id="apiForm" class="form">
                 <label>Event key</label>
-                <input class="form-control" value='casj'><br>
-                <label class="mt-2">Posistion</label>
+                <input class="form-control" value='casj'>
+                <label>Posistion</label>
                 <select id='pos' class="form-control">
                   <option value='1'>Blue 1</option>
                   <option value='2'>Blue 2</option>
@@ -160,11 +159,13 @@
                   <option value='5'>Red 2</option>
                   <option value='6'>Red 3</option>
                 </select>
+                <input id="toogleAPI" type="checkbox" checked>
+                <label class="form-check-label" for="toogleAPI">Enable automatic team selection</label>
               </form>
             </div>
             <div class="modal-footer">
               <button id="apiSave" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-              <button type="button" class="btn btn-" data-dismiss="modal">Close</button>
+              <button type="button" class="btn" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>

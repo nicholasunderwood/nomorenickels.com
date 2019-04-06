@@ -1,11 +1,8 @@
-let matches = [];
-let matchNums = [];
-let file;
-let url;
-let inputs = document.getElementsByTagName('input');
+let matches, matchNums = [];
+let inputs = $('.data');
 let link = document.getElementById('download');
 let QRindex = -1;
-let teams; let pos;
+let teams, pos, file, url;
 
 function loadAPI(){
     console.log('post');
@@ -65,18 +62,47 @@ function exportToCSV(filename) {
     }
 }
 
+function assignDelete(){
+    $('.delMatch').click((e)=>{
+        let tr = $(e.currentTarget).parent();
+        console.log(tr.index());
+        matches.splice(tr.index());
+        tr.remove()
+    })
+}
+
+function assignEdit(){
+    $('.dataCell').click((e)=>{
+        $('#dataSave').attr('disabled', false);
+        let newValue = prompt("new value");
+        $(e.currentTarget).text(newValue);
+    });
+}
+
 function save(){
+    console.log('save')
     $('#dataSave').attr('disabled', true);
     for(let i in matches){
-        for(let f in matches){
-            matches[i][f] = ($('#data td')[i])
+        let trs = $('#data tr');
+        console.log(trs);
+        let tr = $(trs[i]);
+        console.log(tr);
+        let tds = $(tr.children);
+        console.log(tds);
+        for(let f in matches[i]){
+            let td = $(tds[f]);
+            console.log(td);
+            let val = td.text();
+            console.log(val);
+            matches[i][f] = val;
         }
     }
+    console.log(matches);
 }
 
 function generateQR(index){
     let str = '';
-    let matchNum = matches[QRindex][0]
+    let matchNum = matches[QRindex][2]
     $('#matchName').text('Match ' + matchNum);
     $('#qrcode').empty();
     for(let i in matches[QRindex]){
@@ -92,26 +118,27 @@ function generateQR(index){
     });
 }
 
-function changeQR(btn, dir){
+function changeQR(dir){
     if(QRindex+dir <= matches.length-1 && QRindex+dir >= 0){
         QRindex += dir
         generateQR();
     }
 }
 
-$('h3').click(function() {
+$('#form h3').click(function() {
     $(this).width($(this).next().width())
     console.log($(this))
     $(this).next().slideToggle(500)
 })
 
-$('form').submit((e)=>{ 
+$('#form').submit((e)=>{ 
     e.preventDefault();
     if(confirm("are you sure you want to submit?")){
         let match = [];
         let tr = $('<tr></tr>');
         matchNums.push(inputs[2].value);
-        for(let i in [...Array(20)]){
+        tr.append($('<td class="delMatch"><button class="btn btn-danger">&times;</button></td>'))
+        for(let i in [...Array(21)]){
             match.push(inputs[i].value);
             tr.append($('<td></td>').text(inputs[i].value).addClass('dataCell'));
             $('#data tbody').append(tr);
@@ -126,25 +153,8 @@ $('form').submit((e)=>{
         $('#comments').val('')
         matches.push(match);
         QRindex = matches.length-1;
-        $('.dataCell').click((e)=>{
-            $('#dataSave').attr('disabled', false);
-            let newValue = prompt("new value");
-            if(e.currentTarget.cellIndex != 0){
-                let max = parseInt(inputs[e.currentTarget.cellIndex].max);
-                let min = parseInt(inputs[e.currentTarget.cellIndex].min);
-                if(isNaN(newValue)){
-                    alert("Please enter an integer between " + min + " and " + max)
-                }
-                else if(parseInt(newValue) >= min && parseInt(newValue) <= max){
-                    $(e.currentTarget).text(newValue);       
-                }
-                else {
-                    alert("Please enter an integer between " + min + " and " + max)
-                }
-            } else{
-                $(e.currentTarget).text(newValue);
-            }
-        });
+        assignDelete();
+        assignEdit();
     }
     console.log('submit');
     $('#QRbutton').click();
@@ -176,22 +186,41 @@ $('#matchNum').change(function(){
 });
 
 $('#apiSave').click(()=>{
-    pos = $('#pos').val();
-    loadAPI();
+    if($('#toogleAPI').is(':checked') && pos != $('#pos').val()){
+        console.log('get data')
+        pos = $('#pos').val();
+        loadAPI();
+    }
 });
 
 window.onbeforeunload = (e)=>{
-    if(!confirm('are you sure you want to continue? you may lose your data')){
-        e.preventDefault()
-    }
-    localStorage.setItem('data', matches)
-    return null;
+    localStorage.data = JSON.stringify(matches);
 }
 
 window.onload = ()=>{
-    console.log('load')
-    if(!localStorage.getItem('data') == null){
-        matches = localStorage.getItem('data');
+    console.log('load');
+    if(localStorage.getItem('data') != ''){
+        matches = JSON.parse(localStorage.data);
+        console.log('pull data');
+        matches.forEach((match)=>{
+            let tr = $('<tr></tr>');
+            tr.append($('<td class="delMatch"><button class="btn btn-danger">&times;</button></td>'))
+            match.forEach((value)=>{
+                tr.append($('<td></td>').text(value).addClass('dataCell'));
+            });
+            $('#data tbody').append(tr);
+        });
+        $('.dataCell').click((e)=>{
+            $('#dataSave').attr('disabled', false);
+            let newValue = prompt("new value");
+            $(e.currentTarget).text(newValue);
+        });
+        $('.delMatch').click((e)=>{
+            let trNum = $(e.currentTarget).parent().index();
+            matches.splice(trNum)
+            $('#data tr:nth-child(' + trNum + 1 + ')')
+        })
     }
-    console.log(localStorage.getItem('data'))
+    assignDelete();
+    assignEdit();
 }
