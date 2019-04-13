@@ -5,7 +5,6 @@ let QRindex = -1;
 let teams, pos, file, url;
 
 function loadAPI(){
-    console.log('post');
     teams = []
     $('#info').attr('src', './img/loadingGIF.gif').css('display', 'initial');
     var xhr = new XMLHttpRequest();
@@ -16,9 +15,7 @@ function loadAPI(){
         data.forEach(match => {
             teams.push(match.alliances.blue.team_keys.concat(match.alliances.red.team_keys))
         })
-        console.log($('#matchNum'));
         $('#matchNum').change();
-        console.log(teams)
     }
     xhr.send();
 }
@@ -30,7 +27,7 @@ function exportToCSV(filename) {
         for (var j = 0; j < row.length; j++) {
             var innerValue = row[j] === null ? '' : row[j].toString();
             var result = innerValue.replace(/"/g, '""');
-            if (result.search(/("|,|\n)/g) >= 0)
+            if (result.search(/("|,|\n)/g) >= 0);
                 result = '"' + result + '"';
             if (j > 0)
                 finalVal += ',';
@@ -46,14 +43,14 @@ function exportToCSV(filename) {
 
     var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
-        navigator.msSaveBlob(blob, filename);
+        navigator.msSaveBlob(blob, filename + '.csv');
     } else {
         var link = document.createElement("a");
-        if (link.download !== undefined) { // feature detection
+        if (link.download !== undefined) {  // feature detection
             // Browsers that support HTML5 download attribute
             var url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
-            link.setAttribute("download", filename);
+            link.setAttribute("download", filename + '.csv');
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();
@@ -65,9 +62,9 @@ function exportToCSV(filename) {
 function assignDelete(){
     $('.delMatch').click((e)=>{
         let tr = $(e.currentTarget).parent();
-        console.log(tr.index());
         matches.splice(tr.index());
-        tr.remove()
+        matchNums.splice(tr.index());
+        tr.remove();
     })
 }
 
@@ -80,24 +77,15 @@ function assignEdit(){
 }
 
 function save(){
-    console.log('save')
     $('#dataSave').attr('disabled', true);
     for(let i in matches){
-        let trs = $('#data tr');
-        console.log(trs);
-        let tr = $(trs[i]);
-        console.log(tr);
-        let tds = $(tr.children);
-        console.log(tds);
+        let tds = $('#data tr:nth-child(' + (parseInt(i)+1) + ')>td');
         for(let f in matches[i]){
-            let td = $(tds[f]);
-            console.log(td);
+            let td = $(tds[parseInt(f)+1]);
             let val = td.text();
-            console.log(val);
-            matches[i][f] = val;
+            matches[i][parseInt(f)] = val;
         }
     }
-    console.log(matches);
 }
 
 function generateQR(index){
@@ -114,7 +102,7 @@ function generateQR(index){
         height: Math.round($(window).width()/3),
         colorDark : "#000000",
         colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
+        correctLevel : QRCode.CorrectLevel.H //no clue what this means
     });
 }
 
@@ -127,7 +115,6 @@ function changeQR(dir){
 
 $('#form h3').click(function() {
     $(this).width($(this).next().width())
-    console.log($(this))
     $(this).next().slideToggle(500)
 })
 
@@ -148,15 +135,15 @@ $('#form').submit((e)=>{
             if(i>3 && i<20){
                 inputs[i].value = '0';
             }
+            if(i == 20){
+                inputs[i].value = '';
+            }
         }
-        match.push($('#comments').val())
-        $('#comments').val('')
         matches.push(match);
         QRindex = matches.length-1;
         assignDelete();
         assignEdit();
     }
-    console.log('submit');
     $('#QRbutton').click();
 });
 
@@ -175,19 +162,16 @@ $('.minus').click((e)=>{
 });
 
 $('#matchNum').change(function(){
-    console.log('change')
     if(teams != null && pos != null){
         let match = parseInt($(this).val())-1
         let team = teams[match][pos]
         let teamNum = team.substring(3, team.length)
-        console.log(team)
         $('#teamNum').val(teamNum);
     }
 });
 
 $('#apiSave').click(()=>{
     if($('#toogleAPI').is(':checked') && pos != $('#pos').val()){
-        console.log('get data')
         pos = $('#pos').val();
         loadAPI();
     }
@@ -198,10 +182,8 @@ window.onbeforeunload = (e)=>{
 }
 
 window.onload = ()=>{
-    console.log('load');
     if(localStorage.getItem('data') != ''){
         matches = JSON.parse(localStorage.data);
-        console.log('pull data');
         matches.forEach((match)=>{
             let tr = $('<tr></tr>');
             tr.append($('<td class="delMatch"><button class="btn btn-danger">&times;</button></td>'))
@@ -210,17 +192,8 @@ window.onload = ()=>{
             });
             $('#data tbody').append(tr);
         });
-        $('.dataCell').click((e)=>{
-            $('#dataSave').attr('disabled', false);
-            let newValue = prompt("new value");
-            $(e.currentTarget).text(newValue);
-        });
-        $('.delMatch').click((e)=>{
-            let trNum = $(e.currentTarget).parent().index();
-            matches.splice(trNum)
-            $('#data tr:nth-child(' + trNum + 1 + ')')
-        })
     }
+    QRindex = matches.length - 1
     assignDelete();
     assignEdit();
 }

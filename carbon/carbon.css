@@ -1,0 +1,8 @@
+#form{
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+}
+canvas{
+    border: 2px solid black;
+}
