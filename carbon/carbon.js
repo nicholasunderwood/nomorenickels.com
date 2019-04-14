@@ -1,24 +1,62 @@
 let codes = ['meth', 'eth', 'prop', 'but', 'pent', 'hex'];
-let groups = ['ol', 'one', 'yl carbonate', 'oate', 'oic acid']
+let groups = ['ol', 'one', 'al', 'yl carbonate', 'oate', 'oic acid'];
 let ctx =  $('canvas')[0].getContext('2d');
-let fontHeight = 20
-ctx.font = fontHeight + 'px Arial'
+let fontHeight = 20;
+ctx.font = fontHeight + 'px Arial';
 $('#form').submit((e)=>{
+    e.preventDefault();
     ctx.clearRect(0, 0, $('canvas').width(), $('canvas').height());
-    e.preventDefault()
     let name, tempName = $('#primary').val();
     let chains = [];
+    let formula = {'C':0,'H':0,'O':0};
+    let formulaStr = ''
     //identify carbon chains
     for(let i in tempName){
         codes.forEach((code) => {
             if(tempName.substring(i, i+code.length) == code){
-                chains.push([codes.indexOf(code) + 1, i]);
+                let carbon = codes.indexOf(code) + 1
+                chains.push([carbon, i]);
                 tempName.slice(i, code.length);
+                formula['C'] = carbon;
+                formula['H'] = carbon*2+2;
             }
         });
     }
-    console.log(chains[chains.length-1]);
-    drawChain(chains[chains.length-1][0])
+    for(let i in formula){
+        if(formula[i] != 0){
+            formulaStr += i + '<sub>' + formula[i] + '</sub>';
+        }
+    }
+    groups.forEach((group) => {
+        console.log(tempName.substring(tempName.length-group.length, tempName.length), group);
+        console.log(tempName.substring(tempName.length-group.length, tempName.length) == group)
+        // if(tempName.length < group.length){break;}
+        if(tempName.substring(tempName.length-group.length, tempName.length) == group){
+            switch (group){
+                case 'ol':
+                    formulaStr += 'OH';
+                    formula['C']++;formula['H']++;
+                    break;
+                case 'al':
+                    formulaStr += 'C0H'
+                    formula['C']++;formula['H']++;formula['O']++
+                    break;
+                case 'oate':
+                    formulaStr += 'COO<sup>-</sup>'
+                    formula['C']++;formula['O']+2;
+                    break;
+                case 'oic acid':
+                    formulaStr += 'COOH'
+                    formula['C']++;formula['H']++;formula['O']+2;
+            }
+            formula['H'] -= 1;
+            formula['R'] = 1;
+        }
+    })
+
+    console.log(formula);
+    $('#formula')[0].innerHTML += 'Formula: ' + formulaStr;
+    drawChain(chains[chains.length-1][0]);
 });
 
 function drawBond(number, x, y){
@@ -29,7 +67,7 @@ function drawBond(number, x, y){
         ctx.stroke();
     }
     console.log('draw bond');
-    ctx.stroke()
+    ctx.stroke(); 
 }
 
 function drawElement(symbol, left, right, top, bottom, x, y){
@@ -59,7 +97,7 @@ function drawChain(length) {
     }
 }
 
-//$('#form').submit()
+$('#form').submit()
 let json = periodic;
 for (var element in json['elements']) {
     for (var key in json['elements'][element]) {
