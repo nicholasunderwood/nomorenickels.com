@@ -59,8 +59,8 @@ h4{
     display: inline-block !important;
     width: 100px !important;
 }
-@media only screen and (max-width: 1079px) {
-    form, form .form-group{
+@media only screen and (max-width: 1080px) {
+    #form, #form .form-group{
         display: block;
         margin-left: auto;
         margin-right: auto;
