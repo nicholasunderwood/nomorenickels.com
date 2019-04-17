@@ -2,10 +2,9 @@ let matches, matchNums = [];
 let inputs = $('.data');
 let link = document.getElementById('download');
 let QRindex = -1;
-let teams, pos, file, url;
+let teams, pos, file, url, loop;
 
 function loadAPI(){
-    console.log('post');
     teams = []
     $('#info').attr('src', './img/loadingGIF.gif').css('display', 'initial');
     var xhr = new XMLHttpRequest();
@@ -13,12 +12,14 @@ function loadAPI(){
     xhr.setRequestHeader("X-TBA-Auth-Key", 'XL8fgNqovBJ2yo79NeRFMAWEFbyWiUvsHI8v3sDFDeRdQNx5fH4nepBbh4Ns19vL');
     xhr.onload = function(){
         let data = JSON.parse(this.responseText)
+        console.log(data);
         data.forEach(match => {
-            teams.push(match.alliances.blue.team_keys.concat(match.alliances.red.team_keys))
+            if(match.comp_level.substring(10) == 'qm'){
+                teams.push(match.alliances.red.team_keys.concat(match.alliances.blue.team_keys))
+            }
         })
-        console.log($('#matchNum'));
         $('#matchNum').change();
-        console.log(teams)
+        console.log(teams);
     }
     xhr.send();
 }
@@ -127,7 +128,6 @@ function changeQR(dir){
 
 $('#form h3').click(function() {
     $(this).width($(this).next().width())
-    console.log($(this))
     $(this).next().slideToggle(500)
 })
 
@@ -175,19 +175,16 @@ $('.minus').click((e)=>{
 });
 
 $('#matchNum').change(function(){
-    console.log('change')
     if(teams != null && pos != null){
         let match = parseInt($(this).val())-1
         let team = teams[match][pos]
         let teamNum = team.substring(3, team.length)
-        console.log(team)
         $('#teamNum').val(teamNum);
     }
 });
 
 $('#apiSave').click(()=>{
     if($('#toogleAPI').is(':checked') && pos != $('#pos').val()){
-        console.log('get data')
         pos = $('#pos').val();
         loadAPI();
     }
