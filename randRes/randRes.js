@@ -68,7 +68,7 @@ $(window).on('load', (()=>{
             let span = $('<span></span>')
                 .append($('<div>' + res[i] +'</div>'))
                 .append($('<div class="underline"></div>'))
-                .append($('<div class="type">' + ['actor', 'type', 'verb', 'target'][i] + '</div>'))
+                .append($('<div class="type">' + ['actor', 'type', 'action', 'target'][i] + '</div>'))
                 .attr('id',['actor', 'type', 'verb', 'target'][i]);
             $('#res').append(span);
             if(i<3){
