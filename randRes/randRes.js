@@ -21,7 +21,7 @@ $(window).on('load', (()=>{
             ['create and support insurgent groups against', 'launch a coup against', 'invade', 'declare war against', 'give federally owned land to'],
             ['give govermental power to', 'fund', 'ban'],
             ['imprisson', 'assassinate', 'grant legal immunity to', 'give federally owned land to',],
-            ['implement', 'enforce', 'repeal']
+            ['implement', 'repeal']
         ],
         group: [
             ['create and support insurgent groups against', 'lauch a coup against'],
@@ -34,13 +34,12 @@ $(window).on('load', (()=>{
     targets = {
         goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy', 'The United Nations'],
         group:      ['Third Wave Feminists', 'The GOP', 'The NRA', 'Libertarians', 'Public School teachers'],
-        people:     ['Jeff Bezos', 'Donald Trump', 'Jeff Sessions', 'The Crown Prince of Saudi Arabia'],
+        people:     ['Jeff Bezos', 'Donald Trump', 'Jeff Sessions', 'The Crown Prince of Saudi Arabia', 'AP Chemistry teacher Mr. Glimmie'],
         policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'facism', 'private prisons', 'Marijhana', 'a border wall'],
     }
-    targets.goverment.concat(targets.group).forEach((actor)=>{
-        $('#actorSettings ul').append($('<li>' + actor + '</li>'));
-    });
+    
     $('#gen').click(()=>{
+        $('#res').empty()
         let res = makeRes()
         console.log(res);
         for(i in res){
@@ -54,22 +53,42 @@ $(window).on('load', (()=>{
                 $('#res')[0].innerHTML += ' ';
             }
         }
+       
     })
     $('#gen').click();
 
-
-    for(i in targets){
-        targets[i].forEach((target)=>{
-            $('#targetSettings ul').append($('<li>' + target + '</li>'));
-        });
-    }
-    ['goverment', 'group'].forEach((col)=>{
-        verbs[col].forEach((tars)=>{
+    let allActors = [];
+    let allVerbs = []
+    let allTargets = []
+    targets.goverment.concat(targets.group).forEach((actor)=>{
+        $('#actorSettings ul').append($('<li>' + actor + '</li>'));
+        allActors.push(actor)
+    });
+    ['goverment', 'group'].forEach((sec)=>{
+        verbs[sec].forEach((tars)=>{
             tars.forEach((verb)=>{
-                $('#verbSettings ul').append($('<li>' + verb + '</li>'));
-            })
+                allVerbs.push(verb)
+            });
+        });
+    });
+    ['goverment', 'group', 'people', 'policy'].forEach((tars)=>{
+        targets[tars].forEach((tar)=>{
+            allTargets.push(tar);
         })
     })
+    $('#actor').click(()=>{
+        $($('#actor').children()[0]).text(randIndex(allActors));
+    })
+    $('#type').click(()=>{
+        $($('#type').children()[0]).text(randIndex(types));
+    })
+    $('#verb').click(()=>{
+        $($('#verb').children()[0]).text(randIndex(allVerbs));
+    })
+    $('#target').click(()=>{
+        $($('#target').children()[0]).text(randIndex(allTargets));
+    })
+
 }));
 
 

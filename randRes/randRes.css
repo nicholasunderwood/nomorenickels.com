@@ -13,18 +13,19 @@ body{
 #res>span{
     display: inline-block;
     border-radius: 5px;
+    padding: 5px;
 }
 #res>span:nth-child(1):hover{
-    background-color: rgba(255, 0, 0, .6);
+    background-color: rgba(255, 0, 0, .3);
 }
 #res>span:nth-child(2):hover{
-    background-color: rgba(0, 255, 0, .6);
+    background-color: rgba(0, 255, 0, .3);
 }
 #res>span:nth-child(3):hover{
-    background-color: rgba(0, 0, 255, .6);
+    background-color: rgba(0, 0, 255, .3);
 }
 #res>span:nth-child(4):hover{
-    background-color: rgba(255, 0, 255, .6);
+    background-color: rgba(0, 255, 255, .3);
 }
 .underline{
     height: 10px;
