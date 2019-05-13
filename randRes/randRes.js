@@ -15,51 +15,34 @@ function makeRes(){
 }
 
 $(window).on('load', (()=>{
+
     types = ['should', 'ought', 'will'];
     verbs = {
         goverment: [
-            ['create and support insurgent groups against', 'launch a coup against', 'invade', 'declare war against', 'give federally owned land to'],
-            ['give govermental power to', 'fund', 'ban'],
+            ['create and fund insurgent groups against', 'launch a coup against', 'invade', 'declare war against', 'give federally owned land to'],
+            ['give govermental power to', 'give money to', 'ban'],
             ['imprisson', 'assassinate', 'grant legal immunity to', 'give federally owned land to',],
-            ['implement', 'repeal']
+            ['implement', 'repeal', 'mandate', 'add a constituional amendment mandating']
         ],
         group: [
-            ['create and support insurgent groups against', 'lauch a coup against'],
+            ['create and fund insurgent groups against', 'lauch a coup against'],
             ['collaborate with', 'fund'],
-            ['fund', 'sue'],
+            ['assassinate', 'sue'],
             ['advocate for', 'advocate against']
         ]
     };
 
     targets = {
         goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy', 'The United Nations'],
-        group:      ['Third Wave Feminists', 'The GOP', 'The NRA', 'Libertarians', 'Public School teachers'],
+        group:      ['Third Wave Feminists', 'The GOP', 'The NRA', 'Libertarians', 'Public School teachers', 'The Black Lives Matter movement'],
         people:     ['Jeff Bezos', 'Donald Trump', 'Jeff Sessions', 'The Crown Prince of Saudi Arabia', 'AP Chemistry teacher Mr. Glimmie'],
-        policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'facism', 'private prisons', 'Marijhana', 'a border wall'],
+        policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'a police state', 'private prisons', 'Marijhana', 'a border wall', ''],
     }
-    
-    $('#gen').click(()=>{
-        $('#res').empty()
-        let res = makeRes()
-        console.log(res);
-        for(i in res){
-            let span = $('<span></span>')
-                .append($('<div>' + res[i] +'</div>'))
-                .append($('<div class="underline"></div>'))
-                .append($('<div class="type">' + ['actor', 'type', 'verb', 'target'][i] + '</div>'))
-                .attr('id',['actor', 'type', 'verb', 'target'][i]);
-            $('#res').append(span);
-            if(i<3){
-                $('#res')[0].innerHTML += ' ';
-            }
-        }
-       
-    })
-    $('#gen').click();
 
     let allActors = [];
-    let allVerbs = []
-    let allTargets = []
+    let allVerbs = [];
+    let allTargets = [];
+
     targets.goverment.concat(targets.group).forEach((actor)=>{
         $('#actorSettings ul').append($('<li>' + actor + '</li>'));
         allActors.push(actor)
@@ -76,19 +59,36 @@ $(window).on('load', (()=>{
             allTargets.push(tar);
         })
     })
-    $('#actor').click(()=>{
-        $($('#actor').children()[0]).text(randIndex(allActors));
-    })
-    $('#type').click(()=>{
-        $($('#type').children()[0]).text(randIndex(types));
-    })
-    $('#verb').click(()=>{
-        $($('#verb').children()[0]).text(randIndex(allVerbs));
-    })
-    $('#target').click(()=>{
-        $($('#target').children()[0]).text(randIndex(allTargets));
-    })
-
+    
+    $('#gen').click(()=>{
+        $('#res').empty()
+        let res = makeRes()
+        console.log(res);
+        for(i in res){
+            let span = $('<span></span>')
+                .append($('<div>' + res[i] +'</div>'))
+                .append($('<div class="underline"></div>'))
+                .append($('<div class="type">' + ['actor', 'type', 'verb', 'target'][i] + '</div>'))
+                .attr('id',['actor', 'type', 'verb', 'target'][i]);
+            $('#res').append(span);
+            if(i<3){
+                $('#res')[0].innerHTML += ' ';
+            }
+        }
+        $('#actor').click(()=>{
+            $($('#actor').children()[0]).text(randIndex(allActors));
+        })
+        $('#type').click(()=>{
+            $($('#type').children()[0]).text(randIndex(types));
+        })
+        $('#verb').click(()=>{
+            $($('#verb').children()[0]).text(randIndex(allVerbs));
+        })
+        $('#target').click(()=>{
+            $($('#target').children()[0]).text(randIndex(allTargets));
+        });
+    });
+    $('#gen').click();
 }));
 
 
