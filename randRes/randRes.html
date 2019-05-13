@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Snake</title>
+    <link rel="stylesheet" type="text/css" href="randRes.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+    <script src='../jquery-3.3.1.js'></script>
+    <script src="randRes.js"></script>
+</head>
+<body>
+    <div id='res'></div>
+    <button id='gen' class='btn'>Generate Resolution</button>
+    <div id='settings'>
+        <div id='header'>
+            <div id='navBar'>
+                <span onclick="render(0)">Actor</span>
+                <span onclick="render(1)">Type</span>
+                <span onclick="render(2)">Action</span>
+                <span onclick="render(3)">Target</span>
+            </div>
+            <span id='underline'></span>
+        </div>
+        <div>
+            <div id='actorSettings' class='sec'><ul></ul></div>
+            <div id='typeSettings' class='sec'><ul></ul></div>
+            <div id='actionSettings' class='sec'><ul></ul></div>
+            <div id='targetSettings' class='sec'><ul></ul></div>
+        </div>
+    </div>
+</body>
+</html>

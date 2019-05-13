@@ -174,6 +174,7 @@ var drawLines = function(){
     }
 
 };
+
 setupClickListener();
 updateBoardDisplay();
 updateStatusDisplay();

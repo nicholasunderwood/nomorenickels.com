@@ -16,6 +16,34 @@ function getPlay(board){
         });
         return null;
     }
+
+    function canDouble(mRows){
+        let danger = [];
+        let change = [];
+        ['X','Y'].forEach((cond)=>{
+            for(i in mRows){
+                let ys = 0;
+                let xs = 0;
+                for(f in mRows[i]){
+                    if(mRows[i][f] = 'Y'){
+                        ys++;
+                    }
+                    else if(mRows[i][f] = 'X'){
+                        xs++;
+                    }
+                }
+                if(xs>0 && ys>0){
+                    break;
+                }
+                else if(xs > 0){
+                    danger.push(i);
+                }
+                else if(ys > 0){
+                    change.push(i);
+                }
+            }
+        });
+    }
     
     let rows = [
         mBoard[0],
