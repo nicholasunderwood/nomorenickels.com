@@ -27,29 +27,31 @@ marquee{
     background-color: #05386B;
     height: 100%;
 }
-#gameBtn{
-    flex-grow: 2;
-}
 #container{
     position: absolute;
     margin: 0px;
     padding: 0px;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     position: absolute;
     color: #05386B;
     border-color: #05386B;
+    text-align: left;
+    overflow: auto;
 }
 .wrapper{
     position: absolute;
     width: 80%;
     left: 10%;
-    top: 100px;
+    top: 10px;
+    overflow: auto;
 }
 .nav{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    overflow: auto;
+    align-items: center;
+
 }
 iframe{
     display: block;
@@ -70,36 +72,8 @@ iframe{
     margin: 0;
     width: 100%
 }
-.box{
-    border: 2px #6d6d6d solid;
-    border-radius: 5px;
-    display: inline-block;
-    padding: 8px 4px;
-    width: 15%;
-    min-width: 10em;
-    transition: 1s ease;
-    height: 54px;
-    max-height: fit-content;
-    margin-bottom: 20px;
-}
-a{
-    color: black;
-    text-decoration: none;
-}
-.box:hover{
-    height: 200px;
-}
-.box:hover span{
-    display: block;
-    opacity: 100%;
-}
-.box span{
-    transition: 1s;
-    opacity: 0%;
-    display: none;
-}
-a, a:visited{
-    color:black;
+.card{
+    margin: 15px 0;
 }
 #links{
     display: flex;
@@ -113,4 +87,9 @@ a, a:visited{
     display: block;
     flex-grow: 1;
     margin-top: 100px;
+}
+.shrt{
+    width: 45%;
+    margin: 0 2%;
+    display: inline-block;
 }

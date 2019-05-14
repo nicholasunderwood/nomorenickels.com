@@ -11,6 +11,9 @@ function makeRes(){
     let targetType = ['goverment', 'group', 'people', 'policy'][targetIndex];
     let verb = randIndex(verbs[actorType][targetIndex]);
     let target = randIndex(targets[targetType]);
+    // while (target != actor){
+    //     target = randIndex(targets[targetType]);
+    // }
     return [actor, 'should', verb, target];
 }
 
@@ -36,7 +39,7 @@ $(window).on('load', (()=>{
         goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy', 'The United Nations'],
         group:      ['Third Wave Feminists', 'The GOP', 'The NRA', 'Libertarians', 'Public School teachers', 'The Black Lives Matter movement'],
         people:     ['Jeff Bezos', 'Donald Trump', 'Jeff Sessions', 'The Crown Prince of Saudi Arabia', 'AP Chemistry teacher Mr. Glimmie', 'Teoman Tezcan'],
-        policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'a police state', 'private prisons', 'Marijhana', 'a border wall', ''],
+        policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'a police state', 'private prisons', 'Marijhana', 'a border wall'],
     }
 
     let allActors = [];
@@ -54,11 +57,12 @@ $(window).on('load', (()=>{
             });
         });
     });
+
     ['goverment', 'group', 'people', 'policy'].forEach((tars)=>{
         targets[tars].forEach((tar)=>{
             allTargets.push(tar);
-        })
-    })
+        });
+    });
     
     $('#gen').click(()=>{
         $('#res').empty()
@@ -76,40 +80,41 @@ $(window).on('load', (()=>{
             }
         }
         $('#actor').click(()=>{
-            $($('#actor').children()[0]).text(randIndex(allActors));
+            let oldActor = res[0];
+            let actor = randIndex(allActors);
+            // while (actor != res[3] && actor != oldActor){
+            //     actor = randIndex(allActors);
+            // }
+            $($('#actor').children()[0]).text(actor);
+            res[0] = actor;
         })
         $('#type').click(()=>{
-            $($('#type').children()[0]).text(randIndex(types));
+            let oldType = res[1];
+            let type = randIndex(types);
+            // while (type != oldType){
+            //     type = randIndex(types);
+            // }
+            $($('#type').children()[0]).text(type);
+            res[1] = type;
         })
         $('#verb').click(()=>{
-            $($('#verb').children()[0]).text(randIndex(allVerbs));
+            let oldVerb = res[2];
+            let verb = randIndex(allVerbs);
+            // while (verb != oldVerb){
+            //     verb = randIndex(allVerbs);
+            // }
+            $($('#verb').children()[0]).text(verb);
+            res[2] = verb;
         })
         $('#target').click(()=>{
-            $($('#target').children()[0]).text(randIndex(allTargets));
+            let oldTarget = res[3];
+            let target = randIndex(allTargets);
+            // while (target != res[0] && target != oldTarget){
+            //     actor = randIndex(allTargets);
+            // }
+            $($('#target').children()[0]).text(target);
+            res[3] = target;
         });
     });
     $('#gen').click();
 }));
-
-
-let lastIndex = 0
-$('#typeSettings').css('left', '120%');
-$('#actionSettings').css('left', '120%');
-$('#targetSettings').css('left', '120%');
-function render(index){
-    console.log('render', index);
-    // $('#actorSettings').animate({left: '-120%'}, 500);
-    let margin = 25*index + '%';
-    $('#underline').animate({marginLeft: margin}, 500)
-    let bodies = ['#actorSettings', '#typeSettings', '#programSettings']
-    if(index !== lastIndex){
-        if(index>lastIndex){
-            $(bodies[lastIndex]).animate({left: '-120%'}, 500);
-        }
-        else{
-            $(bodies[lastIndex]).animate({left: '120%'}, 500);
-        }
-        $(bodies[index]).animate({left: '50%'}, 500);
-        lastIndex = index;
-    }
-}

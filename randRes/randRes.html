@@ -6,28 +6,41 @@
     <link rel="stylesheet" type="text/css" href="randRes.css">
     <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
     <script src='../jquery-3.3.1.js'></script>
-    <script src="randRes.js"></script>
 </head>
 <body>
     <h2>Resolution Generator</h2>
     <div id='res'></div>
     <button id='gen' class='btn'>Generate Resolution</button>
-    <div id='settings'>
-        <div id='header'>
-            <div id='navBar'>
-                <span onclick="render(0)">Actor</span>
-                <span onclick="render(1)">Type</span>
-                <span onclick="render(2)">Action</span>
-                <span onclick="render(3)">Target</span>
+
+    <!-- <div id='settings'>
+        <div>Generate new</div>
+        <div><span><input type="checkbox" checked>Actor</span>
+            <span><input type="checkbox">Type</span>
+            <span><input type="checkbox" checked>Action</span>
+            <span><input type="checkbox" checked>Target</span>
+        </div>
+    </div> -->
+    <!-- <div id="settings" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <ul></ul>
             </div>
-            <span id='underline'></span>
+            <div class="carousel-item">
+                <ul></ul>
+            </div>
+            <div class="carousel-item">
+                <ul></ul>
+            </div>
         </div>
-        <div>
-            <div id='actorSettings' class='sec'><ul></ul></div>
-            <div id='typeSettings' class='sec'><ul></ul></div>
-            <div id='actionSettings' class='sec'><ul></ul></div>
-            <div id='targetSettings' class='sec'><ul></ul></div>
-        </div>
-    </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div> -->
+    <script src="randRes.js"></script>
 </body>
 </html>

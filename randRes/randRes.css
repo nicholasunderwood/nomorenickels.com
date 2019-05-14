@@ -37,28 +37,9 @@ body{
     font-size: 15px;
 }
 #settings{
-    display: none;
-    width: 50%;
-    min-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    width: 60%;
+    margin: 20px;
     border-radius: 5px;
-    border: 1px solid black;
-    text-align: left;
-}
-#settings #navBar{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-}
-#settings .sec{
-    position: absolute;
-    width: 80%;
-}
-#underline{
-    width: 25%;
-    height: 3px;
-    background-color: #cccc;
-    margin:0%;
+    border: 1px black;
+    text-align: center;
 }
