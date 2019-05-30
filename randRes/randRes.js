@@ -14,7 +14,8 @@ function makeRes(){
     // while (target != actor){
     //     target = randIndex(targets[targetType]);
     // }
-    return [actor, 'should', verb, target];
+    // return [actor, 'should', verb, target];
+    return ['Jeff Bezos', 'should', 'have sexual relations with', 'furries']
 }
 
 $(window).on('load', (()=>{
@@ -36,7 +37,7 @@ $(window).on('load', (()=>{
     };
 
     targets = {
-        goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy', 'The United Nations'],
+        goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy', 'The '],
         group:      ['Third Wave Feminists', 'The GOP', 'The NRA', 'Libertarians', 'Public School teachers', 'The Black Lives Matter movement'],
         people:     ['Jeff Bezos', 'Donald Trump', 'Jeff Sessions', 'The Crown Prince of Saudi Arabia', 'AP Chemistry teacher Mr. Glimmie', 'Teoman Tezcan'],
         policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'a police state', 'private prisons', 'Marijhana', 'a border wall'],
@@ -47,20 +48,28 @@ $(window).on('load', (()=>{
     let allTargets = [];
 
     targets.goverment.concat(targets.group).forEach((actor)=>{
-        $('#actorSettings ul').append($('<li>' + actor + '</li>'));
+        $('#0').append($('<li>' + actor + '</li>'));
         allActors.push(actor)
     });
-    ['goverment', 'group'].forEach((sec)=>{
-        verbs[sec].forEach((tars)=>{
-            tars.forEach((verb)=>{
-                allVerbs.push(verb)
-            });
+    types.forEach((type)=>{
+        $('#1').append($('<li>' + type + '</li>'));
+
+    });
+
+    ['goverment', 'group'].forEach((tars)=>{
+        verbs[tars].forEach((tar)=>{
+            console.log(tar)
+            tar.forEach((verb)=>{
+                allVerbs.push(verb);
+                $('#2').append($('<li>' + verb + '</li>'));
+            })
         });
     });
 
     ['goverment', 'group', 'people', 'policy'].forEach((tars)=>{
         targets[tars].forEach((tar)=>{
             allTargets.push(tar);
+            $('#3').append($('<li>' + tar + '</li>'));
         });
     });
     

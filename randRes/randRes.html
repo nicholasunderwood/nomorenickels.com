@@ -8,39 +8,53 @@
     <script src='../jquery-3.3.1.js'></script>
 </head>
 <body>
-    <h2>Resolution Generator</h2>
-    <div id='res'></div>
-    <button id='gen' class='btn'>Generate Resolution</button>
+    <div id='wrapper'>
+        <h2>Resolution Generator</h2>
+        <div id='res'></div>
+        <button id='gen' class='btn'>Generate Resolution</button>
 
-    <!-- <div id='settings'>
-        <div>Generate new</div>
-        <div><span><input type="checkbox" checked>Actor</span>
-            <span><input type="checkbox">Type</span>
-            <span><input type="checkbox" checked>Action</span>
-            <span><input type="checkbox" checked>Target</span>
+        <div id='settings'>
+            <h5>Settings</h5>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action">
+                    <details>
+                        <summary>
+                            <input class="disableRand" type="checkbox" checked>
+                            Actor
+                        </summary>
+                        <ul id="0"></ul>
+                    </details>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <details>
+                        <summary>
+                            <input class="disableRand" type="checkbox" checked>
+                            Type
+                        </summary>
+                        <ul id="1"></ul>
+                    </details>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <details>
+                        <summary>
+                            <input class="disableRand" type="checkbox" checked>
+                            Action
+                        </summary>
+                        <ul id="2"></ul>
+                    </details>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                    <details>
+                        <summary>
+                            <input class="disableRand" type="checkbox" checked>
+                            Target
+                        </summary>
+                        <ul id="3"></ul>
+                    </details>
+                </li>
+            </ul>
         </div>
-    </div> -->
-    <!-- <div id="settings" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <ul></ul>
-            </div>
-            <div class="carousel-item">
-                <ul></ul>
-            </div>
-            <div class="carousel-item">
-                <ul></ul>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div> -->
+    </div>
     <script src="randRes.js"></script>
 </body>
 </html>
