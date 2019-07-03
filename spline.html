@@ -51,7 +51,7 @@
         let cnvs = document.getElementById('cnvs');
         let ctx = cnvs.getContext('2d');
 
-        function iPart(i){
+        function iPart (i){
             return i - Math.floor(i)
         }
 
@@ -66,7 +66,7 @@
             let cord1 = xList[Math.floor(t)];
             let cord2 = xList[Math.ceil(t)];
             console.log(cord1, cord2)
-            return ((t3 - Math.floor(t3)) * (cord2 - cord1) + cord1 - xList[t3]) * (1-iPart(t)) * iPart(t)
+            return  ((t3)*(cord2 - cord1) + cord1 - xList[t3]) * (1-iPart(t)) * iPart(t)
         }
 
         function renderSpline(curve){

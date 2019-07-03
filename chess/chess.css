@@ -1,0 +1,12 @@
+#board td{
+    width: 50px;
+    height: 50px;
+    background-color: #efe5d9;
+    padding: 0;
+}
+#board tr:nth-child(even) td:nth-child(odd){
+    background-color: #70552f;
+}
+#board tr:nth-child(odd) td:nth-child(even){
+    background-color: #70552f;
+}
