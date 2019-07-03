@@ -15,7 +15,7 @@ function makeRes(){
     //     target = randIndex(targets[targetType]);
     // }
     // return [actor, 'should', verb, target];
-    return ['Jeff Bezos', 'should', 'have sexual relations with', 'furries']
+    return [actor, 'should', verb, target]
 }
 
 $(window).on('load', (()=>{
