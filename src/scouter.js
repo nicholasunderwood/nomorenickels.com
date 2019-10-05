@@ -1,9 +1,10 @@
-let matches, matchNums = [];
+let matchNums = [];
+let matches = []
 let inputs = $('.data');
 let link = document.getElementById('download');
 let QRindex = -1;
 let teams, pos, file, url, loop;
-
+console.log(matches)
 function loadAPI(){
     teams = []
     $('#info').attr('src', './img/loadingGIF.gif').css('display', 'initial');
