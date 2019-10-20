@@ -24,6 +24,7 @@ i {
     padding-left: 5px;
 }
 .inputs input{
+    min-width: 50px;
     margin: 2px 0;
 }
 .inputs>div{
