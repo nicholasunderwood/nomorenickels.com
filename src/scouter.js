@@ -1,5 +1,5 @@
 let matchNums = [];
-let matches = []
+let matches = [];
 let inputs = $('.data');
 let link = document.getElementById('download');
 let QRindex = -1;

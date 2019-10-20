@@ -1,3 +1,6 @@
+body{
+    overflow: None;
+}
 #board td{
     width: 26px;
     height: 26px;

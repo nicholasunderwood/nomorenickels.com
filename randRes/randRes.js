@@ -37,7 +37,7 @@ $(window).on('load', (()=>{
     };
 
     targets = {
-        goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy', 'The '],
+        goverment:  ['The United States Federal Goverment', 'The Isreali Goverment', 'The British Monarchy'],
         group:      ['Third Wave Feminists', 'The GOP', 'The NRA', 'Libertarians', 'Public School teachers', 'The Black Lives Matter movement'],
         people:     ['Jeff Bezos', 'Donald Trump', 'Jeff Sessions', 'The Crown Prince of Saudi Arabia', 'AP Chemistry teacher Mr. Glimmie', 'Teoman Tezcan'],
         policy:     ['universal basic income', 'The Green New Deal', 'communsim', 'a police state', 'private prisons', 'Marijhana', 'a border wall'],
