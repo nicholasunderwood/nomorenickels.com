@@ -95,3 +95,8 @@ body{
     height: 150px;
     margin: 10px;
 }
+.shrt{
+    width: 45%;
+    margin: 0 2%;
+    display: inline-block;
+}
