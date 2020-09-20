@@ -15,17 +15,68 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div id="nav-wrapper">
-            <div class="nav-item active"><button id="gamesBtn" class="btn nav-link" onclick="render(0)">Games</button></div>
-            <div class="nav-item active"><button id="programsBtn" class="btn nav-link" onclick="render(1)">Programs</button></div>
-            <div class="nav-item active"><button id="aboutBtn" class="btn nav-link" onclick="render(2)">About</button></div>
+            <div class="nav-item active"><button id="aboutBtn" lnk='#about' class="btn nav-link slide">About</button></div>
+            <div class="nav-item active"><button id="roboticsBtn" lnk='#robotics' class="btn nav-link slide">Robotics</button></div>
+            <div class="nav-item active"><button id="personalBtn" lnk='#personal' class="btn nav-link slide">Personal Projects</button></div>
+            <div class="nav-item active"><button id="caclBtn" lnk='#calc' class="btn nav-link slide">Calculator Programs</button></div>
         </div>
     </nav>
     <div id="under-wrapper">
         <div id='underline'></div>
     </div>
+
     <div id='container'>
-        <div id="games" class="wrapper 0">
+        <div id='about' class="wrappera">
+            <p>About Me</p>
+        </div>
+        <div id='robotics' class="wrappera">
             <div class="nav">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">BerkeleyLib</h5>
+                        <p class="card-text">A Maven Library for FRC Robotics teams</p>
+                        <a href="https://github.com/team5419/fault" class="btn btn-primary">Github</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Geiger</h5>
+                        <p class="card-text">A Dashboard for FRC robotics. Display and send information dynamiclly</p>
+                        <a href="https://github.com/team5419/tsunami" class="btn btn-primary">Github</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">BerkeleyPath</h5>
+                        <p class="card-text">A path planning desktop application for interloped Quintic Hermite Splines. Built with electron</p><br>
+                        <a href="https://github.com/team5419/BerkeleyPath" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">BerkeleyScout</h5>
+                        <p class="card-text">FRC Scouting. Collect and store data on FRC matches, generate and scan QR codes, and upload data to a google spreadsheet</p>
+                        <a href="#" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='personal' class="wrappera">
+            <div class="nav">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Jeopardy</h5>
+                        <p class="card-text">A multiplayer Jeopardy engine</p>
+                        <a href="hangman/hangman.html" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Resolution Generator</h5>
+                        <p class="card-text">Generate wacky debate resolution by randomlly selecting from a collection of actors, actions, and targets</p>
+                        <a href="randRes/randRes.html" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Hangman</h5>
@@ -54,58 +105,9 @@
                         <a href="tictactoe/tictactoe.html" class="btn btn-primary">Go</a>
                     </div>
                 </div>
-            </div>
         </div>
-        <div id="programs" class="wrapper 1">
-            <div class="nav">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">FRC Scouting</h5>
-                        <p class="card-text">Collect and store data on FRC matches, generate and scan QR codes, and upload data to a google spreadsheet</p>
-                        <a href="src/scouter.html" class="btn btn-primary shrt">Scouter</a>
-                        <a href="src/scanner.html" class="btn btn-primary shrt">Scanner</a>
+        <div id='calc'>
 
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Resolution Generator</h5>
-                        <p class="card-text">Generate wacky debate resolution by randomlly selecting from a collection of actors, actions, and targets</p>
-                        <a href="randRes/randRes.html" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Calculator Programs</h5>
-                        <p class="card-text">Programs designed for texas instrements calculators ti-83 to ti-84 CE</p><br>
-                        <a href="calculator/calc.html" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Text Styler</h5>
-                        <p class="card-text">Create costom text by change properites like drop shadow, font size, and animations</p><br>
-                        <a href="textStyling/textStyling.html" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Clock</h5>
-                        <p class="card-text">Expand your understanding of the status quo by updating your self on the distance our universe has travled along the feild of time since midnight</p>
-                        <a href="clock/clock.html" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div id="about" class="wrapper 3">
-            <div class="nav">
-                <div id='links'>
-                    <div><a href="https:///instagram.com/"><img src="png/instagram.png/"></a></div>
-                    <div><a href="https://github.com/nicholasunderwood"><img src="png/github.png" alt="Github"></a></div>
-                    <div><a href="mailto:nicholasdunderwood@gmail.com"><img src="png/gmail.png" alt="Email"></a></div>
-                </div>
-            </div>
         </div>
     </div>
     <script src='jquery-3.3.1.js'></script>
