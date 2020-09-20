@@ -4,11 +4,7 @@ body{
     overflow: hidden;
     margin: 0;
 }
-h6{
-    display: inline-block;
-    text-align: left;
-    padding: 5px 0;
-}
+
 #nav-wrapper{
     width: 100%;
     display: flex;
@@ -16,16 +12,10 @@ h6{
     align-items: center;
     height: 50px;
     color: #EDF5E1;
-    font-size: 30px;
+    font-size: 30px !important;
 }
-marquee{
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 50px;
-    font-weight: 100;
-    padding-right: 0;
-    color: #EDF5E1;
-    background-color: #05386B;
-    height: 100%;
+.slide {
+    font-size: 20px;
 }
 #container{
     position: absolute;
@@ -37,24 +27,21 @@ marquee{
     border-color: #05386B;
     text-align: left;
     overflow: auto;
+    
 }
 .wrapper{
     position: absolute;
     width: 80%;
     left: 10%;
-    top: 10px;
     overflow: auto;
+    top: 40%;
+    transform: translateY(-50%);
 }
 .nav{
     display: flex;
     justify-content: space-around;
     overflow: auto;
     align-items: center;
-
-}
-iframe{
-    display: block;
-    width: 100%;
 }
 #underwrapper{
     flex-basis: 100%
@@ -74,21 +61,37 @@ iframe{
 .card{
     margin: 15px 0;
 }
-#links{
+.card .card-body p {
+    min-height: 115px;
+    font-size: 20px;
+    line-height: 23px;
+}
+.card .card-title {
+    font-size: 24px;
+    border-bottom: 3px #05386B ridge;
+    padding-bottom: 5px;
+}
+#about {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    margin-right: auto;
-    margin-left: auto;
 }
-#links div{
-    display: block;
-    flex-grow: 1;
-    margin-top: 100px;
+#about>* {
+    font-size: 25px;
+    width: 25%;
+    margin: 0 75px;
 }
-.shrt{
-    width: 45%;
-    margin: 0 2%;
-    display: inline-block;
+#about p {
+    padding-top: 20px
+}
+#about #links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 4px black solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+#about img{
+    height: 150px;
+    margin: 10px;
 }
