@@ -1,24 +1,27 @@
-let lastIndex = 0
-$('#programs').css('left', '120%');
-$('#about').css('left', '240%');
-function render(index){
-    let margin = 33*index + '%';
-    $('#underline').animate({marginLeft: margin}, 500)
-    let bodies = ['#games', '#programs', '#about']
-    if(index !== lastIndex){
-        if(index>lastIndex){
-            $(bodies[lastIndex]).animate({left: '-120%'}, 500);
-        }
-        else{
-            $(bodies[lastIndex]).animate({left: '120%'}, 500);
-        }
-        $(bodies[index]).animate({left: '10%'}, 500);
+let lastPage = $('#about');
+let lastIndex = 0;
 
-        lastIndex = index;
-    }
-}
+const numPages = 4;
 
-$('.box').on('transitionend', (e)=>{
-    console.log(e.currentTarget)
-    $($(e.currentTarget).children()).children()[2].style.opactiy = '100%'
-})
+
+console.log($('.wrapper:not(:first-child)'));
+$('.wrapper:not(:first-child)').css('left', '120%');
+
+$('.slide').click((e) => {
+    console.log("click")
+
+    let slide = $(e.currentTarget);
+    let index = $('.slide').index(slide);
+
+    if(index == lastIndex) return;
+    
+    let currentPage = $(slide.attr('lnk'));
+    console.log(slide.attr('lnk'), currentPage)
+    lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
+    currentPage.animate({left: '10%'}, 500);
+    
+    $('#underline').animate({marginLeft: index*100/numPages + "%"}, 500);
+
+    lastPage = currentPage;
+    lastIndex = currentPage.index();
+});
