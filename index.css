@@ -1,47 +1,30 @@
+:root {
+    --main-bg-color: #232427;
+    --secondary-bg-color: #1e1e24;
+    --main-text-color: #ff8a00;
+    --secondary-text-color: #e52e71;
+    --gradient: linear-gradient(90deg,#ff8a00,#e52e71);
+}
+
 body{
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    overflow: hidden;
     margin: 0;
+    background-color: var(--main-bg-color);
+    color: white;
 }
-
+.navbar{
+    background-color: var(--secondary-bg-color);
+    padding: 20px 10px;
+}
 #nav-wrapper{
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 50px;
-    color: #EDF5E1;
-    font-size: 30px !important;
-}
-.slide {
-    font-size: 20px;
-}
-#container{
-    position: absolute;
-    margin: 0px;
-    padding: 0px;
-    width: 100%;
-    height: 100%;
-    color: #05386B;
-    border-color: #05386B;
-    text-align: left;
-    overflow: auto;
-    
-}
-.wrapper{
-    position: absolute;
-    width: 80%;
-    left: 10%;
-    overflow: auto;
-    top: 40%;
-    transform: translateY(-50%);
-}
-.nav{
-    display: flex;
-    justify-content: space-around;
-    overflow: auto;
-    align-items: center;
+    background-color: var(--secondary-bg-color);
+    font-size: 30px;
 }
 #underwrapper{
     flex-basis: 100%
@@ -58,18 +41,8 @@ body{
     margin: 0;
     width: 100%
 }
-.card{
-    margin: 15px 0;
-}
-.card .card-body p {
-    min-height: 115px;
+.slide {
     font-size: 20px;
-    line-height: 23px;
-}
-.card .card-title {
-    font-size: 24px;
-    border-bottom: 3px #05386B ridge;
-    padding-bottom: 5px;
 }
 #about {
     display: flex;
@@ -77,26 +50,28 @@ body{
 }
 #about>* {
     font-size: 25px;
-    width: 25%;
     margin: 0 75px;
+    max-height: 400px;
 }
 #about p {
-    padding-top: 20px
+    padding-top: 20px;
+    flex: 0 1 25%;
 }
 #about #links{
+    flex: 0 0 460px;
+    height: fit-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 4px black solid;
+    border: 4px var(--gradient) solid;
     border-radius: 10px;
     padding: 10px;
+    background-color: white;
+    max-width: fit-content;
 }
 #about img{
     height: 150px;
     margin: 10px;
-}
-.shrt{
-    width: 45%;
-    margin: 0 2%;
-    display: inline-block;
+    filter: drop-shadow(10px 10px 10px #222);
+    margin: 20px;
 }

@@ -18,7 +18,7 @@ $('.slide').click((e) => {
     let currentPage = $(slide.attr('lnk'));
     console.log(slide.attr('lnk'), currentPage)
     lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
-    currentPage.animate({left: '10%'}, 500);
+    currentPage.animate({left: '5%'}, 500);
     
     $('#underline').animate({marginLeft: index*100/numPages + "%"}, 500);
 
