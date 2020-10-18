@@ -7,9 +7,10 @@
     }
 }
 #title {
-    height: 80px;
-    background-color: var(--secondary-bg-color);
+    flex: 0 1 80px;
+    background-color: var(--bg-color-1);
     text-align: left;
+    overflow: visible;
 }
 
 #title span{
@@ -36,5 +37,6 @@
     margin: 0 auto;
     left: 0;
     right: 0;
-    top: 75px;
+    top: 77.25px;
+    z-index: 2;
 }
