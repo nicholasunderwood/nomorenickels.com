@@ -1,7 +1,8 @@
 :root {
     --bg-color-1: #1e1e24;
     --bg-color-2: #14151D;
-    --text-color-1: white;
+    --accent-color: #6d6d6d;
+    --text-color-1: rgba(255,255,255,.7);
     --text-highlight-1: #ff8a00;
     --text-highlight-2: #e52e71;
     --gradient: linear-gradient(90deg,#ff8a00,#e52e71);
@@ -16,18 +17,18 @@ html{
 body{
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color-1);
+    color: var(--text-color-1);
     overflow-x: hidden;
     height: 100%;
     display: flex;
     flex-flow: column;
-
 }
 #nav-wrapper{
     flex: 0 1 auto;
     width: 100%;
     background-color: var(--bg-color-1);
     font-size: 30px;
-    box-shadow: 0 20px 30px rgba(0,0,0,.5);
+    box-shadow: 0 20px 30px rgba(0,0,0,.3);
 }
 .navbar{
     z-index: 2;
@@ -46,11 +47,12 @@ body{
 .nav-item{
     width: 20%;
 }
-.btn{
+.navbar .btn{
     margin: 0;
     width: 100%;
-    background-color: white;
-    color: var(--bg-color-2)
+    background-color: var(--bg-color-2);
+    box-shadow: -3px 8px 10px rgba(0,0,0,.5);
+    color: var(--text-color-1)
 }
 .slide {
     font-size: 20px;
@@ -77,7 +79,7 @@ body{
     border: 4px var(--gradient) solid;
     border-radius: 10px;
     padding: 10px;
-    background-color: white;
+    background-color: var(--accent-color);
     max-width: fit-content;
 }
 #about img{

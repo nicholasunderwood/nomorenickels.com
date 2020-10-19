@@ -25,3 +25,18 @@ $('.slide').click((e) => {
     lastPage = currentPage;
     lastIndex = currentPage.index();
 });
+
+$('#roboticsBtn').click()
+
+// tilting
+const max = 40;
+
+$('.card-border').on('mouseover mouseenter mousemove', (e) => {
+    let rect = e.currentTarget.getBoundingClientRect();
+    card = $(e.currentTarget).children()[0];
+    x = (e.clientX - rect.left) / rect.width;
+    y = (e.clientY - rect.top) / rect.height;
+    
+    card.style.transform = `perspective(1000px) rotateX(${x*max}) rotateY(${y*max})`;
+    console.log(card, card.style)
+})
