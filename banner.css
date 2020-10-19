@@ -1,24 +1,29 @@
-@keyframes slide {
-    from {
-        margin-left: -414.84px;
-    }
-    to {
-        margin-left: 100%;
-    }
+@keyframes title-slide {
+    from { left: calc(); }
+    to { left: 100%; }
 }
+
+@keyframes sep-slide {
+    from { left: -450px; }
+    to { left: 100%; }
+}
+
 #title {
-    flex: 0 1 80px;
+    position: relative;
+    flex: 0 1 70px;
     background-color: var(--bg-color-1);
     text-align: left;
     overflow: visible;
-    position: relative;
+    border-bottom: 3px solid var(--accent-color);
 }
 
 #title span{
     position: absolute;
     transform: translateY(-50%);
     top: 50%;
-
+    
+    width: 470px; 
+    text-align: center;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 50px;
     font-weight: 100;
@@ -28,18 +33,18 @@
     -webkit-background-clip: text;
     white-space: nowrap;
     background-clip: text;
-    animation: slide 4s 0s infinite forwards linear;
+    animation: sep-slide 5s 0s infinite forwards linear;
 }
 
 .seperator {
     position: absolute;
-    width: 80%;
+    width: 470px;
     height: 5px;
     border-radius: 2.5px;
     background-color: #6d6d6d;
-    margin: 0 auto;
     left: 0;
     right: 0;
-    top: 77.25px;
+    bottom: -4px;
     z-index: 2;
+    animation: sep-slide 5s 0s infinite forwards linear;
 }

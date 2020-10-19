@@ -24,6 +24,7 @@ body{
     flex-flow: column;
 }
 #nav-wrapper{
+    position: relative;
     flex: 0 1 auto;
     width: 100%;
     background-color: var(--bg-color-1);
@@ -33,26 +34,32 @@ body{
 .navbar{
     z-index: 2;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     padding: 20px 10px;
 }
 #underline{
-    width: 25%;
-    border: 2px solid #6d6d6d;
+    position: absolute;
     display: block;
-    border-radius: 2px;
-    z-index: 3;
+    height: 30%;
+    width: 21%;
+    border: 4px solid var(--accent-color);
+    border-top: none;
+    /* background-color: red; */
+    border-radius: 0 0 5px 5px;
+    bottom: 10px;
 }
 .nav-item{
     width: 20%;
 }
+
 .navbar .btn{
     margin: 0;
     width: 100%;
     background-color: var(--bg-color-2);
     box-shadow: -3px 8px 10px rgba(0,0,0,.5);
-    color: var(--text-color-1)
+    color: var(--text-color-1);
+    z-index: 3;
 }
 .slide {
     font-size: 20px;

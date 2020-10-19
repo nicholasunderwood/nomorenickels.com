@@ -28,7 +28,7 @@
     position: relative;
     margin: 15px 0;
     width: 220px;
-    height: 300px;
+    height: 250px;
     margin: 10px;
     background-color: var(--bg-color-1);
     box-shadow:
@@ -38,28 +38,24 @@
 }
 .card-border .card {
     position: absolute;
-    padding: 0 0 20px 0;
-    top: 20px; bottom: 20px;
-    right: 20px; left: 20px;
+    top: 15px; bottom: 15px;
+    right: 15px; left: 15px;
     border: 3px solid rgba(0,0,0,.3);
     background-color: var(--bg-color-1);
     border-radius: inherit;
     box-shadow:
         /* 0 0 5px rgba(255,255,255,0.2), */
-        0 20px 30px rgba(0,0,0,.3);
+        -5px 20px 30px rgba(0,0,0,.3);
     transition: 0.5s;
     margin: 0;
 }
 .card-border .card:hover {
-    transform: translateY(-50px);
+    transform: translateY(-30px);
     box-shadow:
-        0 0 0 rgba(255,255,255,0.1),
-        0 20px 50px rgba(0,0,0,.8);
+        /* 0 0 0 rgba(255,255,255,0.1), */
+        0 20px 30px rgba(0,0,0,.8);
 }
 
-.card-border .card-body {
-    background-color: var(--bg-color-1);
-}
 .card-border .card-header {
     width: 100%;
     color: var(--text-color-1);
@@ -69,28 +65,35 @@
     background-color: var(--bg-color-1);
 }
 
+.card-border .card-body {
+    padding: 10px 15px;
+    background-color: var(--bg-color-1);
+    display: flex;
+    flex-direction: column;
+}
+
 .card-border .card p {
+    flex: 1 1 auto;
     line-height: 23px;
     border-radius: 15px;
     font-size: 16px;
     color: var(--text-color-1);
     text-align: left;
+    margin: 0;
 }
 .card-border .btn{
-    width: 85%;
-    bottom: 25px;
-    position: absolute;
-    text-emphasis: bold;
+    flex: 0 0 auto;
+    width: 100%;
     transition: 0.5s;
 }
 
 .card-border .btn:hover{
-    box-shadow: 0 20px 0 rgba(0,0,0,.5);
+    box-shadow: -5px 15px 25px rgba(0,0,0,.5);
 }
 
 
 .shrt{
-    width: 45%;
-    margin: 0 2%;
-    display: inline-block;
+    width: 20% !important; 
+    margin: 0;
+    display: inline;
 }
