@@ -37,6 +37,7 @@ body{
     justify-content: space-evenly;
     align-items: center;
     padding: 20px 10px;
+    flex-wrap: nowrap;
 }
 #underline{
     position: absolute;
@@ -45,21 +46,23 @@ body{
     width: 21%;
     border: 4px solid var(--accent-color);
     border-top: none;
-    /* background-color: red; */
     border-radius: 0 0 5px 5px;
     bottom: 10px;
 }
 .nav-item{
-    width: 20%;
+    flex: 0 1 20%;
+    min-height: 100%;
 }
 
 .navbar .btn{
+    min-width: fit-content;
     margin: 0;
     width: 100%;
     background-color: var(--bg-color-2);
     box-shadow: -3px 8px 10px rgba(0,0,0,.5);
     color: var(--text-color-1);
     z-index: 3;
+    white-space: normal;
 }
 .slide {
     font-size: 20px;
@@ -67,15 +70,16 @@ body{
 #about {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 #about>* {
     font-size: 25px;
-    margin: 0 75px;
-    max-height: 400px;
 }
 #about p {
+    min-width: 330px;
     padding-top: 20px;
-    flex: 0 1 25%;
+    flex: 0 1 30%;
+    margin: 0 75px 30px 30px; 
 }
 #about #links{
     flex: 0 0 460px;

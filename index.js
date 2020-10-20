@@ -1,6 +1,6 @@
-let lastPage = $('#about');
-let lastIndex = 0;
-let w = window.innerWidth
+var lastPage = $('#about');
+var lastIndex = 0;
+var w = window.innerWidth
 
 var isMoving = false
 
@@ -8,7 +8,7 @@ const numPages = 4;
 
 
 console.log($('.wrapper:not(:first-child)'));
-$('.wrapper:not(:first-child)').css('left', '120%');
+$('.wrapper:not(:first-child)').css({ left: '120%', display: 'none' });
 $('#underline').css('left', 10 + (w-20)/25 - (.21*w - (w-20)/5)/2 + 'px')
 
 $('.slide').click((e) => {
@@ -23,11 +23,18 @@ $('.slide').click((e) => {
     if(index == lastIndex) return;
     
     let currentPage = $(slide.attr('lnk'));
-    console.log(slide.attr('lnk'), currentPage)
+    currentPage.css('display', 'block');
+    console.log(currentPage);
+
     lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
     currentPage.animate({left: '5%'}, { 
         duration: 500,
-        complete: () => { isMoving = false; }
+        complete: () => { 
+            isMoving = false; 
+            lastPage.css('display', 'none'); 
+            lastPage = currentPage;
+            lastIndex = index;
+        }
     });
 
     if(index - lastIndex > 1){
@@ -40,14 +47,18 @@ $('.slide').click((e) => {
 
     w = window.innerWidth
 
-    boxOffset = 10 + (w-20)*index/5 + (w-20)*(index+1)/25 - (.21*w - (w-20)/5)/2
+    boxOffset = getUnderlineOffset(index)
     console.log(boxOffset)
     
     $('#underline').animate({left: boxOffset + "px"}, 500);
-
-    lastPage = currentPage;
-    lastIndex = currentPage.index();
 });
+
+function getUnderlineOffset(index) {
+    rect = $('.slide').eq(index)[0].getBoundingClientRect();
+    console.log(rect);
+    return rect.x;// - (rect.width - .21*w)/2;
+    // return 10 + (w-20)*index/5 + (w-20)*(index+1)/25 - (.21*w - (w-20)/5)/2
+}
 
 // tilting
 // const max = 40;
