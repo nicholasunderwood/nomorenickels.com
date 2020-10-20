@@ -1,5 +1,6 @@
 var lastPage = $('#about');
 var lastIndex = 0;
+var index = 0;
 var w = window.innerWidth
 
 var isMoving = false
@@ -18,12 +19,12 @@ $('.slide').click((e) => {
     console.log("click")
 
     let slide = $(e.currentTarget);
-    let index = $('.slide').index(slide);
+    index = $('.slide').index(slide);
 
     if(index == lastIndex) return;
     
     let currentPage = $(slide.attr('lnk'));
-    currentPage.css('display', 'block');
+    currentPage.css('display', index == 0 ? 'flex' : 'block');
     console.log(currentPage);
 
     lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
@@ -45,7 +46,7 @@ $('.slide').click((e) => {
         $('.wrapper').slice(index+1, lastIndex).css("left", "120%");
     }
 
-    w = window.innerWidth
+    w = window.innerWidth;
 
     boxOffset = getUnderlineOffset(index)
     console.log(boxOffset)
@@ -53,22 +54,13 @@ $('.slide').click((e) => {
     $('#underline').animate({left: boxOffset + "px"}, 500);
 });
 
+$(window).resize(() => {
+    w = window.innerWidth;
+    console.log('resize', w)
+    $('#underline').css({left: getUnderlineOffset(index) + "px"});
+})
+
 function getUnderlineOffset(index) {
     rect = $('.slide').eq(index)[0].getBoundingClientRect();
-    console.log(rect);
-    return rect.x;// - (rect.width - .21*w)/2;
-    // return 10 + (w-20)*index/5 + (w-20)*(index+1)/25 - (.21*w - (w-20)/5)/2
+    return rect.x - (.21*w - rect.width)/2;
 }
-
-// tilting
-// const max = 40;
-
-// $('.card-border').on('mouseover mouseenter mousemove', (e) => {
-//     let rect = e.currentTarget.getBoundingClientRect();
-//     card = $(e.currentTarget).children()[0];
-//     x = (e.clientX - rect.left) / rect.width;
-//     y = (e.clientY - rect.top) / rect.height;
-    
-//     card.style.transform = `perspective(1000px) rotateX(${x*max}) rotateY(${y*max})`;
-//     console.log(card, card.style)
-// })
