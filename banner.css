@@ -4,7 +4,7 @@
 }
 
 @keyframes sep-slide {
-    from { left: -450px; }
+    from { left: 0; }
     to { left: 100%; }
 }
 
@@ -13,7 +13,7 @@
     flex: 0 1 70px;
     background-color: var(--bg-color-1);
     text-align: left;
-    overflow: visible;
+    overflow: hidden;
     border-bottom: 3px solid var(--accent-color);
 }
 
