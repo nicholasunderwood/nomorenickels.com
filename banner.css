@@ -1,11 +1,11 @@
-@keyframes title-slide {
-    from { left: calc(); }
-    to { left: 100%; }
-}
-
-@keyframes sep-slide {
+/* @keyframes slide {
     from { left: 0; }
     to { left: 100%; }
+} */
+
+@keyframes slide {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(100vw); }
 }
 
 #title {
@@ -13,15 +13,11 @@
     flex: 0 1 70px;
     background-color: var(--bg-color-1);
     text-align: left;
-    overflow: hidden;
+    overflow: visible;
     border-bottom: 3px solid var(--accent-color);
 }
 
-#title span{
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    
+#title .marquee{    
     width: 470px; 
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
@@ -33,7 +29,7 @@
     -webkit-background-clip: text;
     white-space: nowrap;
     background-clip: text;
-    animation: sep-slide 5s 0s infinite forwards linear;
+    animation: slide 10s 0s infinite forwards linear;
 }
 
 .seperator {
@@ -46,5 +42,5 @@
     right: 0;
     bottom: -4px;
     z-index: 2;
-    animation: sep-slide 5s 0s infinite forwards linear;
+    animation: slide 10s 0s infinite forwards linear;
 }

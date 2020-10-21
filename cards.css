@@ -11,6 +11,18 @@
     overflow-x: hidden;
 }
 
+#container::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+#container::-webkit-scrollbar-track{
+    background: #1e1e24;
+}
+
+#container::-webkit-scrollbar-thumb {
+    background: #6649b8;
+}
+
 .nav{
     display: flex;
     justify-content: space-around;
@@ -26,7 +38,7 @@
     position: relative;
     margin: 15px 0;
     width: 220px;
-    height: 250px;
+    height: 220px;
     margin: 10px;
     background-color: var(--bg-color-1);
     box-shadow:

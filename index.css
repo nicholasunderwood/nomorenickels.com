@@ -8,6 +8,19 @@
     --gradient: linear-gradient(90deg,#ff8a00,#e52e71);
 }
 
+*::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+*::-webkit-scrollbar-track{
+    background: #1e1e24;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #6649b8;
+}
+
+
 html{
     height: 100%;
     padding: 0;
