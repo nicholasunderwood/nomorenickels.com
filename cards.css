@@ -1,5 +1,5 @@
 .nav *{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 #container{
@@ -9,18 +9,7 @@
     position: relative;
     padding-top: 20px;
     overflow-x: hidden;
-}
-
-#container::-webkit-scrollbar {
-    width: 0.25rem;
-}
-
-#container::-webkit-scrollbar-track{
-    background: #1e1e24;
-}
-
-#container::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    overflow-y: visible;
 }
 
 .nav{
@@ -33,6 +22,7 @@
     position: absolute;
     width: 90%;
     left: 5%;
+
 }
 .card-border{
     position: relative;

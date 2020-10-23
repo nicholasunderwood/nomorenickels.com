@@ -10,10 +10,10 @@
 
 #title {
     position: relative;
-    flex: 0 1 70px;
+    flex: 0 0 70px;
     background-color: var(--bg-color-1);
     text-align: left;
-    overflow: visible;
+    overflow-y: visible;
     border-bottom: 3px solid var(--accent-color);
 }
 
