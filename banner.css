@@ -8,13 +8,19 @@
     to   { transform: translateX(100vw); }
 }
 
-#title {
-    position: relative;
+
+
+#title-wrapper {
+    overflow-x: hidden;
     flex: 0 1 70px;
     background-color: var(--bg-color-1);
-    text-align: left;
-    overflow: visible;
+}
+
+#title {
     border-bottom: 3px solid var(--accent-color);
+    position: relative;
+    text-align: left;
+    overflow-y: visible;
 }
 
 #title .marquee{    
