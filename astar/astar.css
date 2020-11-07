@@ -1,0 +1,40 @@
+html, body{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    resize: both;    
+}
+
+table {
+    width: 1000px;
+    height: 600px;
+}
+
+td {
+    height: 20px !important;
+    width: 20px !important;
+    border: 1px solid black;
+}
+td.end {
+    background-color: blue;
+}
+td.open {
+    background-color: green;
+}
+td.closed{
+    background-color: red;
+}
+td.wall{
+    background-color: black;
+}
+
+canvas {
+    border: 1px solid black;
+}
