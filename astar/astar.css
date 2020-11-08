@@ -22,18 +22,12 @@ td {
     width: 20px !important;
     border: 1px solid black;
 }
-td.end {
-    background-color: blue;
-}
-td.open {
-    background-color: green;
-}
-td.closed{
-    background-color: red;
-}
-td.wall{
-    background-color: black;
-}
+td.start { background-color: blue; }
+td.end { background-color: blue;}
+td.path { background-color: blue; }
+td.open { background-color: green; }
+td.closed{ background-color: red; }
+td.wall{ background-color: black; }
 
 canvas {
     border: 1px solid black;

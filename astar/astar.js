@@ -13,7 +13,10 @@ class Node{
         this.x = x; this.y = y; this.td = td; this.state = NodeState.None;
         this.h = 1000; this.g = 1000; this.parent = null;
     }
-    setState(state){ this.state = state }
+    setState(state){
+        this.state = state;
+        this.td[0].classList = state;
+    }
     setParent(parent) { this.parent = parent; }
     get f() { return this.h + this.g; }
     
@@ -38,7 +41,6 @@ function handleEndPoints(node) {
         node.setState(NodeState.Start)
         node.g = 0;
         startNode = node;
-        console.log(node, startNode);
         setState(false)
     } else {
         node.setState(NodeState.End);
@@ -54,9 +56,9 @@ function handleEndPoints(node) {
 
 function getSuroundingNodes(node, includeCorners) {
     let nodes = [];
-    for(let x = Math.max(node.x-1, 0); x <= Math.min(node.x+1, gridWidth-1); x++) {
-      for(let y = Math.max(node.y-1, 0); y <= Math.min(node.y+1, gridHeight-1); y++) {
-        let neighbor = grid[x][y];
+    for(let y = Math.max(node.y-1, 0); y <= Math.min(node.y+1, gridHeight-1); y++) {
+      for(let x = Math.max(node.x-1, 0); x <= Math.min(node.x+1, grid   Width-1); x++) {
+        let neighbor = grid[y][x];
         if(!includeCorners && (x - node.x) * (y - node.y) != 0) continue;
         if(neighbor == node) continue;
         nodes.push(neighbor);
@@ -83,7 +85,7 @@ function addToClosed(node){
 function getPath(end){
     path = [end];
     let current = end.parent;
-    while(current != startNode){
+    while(current && current != startNode){
         path.push(current);
         current.setState(NodeState.Path);
         current = current.
@@ -100,13 +102,25 @@ function step(){
         current = !current ? node : Node.getBestNode(current, node);
     });
     addToClosed(current);
+    
     if(current === endNode){
         console.log('done');
         getPath(current);
         return;
     }
-    getSuroundingNodes(current, false).forEach(node => {
-        if(closed.has(node) || open.has(node) || node.state == NodeState.Wall) return;
+    let neighbors = getSuroundingNodes(current, false);
+    if(neighbors.length < 4 && current.x != 0 && current.y != 0 && current.x != gridWidth-1 && current.y != gridHeight-1)
+        console.log(current, neighbors)
+
+    neighbors.forEach(node => {
+        if(node.state == NodeState.Wall) {
+            console.log('wall', current)
+        }
+
+        if(closed.has(node) || open.has(node) || node.state == NodeState.Wall){
+            // console.log(closed.has(node), open.has(node), node.state == NodeState.Wall)
+            return;
+        }
         let dist = Node.calcDist(node, current);
         if(dist + current.g >= node.g) return;
         
@@ -115,14 +129,13 @@ function step(){
         node.setParent(current);
         addToOpen(node);
     });
-    
 }
 
 function clearGrid () {
     console.log('clear');
-    for(let x = 0; x < gridWidth; x++){
-        for(let y = 0; y < gridHeight; y++){
-            grid[x][y] = new Node(x,y);
+    for(let y = 0; y < gridHeight; y++){
+        for(let x = 0; x < gridWidth; x++){
+            grid[y][x].setState(NodeState.None);
         }
     }
     startNode = null; endNode = null;
@@ -144,32 +157,35 @@ function setState(isPathing){
 }
 
 function mousePressed(e) {
-    console.log(e);
     e.preventDefault();
     let td = $(e.currentTarget)
-    let node = Node.getNode(+td.attr('x'), td.attr('y'));
+    let node = grid[+td.attr('y')][+td.attr('x')];
     if(!node) return;
-    if(e.type == 'click'){
+    if(e.buttons == 1){
         handleEndPoints(node);
-    } else if(e.type == 'contextmenu'){
+    } else if(e.buttons == 2){
         isRemovingWall = node.state == NodeState.Wall;
+        console.log(isRemovingWall)
         node.setState(isRemovingWall ? NodeState.None : NodeState.Wall)
     }
 }
 
-function mouseDragged() {
-    let node = Node.getNode(mouseX, mouseY);
-    if(!node || mouseButton == LEFT) return;
-    node.setState(isRemovingWall ? NodeState.None : NodeState.Wall);
+function mouseMoved(e) {
+    if(e.buttons != 2) return;
+    let td = $(e.currentTarget)
+    let node = grid[+td.attr('y')][+td.attr('x')];
+    node.setState(isRemovingWall ? NodeState.None : NodeState.Wall)
 }
 
-function keyPressed(){
-    if(key == ' ' && startNode && endNode && path == null) {
-        step();
-    }
-}
-
-const NodeState = { None: [255], Start: [0,0,255], End: [0,0,255], Closed: [255,0,0], Open: [0,255,0], Wall: [0], Path: [0,0,255] };
+const NodeState = {
+    None: new String('none'),
+    Start: new String('start'),
+    End: new String('end'),
+    Closed: new String('closed'),
+    Open: new String('open'),
+    Wall: new String('wall'),
+    Path: new String('path')
+};
 
 const gridWidth = 50, gridHeight = 30, nodeSize = 20;
 const grid = [];
@@ -193,16 +209,16 @@ $(document).ready(() => {
     
     for(let y = 0; y < gridHeight; y++){
         grid.push([]);
-        let tr = $('<tr></tr>')
+        let tr = $('<tr></tr>');
         for(let x = 0; x < gridWidth; x++){
             grid[y].push(new Node(x,y,$(`<td x=${x} y=${y}></td>`)));
-            tr.append(grid[x][y]);
+            tr.append(grid[y][x].td);
         }
-        console.log(tr);
         $('#table').append(tr);
     }
 
-    $('td').on('click contextmenu', mousePressed)
+    $('td').on('mousedown', mousePressed)
+        .on('mouseover', mouseMoved)
 });
 
 console.log('load')
