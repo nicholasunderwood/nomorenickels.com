@@ -18,6 +18,11 @@ class Node{
         this.td[0].classList = state;
     }
     setParent(parent) { this.parent = parent; }
+    clear() {
+        this.state = NodeState.None;
+        this.td[0].classList = '';
+        this.h = 1000; this.g = 1000;
+    }
     get f() { return this.h + this.g; }
     
 }
@@ -57,7 +62,7 @@ function handleEndPoints(node) {
 function getSuroundingNodes(node, includeCorners) {
     let nodes = [];
     for(let y = Math.max(node.y-1, 0); y <= Math.min(node.y+1, gridHeight-1); y++) {
-      for(let x = Math.max(node.x-1, 0); x <= Math.min(node.x+1, grid   Width-1); x++) {
+      for(let x = Math.max(node.x-1, 0); x <= Math.min(node.x+1, gridWidth-1); x++) {
         let neighbor = grid[y][x];
         if(!includeCorners && (x - node.x) * (y - node.y) != 0) continue;
         if(neighbor == node) continue;
@@ -92,7 +97,7 @@ function getPath(end){
         parent;
     }
 
-    setState(false)
+    setState(false);
 }
 
 function step(){
@@ -135,7 +140,7 @@ function clearGrid () {
     console.log('clear');
     for(let y = 0; y < gridHeight; y++){
         for(let x = 0; x < gridWidth; x++){
-            grid[y][x].setState(NodeState.None);
+            grid[y][x].clear();
         }
     }
     startNode = null; endNode = null;
@@ -219,6 +224,7 @@ $(document).ready(() => {
 
     $('td').on('mousedown', mousePressed)
         .on('mouseover', mouseMoved)
+        .on('contextmenu', e => e.preventDefault());
 });
 
 console.log('load')
