@@ -1,47 +1,21 @@
-
-class Node{
-    static getNode(x,y) { return grid[Math.floor(x/nodeSize)][Math.floor(y/nodeSize)]}
-    static calcDist(node1, node2) {
-        let dx = Math.abs(node1.x - node2.x); let dy = Math.abs(node1.y - node2.y);
-        return Math.min(dx, dy) * 14 + Math.abs(dx - dy) * 10
-    }
-    static getBestNode(node1, node2){
-        if(node1.f == node2.f) return node1.h > node2.h ? node2 : node1;
-        else return node1.f > node2.f ? node2 : node1;
-    }
-    constructor(x,y, td){
-        this.x = x; this.y = y; this.td = td; this.state = NodeState.None;
-        this.h = 1000; this.g = 1000; this.parent = null;
-    }
-    setState(state){
-        this.state = state;
-        this.td[0].classList = state;
-    }
-    setParent(parent) { this.parent = parent; }
-    clear() {
-        this.state = NodeState.None;
-        this.td[0].classList = '';
-        this.h = 1000; this.g = 1000;
-    }
-    get f() { return this.h + this.g; }
-    
-}
-
 function play () {
+    console.log('play', startNode, endNode, path, ani)
     if(startNode && endNode && !path){
         ani = setInterval(step, 10);
+        $('#play').text('Pause').unbind('click').on('click', pause);
     }
-    $('#play').text('Pause').on('click', pause);
 }
 
 function pause(){
+    console.log('pause')
     if(ani) clearInterval(ani);
-    $('#play').text('Play').on('click', play);
+    $('#play').text('Play').unbind('click').on('click', play);
 }
 
 function handleEndPoints(node) {
+    if(node.state == NodeState.Wall) return;
     if(!startNode || endNode) {
-        if(startNode && endNode) { clearGrid(); console.log('reset') }
+        if(startNode && endNode) { clearGrid(false); console.log('reset') }
 
         node.setState(NodeState.Start)
         node.g = 0;
@@ -101,11 +75,17 @@ function getPath(end){
 }
 
 function step(){
-    if(open.size < 1) return;
+    console.log('step')
+    if(open.size == 0) {
+        setState(false);
+        alert("No possible path");
+        return;
+    };
     var current;
     open.forEach(node => {
         current = !current ? node : Node.getBestNode(current, node);
     });
+    console.log(current, current.td[0])
     addToClosed(current);
     
     if(current === endNode){
@@ -114,18 +94,13 @@ function step(){
         return;
     }
     let neighbors = getSuroundingNodes(current, false);
+    console.log(neighbors)
     if(neighbors.length < 4 && current.x != 0 && current.y != 0 && current.x != gridWidth-1 && current.y != gridHeight-1)
         console.log(current, neighbors)
 
     neighbors.forEach(node => {
-        if(node.state == NodeState.Wall) {
-            console.log('wall', current)
-        }
-
-        if(closed.has(node) || open.has(node) || node.state == NodeState.Wall){
-            // console.log(closed.has(node), open.has(node), node.state == NodeState.Wall)
-            return;
-        }
+        console.log(node, closed.has(node), open.has(node), node.state == NodeState.Wall);
+        if(closed.has(node) || open.has(node) || node.state == NodeState.Wall) return;
         let dist = Node.calcDist(node, current);
         if(dist + current.g >= node.g) return;
         
@@ -136,15 +111,17 @@ function step(){
     });
 }
 
-function clearGrid () {
+function clearGrid (clearWalls) {
     console.log('clear');
     for(let y = 0; y < gridHeight; y++){
         for(let x = 0; x < gridWidth; x++){
+            if(!clearWalls && grid[y][x].state == NodeState.Wall) continue;
             grid[y][x].clear();
         }
     }
     startNode = null; endNode = null;
     open.clear(); closed.clear(); path = null;
+    clearInterval(ani);
     setState(false)
 }
 
@@ -158,7 +135,7 @@ function draw() {
 
 function setState(isPathing){
     $('#play,#next').attr('disabled', !isPathing);
-    if(ani) clearInterval(ani);
+    if(ani && !isPathing) clearInterval(ani);
 }
 
 function mousePressed(e) {
@@ -182,22 +159,23 @@ function mouseMoved(e) {
     node.setState(isRemovingWall ? NodeState.None : NodeState.Wall)
 }
 
-const NodeState = {
-    None: new String('none'),
-    Start: new String('start'),
-    End: new String('end'),
-    Closed: new String('closed'),
-    Open: new String('open'),
-    Wall: new String('wall'),
-    Path: new String('path')
-};
+function genMaze(){
+    clearGrid(true);
+    maze.start(grid[1][1]);
+    $('#maze').text('Finish Maze').unbind('click').on('click', () => {
+        maze.finishMaze();
+        $('#maze').text('Generate Maze').unbind('click').on('click', genMaze);
+    });
+}
 
-const gridWidth = 50, gridHeight = 30, nodeSize = 20;
+const gridWidth = 51, gridHeight = 33, nodeSize = 20;
 const grid = [];
 const sqrt2 = Math.sqrt(2);
+const maze = new Maze(grid);
 var canvas;
 var startNode = null, endNode = null, path = null;
 var isRemovingWall = false;
+var isAnimating = false;
 var includeCorners = false;
 var ani;
 
@@ -208,9 +186,9 @@ $(document).ready(() => {
     console.log('ready')
     $('#play').on('click', play);
     $('#next').on('click', step);
-    $('#clear').on('click', clearGrid);
+    $('#clear').on('click', () => clearGrid(true));
+    $('#maze').on('click', genMaze);
     setState(false)
-
     
     for(let y = 0; y < gridHeight; y++){
         grid.push([]);

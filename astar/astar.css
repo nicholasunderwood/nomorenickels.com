@@ -22,6 +22,7 @@ td {
     width: 20px !important;
     border: 1px solid black;
 }
+
 td.start { background-color: blue; }
 td.end { background-color: blue;}
 td.path { background-color: blue; }
