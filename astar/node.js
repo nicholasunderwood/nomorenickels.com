@@ -9,7 +9,7 @@ class Node{
         else return node1.f > node2.f ? node2 : node1;
     }
     static getBestNodeByG(node1, node2) {
-        return node1 >= node2 ? node2 : node1;
+        return node1 >= node2 ? node1 : node2;
     }
     constructor(x,y, td){
         this.x = x; this.y = y; this.td = td; this.state = NodeState.None;
