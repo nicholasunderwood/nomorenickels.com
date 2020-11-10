@@ -4,9 +4,12 @@ class Node{
         let dx = Math.abs(node1.x - node2.x); let dy = Math.abs(node1.y - node2.y);
         return Math.min(dx, dy) * 14 + Math.abs(dx - dy) * 10
     }
-    static getBestNode(node1, node2){
+    static getBestNodeByF(node1, node2){
         if(node1.f == node2.f) return node1.h > node2.h ? node2 : node1;
         else return node1.f > node2.f ? node2 : node1;
+    }
+    static getBestNodeByG(node1, node2) {
+        return node1 >= node2 ? node2 : node1;
     }
     constructor(x,y, td){
         this.x = x; this.y = y; this.td = td; this.state = NodeState.None;
@@ -22,6 +25,7 @@ class Node{
         this.td[0].classList = '';
         this.h = Number.MAX_SAFE_INTEGER;
         this.g = Number.MAX_SAFE_INTEGER;
+        this.parent = null;
     }
     get f() { return this.h + this.g; }
     

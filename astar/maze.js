@@ -2,9 +2,10 @@ class Maze {
     constructor(grid){
         this.grid = grid;
         this.closed = new Set();
+        this.isGenerating = true;
     }
 
-    start(startNode) {
+    async start(startNode) {
         this.closed.clear();
         console.log('start', startNode)
         this.startNode = startNode;
@@ -16,7 +17,8 @@ class Maze {
         }));
         startNode.setState(NodeState.None);
         this.nextNode = this.startNode;
-        this.ani = setInterval(() => this.step(this.nextNode, false), 50);
+        this.isGenerating = true;
+        this.ani = setInterval(() => this.step(this.nextNode, false), 30);
     }
 
     finishMaze(){
@@ -31,7 +33,11 @@ class Maze {
         
         let nextNodes = this.getNextNodes(node);
         if(nextNodes.length == 0){
-            if(node == this.startNode) return;
+            if(node == this.startNode) {
+                this.isGenerating = false;
+                clearInterval(this.ani);
+                return;
+            }
             this.nextNode = this.path.pop();
             if(!finish) this.nextNode.setState(NodeState.Path);
             return finish ? this.step(this.nextNode, true) : null;
@@ -58,10 +64,10 @@ class Maze {
         let nodes = [];
         for(let y = Math.max(node.y-2, 1); y <= Math.min(node.y+2, gridHeight-2); y+=2) {
             for(let x = Math.max(node.x-2, 1); x <= Math.min(node.x+2, gridWidth-2); x+=2) {
-            let neighbor = grid[y][x];
-            if((x - node.x) * (y - node.y) != 0) continue;
-            if(neighbor == node || this.closed.has(neighbor)) continue;
-            nodes.push(neighbor);
+                let neighbor = grid[y][x];
+                if((x - node.x) * (y - node.y) != 0) continue;
+                if(neighbor == node || this.closed.has(neighbor)) continue;
+                nodes.push(neighbor);
             }
         }
         return nodes;
