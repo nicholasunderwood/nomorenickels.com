@@ -85,15 +85,15 @@ body{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 #about>* {
     font-size: 25px;
 }
 #about p {
     min-width: 330px;
-    padding-top: 20px;
     flex: 0 1 30%;
-    margin: 0 75px 30px 30px; 
+    margin-right: 20px; 
 }
 #about #links{
     flex: 0 0 460px;

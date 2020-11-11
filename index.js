@@ -61,6 +61,7 @@ $(window).resize(() => {
 })
 
 function getUnderlineOffset(index) {
-    rect = $('.slide').eq(index)[0].getBoundingClientRect();
-    return rect.x - (.21*w - rect.width)/2;
+    rect = $('.slide').eq(index).parents('.nav-item')[0].getBoundingClientRect();
+    slide = $('#underline')[0].getBoundingClientRect()
+    return rect.x - (slide.width - rect.width)/2;
 }
