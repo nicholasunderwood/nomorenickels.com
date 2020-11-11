@@ -7,8 +7,11 @@
     width: 100%;
     text-align: left;
     position: relative;
-    padding-top: 20px;
+    padding-top: 50px;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 #container::-webkit-scrollbar {
@@ -30,9 +33,13 @@
 }
 
 .wrapper{
+    max-height: 100%;
     position: absolute;
     width: 90%;
     left: 5%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
 }
 .card-border{
     position: relative;
