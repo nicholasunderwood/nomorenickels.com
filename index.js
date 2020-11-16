@@ -24,7 +24,7 @@ $('.slide').click((e) => {
     if(index == lastIndex) return;
     
     let currentPage = $(slide.attr('lnk'));
-    currentPage.css('display', index == 0 ? 'flex' : 'block');
+    currentPage.css('display', 'flex');
     console.log(currentPage);
 
     lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
