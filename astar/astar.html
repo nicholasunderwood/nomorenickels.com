@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <title>ASTAR Path Generation</title>
+    <link href="./astar.css" rel="stylesheet">
+    <link href="../bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="form-inline mb-3">
+            <div class="btn-group" role="group" >
+                <button class="btn btn-dark" id='play'>Pause</button>
+                <button class="btn btn-dark" id='next'>Next</button>
+                <button class="btn btn-dark" id='maze'>Generate Maze</button>
+                <button class="btn btn-danger" id='clear'>Clear</button>
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Options</div>
+                <div class="input-group-text bg-white">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="jump" value="option1">
+                    <label class="form-check-label" for="jump">Jump Corners</label>
+                  </div>
+                </div>
+                <div class="input-group-text bg-white">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="animate" value="option1">
+                    <label class="form-check-label" for="animate">Animate</label>
+                  </div>
+                </div>
+              </div>
+              <select class="custom-select" id="algorithm">
+                <option selected value="0">A* Search Algorithm</option>
+                <option value="1">Dijkstra's algorithm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id='table-wrapper'>
+          <table><tbody id='table'></tbody></table>
+        </div>
+    </main>
+    <script src="../jquery-3.3.1.js"></script>
+    <script src="./node.js"></script>
+    <script src="./paths.js"></script>
+    <script src="./maze.js"></script>
+    <script src="./astar.js"></script>
+</body>
