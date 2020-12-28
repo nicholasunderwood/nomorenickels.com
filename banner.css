@@ -8,12 +8,10 @@
     to   { transform: translateX(100vw); }
 }
 
-
-
 #title-wrapper {
     overflow-x: hidden;
     flex: 0 1 70px;
-    background-color: var(--bg-color-1);
+    background-color: var(--bg-color-2);
 }
 
 #title {

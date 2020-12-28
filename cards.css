@@ -9,17 +9,51 @@
     position: relative;
     overflow-x: hidden;
     overflow-y: visible;
+
+    display: flex;
+}
+
+.arrow {
+    height: 100%;
+    flex: 0 0 auto;
+    background-color: var(--bg-color-1);
+    position: relative;
+    z-index: 2;
+}
+
+.arrow .btn {
+    background-color: var(--bg-color-2);
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 30px;
+    font-size: 2em;
+    height: 80%;
+}
+
+.arrow.left-arrow .btn {
+    left: 0
+}
+
+.arrow.right-arrow .btn {
+    right: 0;
+}
+
+.slides-wrapper {
+    flex: 1 1 auto;
+    
 }
 
 .wrapper{
     position: absolute;
     min-height: 100%;
     min-width: 0;
-    width: 90%;
-    left: 5%;
+    width: 80%;
+    left: 10%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .nav{
@@ -93,7 +127,6 @@
 .card-border .btn:hover{
     box-shadow: -5px 15px 25px rgba(0,0,0,.5);
 }
-
 
 .shrt{
     width: 20% !important; 

@@ -2,11 +2,8 @@ var lastPage = $('#about');
 var lastIndex = 0;
 var index = 0;
 var w = window.innerWidth
-
 var isMoving = false
-
 const numPages = 4;
-
 
 console.log($('.wrapper:not(:first-child)'));
 $('.wrapper:not(:first-child)').css({ left: '120%', display: 'none' });
@@ -20,7 +17,7 @@ $('.slide').click((e) => {
 
     let slide = $(e.currentTarget);
     index = $('.slide').index(slide);
-
+    
     if(index == lastIndex) return;
     
     let currentPage = $(slide.attr('lnk'));
