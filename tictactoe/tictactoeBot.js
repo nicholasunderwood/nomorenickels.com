@@ -26,6 +26,7 @@ function minimax(player, board, depth) {
 	let score = evaluateBoard(board);
 	
 	if(score != null){
+		
 		return {score: score, depth: depth};
 	}
 	

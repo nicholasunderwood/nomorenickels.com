@@ -48,11 +48,8 @@ $(document).ready(() => {
         for(let i = 0; i < boardSize; i++){
             board[i] = [...Array(boardSize)].map(_ => 0);
         }
-        console.log(board)
         $('#board td').text(() => "");
         setStatus(`X to play`);
-
-        botMove();
 
     }
 
@@ -64,7 +61,7 @@ $(document).ready(() => {
         $(`td:eq(${y*boardSize+x})`).text(getPlayerString(currentPlayer));
         currentPlayer = -currentPlayer;
         
-        let gameState = checkForWinner(board);
+        let gameState = evaluateBoard(board);
         
         if(Math.abs(gameState) == 1) {
             setStatus(`${getPlayerString(gameState)} Wins!`);
