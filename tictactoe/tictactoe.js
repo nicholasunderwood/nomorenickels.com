@@ -1,180 +1,111 @@
-var isWinner = false;
-var player = 'X';
-var board = [];
-var layout = [];
-var winner = 'O';
-var restart = document.getElementById('restart');
-var lines = document.getElementsByClassName('line');
-var spaces = document.getElementsByTagName('');
-// Initialize to a 2D array of empty strings, 3x3
-for (var row = 0; row < 3; row++) {
-    var cols = [];
-    for (var col = 0; col < 3; col++) {
-        cols.push(" ");
-    }
-    board.push(cols);
+const boardSize = 3;
+
+function getPlayerString(player){
+    return player == 1 ? 'X' : player == -1 ? 'O' : '';
 }
 
-restart.addEventListener('click', function () {
-    board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]];
-    isWinner = false;
-    player = 'X';
-    winner = 'O';
-    for(x=0;x<16;x++){
-        lines[x].style.border = 'none';
-        console.log(x)
-    }
-    document.getElementById("diag").style.background = 'transparent';
-    drawLines();
-    setupClickListener();
-    updateBoardDisplay();
-    updateStatusDisplay();
-})
-// Handles click by current player of row and col
-var handleClick = function(row, col) {
-    console.log('handleClick')
-    if(!isWinner){
-        if(board[row][col] === ' '){
-            board[row][col] = player;
-            if(player === 'X'){
-                player = 'O';
-                winner = 'X'
-            }
-            else{
-                player = 'X';
-                winner = 'O'
-            }
+function initiateBoard() {
+    var table = $('#board');
+    for(let i = 0; i < boardSize * boardSize; i++){
+        if(i % boardSize == 0) table.append($('<tr></tr>'));
+
+        table.children().last().append(
+            $('<td></td>').attr('x', i%boardSize).attr('y', Math.floor(i/boardSize))
+        )
+    };
+    return table   
+}
+
+function setStatus(status){
+    $('#status').text(status);
+}
+
+function checkForWinner(board) {
+    let isDraw = true;
+    for(let a = 0; a < 3; a++){
+        let rowWin = board[a][0];
+        let colWin = board[0][a];
+        isDraw = isDraw && board[a][0] != 0;
+        for(let b = 1; b < 3; b++){
+            rowWin = (rowWin == board[a][b] ? rowWin : 0)
+            colWin = (colWin == board[b][a] ? colWin : 0)
+            isDraw = isDraw && board[a][b] != 0;
         }
+        if(rowWin != 0) return rowWin;
+        if(colWin != 0) return colWin;
     }
-    updateBoardDisplay();
-    updateStatusDisplay();
-};
+    if(isDraw) return 2;
+    if(board[0][0] == board[1][1] && board[0][0] == board[2][2]) return board[0][0];
+    if(board[0][2] == board[1][1] && board[0][2] == board[2][0]) return board[0][2];
+    return 0
+}
 
-// Returns winning player if found (X or O)
-// If no winner, returns empty string
-var checkForWinner = function() {
-    console.log('checkForWinner')
-    if(
-        board[0][0] === board[0][1] && board[0][0] === board[0][2] && board[0][0] !== " " ||
-        board[1][0] === board[1][1] && board[1][0] === board[1][2] && board[1][0] !== " " ||
-        board[2][0] === board[2][1] && board[2][0] === board[2][2] && board[2][0] !== " " ||
-        board[0][0] === board[1][0] && board[0][0] === board[2][0] && board[0][0] !== " " ||
-        board[0][1] === board[1][1] && board[0][1] === board[2][1] && board[0][1] !== " " ||
-        board[0][2] === board[1][2] && board[0][2] === board[2][2] && board[0][2] !== " " ||
-        board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== " " ||
-        board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== " "
-    ){
-        console.log('WON');
-        return winner;
+$(document).ready(() => {
+
+    function restart() {
+        isFinished = false;
+        currentPlayer = 1;
+        for(let i = 0; i < boardSize; i++){
+            board[i] = [...Array(boardSize)].map(_ => 0);
+        }
+        console.log(board)
+        $('#board td').text(() => "");
+        setStatus(`X to play`);
+
+        botMove();
+
     }
 
-};
+    function move(x, y) {
+        if(isFinished) restart();
 
-var setupClickListener = function() {
-    console.log('setupClickListener')
-    var boardTable = document.getElementById("board");
-    boardTable.addEventListener("click", function(event) {
-        if (event.target.nodeName !== "TD") {
+        if(board[x][y] != 0) return;
+        board[x][y] = currentPlayer
+        $(`td:eq(${y*boardSize+x})`).text(getPlayerString(currentPlayer));
+        currentPlayer = -currentPlayer;
+        
+        let gameState = checkForWinner(board);
+        
+        if(Math.abs(gameState) == 1) {
+            setStatus(`${getPlayerString(gameState)} Wins!`);
+            isFinished = true;
             return;
         }
-        var cell = event.target;
-        var row = Number.parseInt(cell.getAttribute("data-row"), 10);
-        var col = Number.parseInt(cell.getAttribute("data-col"), 10);
-        handleClick(row, col);
-    });
-};
 
-var updateBoardDisplay = function() {
-    console.log('updateBoardDisplay')
-    layout = [];
-    var boardTable = document.getElementById("board");
-    boardTable.innerHTML = "";
-    for (var row = 0; row < board.length; row++) {
-        var tableRow = document.createElement("tr");
-        var layoutRow = []
-        for (var col = 0; col < board[row].length; col++) {
-            var cellTd = document.createElement("td");
-            cellTd.innerHTML = board[row][col];
-            cellTd.setAttribute("data-row", row);
-            cellTd.setAttribute("data-col", col);
-            if(col === 1){
-                cellTd.style.borderLeft = 'solid';
-                cellTd.style.borderRight = 'solid';
-            }
-            if(row === 1){
-                cellTd.style.borderTop = 'solid';
-                cellTd.style.borderBottom = 'solid';
-            }
-            tableRow.appendChild(cellTd);
-            layoutRow.push(cellTd)
+        if(gameState == 2){
+            setStatus('Tie!');
+            isFinished = true;
+            return;
         }
-        boardTable.appendChild(tableRow);
-        layout.push(layoutRow);
-    }
-};
 
-var updateStatusDisplay = function() {
-    console.log('updateStatusDisplay');
-    var statusDiv = document.getElementById("status");
-    var winner = checkForWinner();
-    if (winner) {
-        console.log('win')
-        statusDiv.innerHTML = winner + ' Wins!';
-        isWinner = true;
-        drawLines();
-    }else if(!board[0].includes(' ') && !board[1].includes(' ') && !board[2].includes(' ')){
-        statusDiv.innerHTML = 'Tie!'
-    }else {
-        console.log('turn', player)
-        statusDiv.innerHTML = "Current player is " + player;
-    }
-};
-
-var drawLines = function(){
-    console.log('drawLines');
-    if(board[0][0] === board[0][1] && board[0][0] === board[0][2] && board[0][0] !== " "){
-        layout[0][0].style.animationName = 'pulse';
-        layout[0][1].style.animationName = 'pulse';
-        layout[0][2].style.animationName = 'pulse';
-    }
-    else if(board[1][0] === board[1][1] && board[1][0] === board[1][2] && board[1][0] !== " "){
-        layout[1][0].style.animationName = 'pulse';
-        layout[1][1].style.animationName = 'pulse';
-        layout[1][2].style.animationName = 'pulse';
-    }
-    else if(board[2][0] === board[2][1] && board[2][0] === board[2][2] && board[2][0] !== " "){
-        layout[2][0].style.animationName = 'pulse';
-        layout[2][1].style.animationName = 'pulse';
-        layout[2][2].style.animationName = 'pulse';
-    }
-    else if(board[0][0] === board[1][0] && board[0][0] === board[2][0] && board[0][0] !== " "){
-        layout[0][0].style.animationName = 'pulse';
-        layout[1][0].style.animationName = 'pulse';
-        layout[2][0].style.animationName = 'pulse';
-    }
-    else if(board[1][0] === board[1][1] && board[1][0] === board[1][2] && board[1][0] !== " "){
-        layout[1][0].style.animationName = 'pulse';
-        layout[1][1].style.animationName = 'pulse';
-        layout[1][2].style.animationName = 'pulse';
-    }
-    else if(board[0][2] === board[1][2] && board[0][2] === board[2][2] && board[0][2] !== " "){
-        layout[0][2].style.animationName = 'pulse';
-        layout[1][2].style.animationName = 'pulse';
-        layout[2][2].style.animationName = 'pulse';
-    }
-    else if(board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== " "){
-        layout[0][0].style.animationName = 'pulse';
-        layout[1][1].style.animationName = 'pulse';
-        layout[2][2].style.animationName = 'pulse';
-    }
-    else if(board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== " "){
-        layout[0][2].style.animationName = 'pulse';
-        layout[1][1].style.animationName = 'pulse';
-        layout[2][0].style.animationName = 'pulse';
+        setStatus(`${getPlayerString(currentPlayer)} to play`);
     }
 
-};
+    function handleClick(){
+        if(isFinished) return;
 
-setupClickListener();
-updateBoardDisplay();
-updateStatusDisplay();
+        console.log('click');
+        let x = +$(this).attr('x');
+        let y = +$(this).attr('y');
+        move(x, y);
+
+        // botMove();
+    }
+
+    function botMove(){
+        let m = bestMove(board, currentPlayer);
+        move(m.i, m.j);
+    }
+
+    const board = [...Array(boardSize)].map(_ => [...Array(boardSize)].map(_ => 0));
+    var currentPlayer = 1;
+    isFinished = false;
+    const table = initiateBoard(board)
+    $('#board td').click(handleClick);
+    $('#restart').click(restart);
+    $('#bot').click(botMove)
+    setStatus(`${getPlayerString(currentPlayer)} to play`);
+
+    // setTimeout(botMove, 0)
+});
+

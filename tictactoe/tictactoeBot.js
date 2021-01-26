@@ -1,71 +1,100 @@
-function getPlay(board){
-    function willEnd(mRows){
-        ['X', 'Y'].forEach((cond)=>{
-            for(let row in mRows){
-                let filled = [];
-                for(let col in mRows[row]){
-                    let square = mRows[row][col]
-                    if(square == cond){
-                        filled.push(col);
-                    }
-                    if(filled.length == 2){
-                        return map[row][-1*(filled[0]+filled[1])+3];
-                    }
-                } 
-            }
-        });
-        return null;
-    }
+function getBestMove(player, board) {
+	let moves = getPossibleMoves(board)
+	evals = new Map();
 
-    function canDouble(mRows){
-        let danger = [];
-        let change = [];
-        ['X','Y'].forEach((cond)=>{
-            for(i in mRows){
-                let ys = 0;
-                let xs = 0;
-                for(f in mRows[i]){
-                    if(mRows[i][f] = 'Y'){
-                        ys++;
-                    }
-                    else if(mRows[i][f] = 'X'){
-                        xs++;
-                    }
-                }
-                if(xs>0 && ys>0){
-                    break;
-                }
-                else if(xs > 0){
-                    danger.push(i);
-                }
-                else if(ys > 0){
-                    change.push(i);
-                }
-            }
-        });
-    }
-    
-    let rows = [
-        mBoard[0],
-        mBoard[1],
-        mBoard[3],
-        [mBoard[0][0], mBoard[0][1], mBoard[0][2]],
-        [mBoard[1][0], mBoard[1][1], mBoard[1][2]],
-        [mBoard[2][0], mBoard[2][1], mBoard[2][2]]
-    ];
-    let map = [
-        [[0,0], [0,1], [0,2]],
-        [[1,0], [1,1], [1,2]],
-        [[2,0], [2,1], [2,2]],
-        [[0,0], [0,1], [0,2]],
-        [[1,0], [1,1], [1,2]],
-        [[2,0], [2,1], [2,2]]
-    ]
+	let bestScore = -player * Infinity;
+	let bestMove;
 
-    let play = willEnd(rows);
-    if(play != null){
-        return play;
-    }
-    
-    
+	moves.forEach(move => {
+		board[move.y][move.x] = player;
+		let score = player * minimax(-player, board, 0);
+		board[move.y][move.x] = 0;
+
+		evals.set(move, score);
+
+		if (score * player > bestScore * player) {
+			bestScore = score;
+			bestMove = move;
+		}
+	});
+
+	console.log(bestMove, bestScore, evals)
+	return bestMove;
+}
+
+function minimax(player, board, depth) {
+	let score = evaluateBoard(board);
+	
+	if(score != null){
+		return {score: score, depth: depth};
+	}
+	
+	let moves = getPossibleMoves(board);
+
+	if(player == 1){
+		let bestScore = -Infinity;
+	
+		moves.forEach(move => {
+			board[move.y][move.x] = player;
+			let score = minimax(-player, board, depth+1);
+			board[move.y][move.x] = 0;
+			if(score.score > bestScore.score){
+				bestScore = score;
+			} else if(bestScore.score == score.score){
+				if(score.depth < bestScore.depth){
+					bestScore = score;
+				}
+			}
+		});
+	
+		return bestScore;
+	} else {
+		let bestScore = Infinity;
+	
+		moves.forEach(move => {
+			board[move.y][move.x] = player;
+			let score = minimax(-player, board, depth+1);
+			board[move.y][move.x] = 0;
+			if(score.score < bestScore.score){
+				bestScore = score;
+			} else if(bestScore.score == score.score){
+				if(score.depth < bestScore.depth){
+					bestScore = score;
+				}
+			}
+		});
+	
+		return bestScore;
+	}
+}
+
+function printBoard(board){
+	console.log(board.reduce((str, row) => {return str + row.join(' ') + "\n"}, ""));
+}
+
+
+function getPossibleMoves(board) {
+	return [...Array(9)]
+		.map((_, i) => { return { 'x': i % 3, 'y': Math.floor(i / 3) }; })
+		.filter(i => board[i.y][i.x] == 0);
+}
+
+function evaluateBoard(board) {
+	let isDraw = true;
+	for (let a = 0; a < 3; a++) {
+		let rowWin = board[a][0];
+		let colWin = board[0][a];
+		isDraw = isDraw && board[a][0] != 0;
+		for (let b = 1; b < 3; b++) {
+			rowWin = (rowWin == board[a][b] ? rowWin : 0)
+			colWin = (colWin == board[b][a] ? colWin : 0)
+			isDraw = isDraw && board[a][b] != 0;
+		}
+		if (rowWin != 0) return rowWin;
+		if (colWin != 0) return colWin;
+	}
+	if (isDraw) return 0;
+	if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) return board[0][0];
+	if (board[0][2] == board[1][1] && board[0][2] == board[2][0]) return board[0][2];
+	return null;
 }

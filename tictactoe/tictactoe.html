@@ -1,36 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>TicTacToe</title>
-    <link rel="stylesheet" type="text/css" href="tictactoe.css">
-</head>
-<body>
-<h1>TIC TAC TOE</h1>
-<div>
-    <div id='diag'></div>
-    <table id='lines'>
-            <tr>
-                <td class='cor line' id='a'></td><td class='ver line' id='b'></td><td class='ver line' id='c'></td><td class='cor line' id='d'></td>
-            </tr>
-            <tr>
-                <td class='hor line' id='e'></td><td class='mid line' id='f'></td><td class='mid line' id='g'></td><td class='hor line' id='h'></td>
-            </tr>
-            <tr>
-                <td class='hor line' id='i'></td><td class='mid line' id='j'></td><td class='mid line' id='k'></td><td class='hor line' id='l'></td>
-            </tr>
-            <tr>
-                <td class='cor line' id='m'></td><td class='ver line' id='n'></td><td class='ver line' id='o'></td><td class='cor line' id='p'></td>
-            </tr>
-        </table>
-<table id="board">
-</table>
-</div>
-<div id="status">
-</div>
-<button id="restart">Restart</button>
-<script src="tictactoe.js">
-</script>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>TicTacToe</title>
+        <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="tictactoe.css">
+    </head>
+    <body>
+        <h1>TIC TAC TOE</h1>
+        <div id='game'>
+            <div id='status'></div>
+            <table id="board">
+            </table>
+            <button id="restart" class="btn btn-primary">Restart</button>
+            <button id="bot" class="btn btn-primary">Bot</button>
+        </div>
+        <div id="status"></div>
+        
+        <script defer src="../jquery-3.3.1.js"></script>
+        <script defer src="./minimax.js"></script>
+        <script defer src="./tictactoe.js"></script>
+    </body>
 </html>
