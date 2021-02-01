@@ -62,20 +62,23 @@ $(document).ready(() => {
         currentPlayer = -currentPlayer;
         
         let gameState = evaluateBoard(board);
+
+        if(gameState != null){
+            setStatus(`${getPlayerString(currentPlayer)} to play`);
+            return;
+        } else {
+            ifFinished = true;
+        }
         
         if(Math.abs(gameState) == 1) {
             setStatus(`${getPlayerString(gameState)} Wins!`);
-            isFinished = true;
             return;
         }
 
-        if(gameState == 2){
+        if(gameState == 0){
             setStatus('Tie!');
-            isFinished = true;
             return;
-        }
-
-        setStatus(`${getPlayerString(currentPlayer)} to play`);
+        }        
     }
 
     function handleClick(){
