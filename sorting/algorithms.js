@@ -28,73 +28,68 @@ class SortingAlgorithm {
 
 class BubbleSort extends SortingAlgorithm {
     constructor(array){
-        super()
-        this.array = array;
+        super(array)
         this.index = 0;
         this.cap = array.length-1;
         this.hasDisorder = false;
     }
 
-    step(array){
+    step(){
         if(this.isFinished) return;
 
-        if(array[this.index] > array[this.index+1]){
-            this.hasDisorder = true;
-            this.swap(array, this.index, this.index+1)
+        
+        while(this.index != this.cap){
+            
+            if(this.array[this.index] > this.array[this.index+1]){
+                this.hasDisorder = true;
+                this.swap(this.array, this.index, this.index+1)
+            }
+            this.index++;
         }
 
-        colors[this.index] = 'black';
-        this.index++;
-        colors[this.index] = 'red';
-        colors[this.index+1] = 'red';
+        // colors[this.index] = 'black';
+        // colors[this.index] = 'red';
+        // colors[this.index+1] = 'red';
 
-        if(this.index == this.cap){
-            this.index = 0;
-            colors[this.cap] = 'green';
-            colors[this.cap+1] = 'green';
-            this.cap--;
-            if(this.cap == 1){
-                this.isFinished = true;
-                console.log('finished')
-            }
+        this.index = 0;
+        this.cap--;
+        colors[this.cap] = 'green';
+        colors[this.cap+1] = 'green';
+        if(this.cap == 1){
+            this.isFinished = true;
+            console.log('finished')
         }
     }
 }
 
 class SelectionSort extends SortingAlgorithm {
     constructor(array){
-        super()
-        this.array = array;
+        super(array)
 
         this.firstUnsorted = 0;
         this.index = 1;
         this.smallestIndex = 0;
     }
 
-    step(array){
+    step(){
         if(this.isFinished) return;
         
-        if(array[this.smallestIndex] > array[this.index]) {
-            this.smallestIndex = this.index
-            colors[this.smallestIndex] = 'red';
+
+        while(this.index != this.array.length) {
+            if(this.array[this.smallestIndex] > this.array[this.index]) {
+                this.smallestIndex = this.index
+            }
+            this.index++
         }
-
-        colors[this.index] = 'black';
-        this.index++
-        colors[this.index] = 'red';
-
-        if(this.index == array.length){
-            this.swap(array, this.firstUnsorted, this.smallestIndex);
-            colors[this.firstUnsorted] = 'green';
-            
-            this.firstUnsorted++;
-            this.smallestIndex = this.firstUnsorted;
-            this.index = this.firstUnsorted+1;
-            colors[this.firstUnsorted] = 'yellow';
-
-        }
-
-        if(this.firstUnsorted == array.length){
+        
+        this.swap(this.array, this.firstUnsorted, this.smallestIndex);
+        colors[this.firstUnsorted] = 'green';
+        
+        this.firstUnsorted++;
+        this.smallestIndex = this.firstUnsorted;
+        this.index = this.firstUnsorted+1;
+        
+        if(this.firstUnsorted == this.array.length){
             this.isFinished = true;
             colors[this.firstUnsorted] = 'green';
         }
@@ -102,27 +97,12 @@ class SelectionSort extends SortingAlgorithm {
     }
 }
 
-class BogoSort extends SortingAlgorithm {
-    constructor(){
-        super();
-        this.stepRate = 100;
+class MergeSort extends SortingAlgorithm{
+    constructor(array){
+        super(array);
     }
 
-    shuffle(array){
-        array = array.sort(() => { () => .5 - Math.random() });
-    }
-
-    step(array){
-        if(this.isFinished) return;
-
-        console.log('step')
-        this.shuffle(array);
-        if(this.isSorted(array)) {
-            this.isFinished = true;
-        }
-    }
-
-
+    
 }
 
 class StalinSort extends SortingAlgorithm {
@@ -133,24 +113,24 @@ class StalinSort extends SortingAlgorithm {
         this.stepRate = 1;
     }
 
-    start(array){
-        this.minValue = array[0];
+    start(){
+        this.minValue = this.array[0];
         colors[0] = 'green';
         colors[1] = 'red';
     }
 
-    step(array){
-        if(this.minValue > array[this.index]){
+    step(){
+        if(this.minValue > this.array[this.index]){
             array.splice(this.index, 1);
-            console.log(this.minValue, array[this.index]);
+            console.log(this.minValue, this.array[this.index]);
         } else {
-            this.minValue = array[this.index]
+            this.minValue = this.array[this.index]
             colors[this.index] = 'black'
             this.index++;
             colors[this.index] = 'red';
         }
 
-        if(this.index >= array.length){
+        if(this.index >= this.array.length){
             this.isFinished = true;
         }
 

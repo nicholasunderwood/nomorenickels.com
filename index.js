@@ -25,7 +25,7 @@ $('.slide').click((e) => {
     console.log(currentPage);
 
     lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
-    currentPage.animate({left: '5%'}, { 
+    currentPage.animate({left: '10%'}, { 
         duration: 500,
         complete: () => { 
             isMoving = false; 

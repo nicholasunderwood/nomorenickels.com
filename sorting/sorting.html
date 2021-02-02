@@ -11,12 +11,14 @@
 		<div class="form-inline mb-3">
 			<div class="btn-group" role="group">
 				<button class="btn btn-dark" id='play'>Start</button>
-				<button class="btn btn-dark" id='next'>Next</button>
+				<button class="btn btn-dark" id='speed' disabled>Speed Up</button>
+				<button class="btn btn-dark" id='slow' disabled>Slow Down</button>
 				<button class="btn btn-dark" id='restart'>Restart</button>
 			</div>
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<div class="input-group-text">Options</div>
+					<button class="btn btn-outline-secondary">Change Set Size</button>
 					<div class="input-group-text bg-white">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" id="animate" value="option1">
@@ -24,13 +26,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="input-group-text bg-white rounded-0 border-right-0 pr-0">Set Size</div>
-				<input type="number" min="0" value='100' class="form-control border-left-0">
 				<select class="custom-select" id="algorithm">
 					<option selected value="0">Bubble Sort</option>
 					<option value="1">Selection Sort</option>
-					<option value="2">Bogosort</option>
-					<option value="3">Stalin Sort</option>
+					<option value="2">Stalin Sort</option>
 				</select>
 			</div>
 		</div>

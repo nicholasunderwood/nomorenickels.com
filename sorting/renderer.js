@@ -1,9 +1,10 @@
-var values, interval, canvas, ctx, al;
+var values, canvas, ctx, al;
 var staticAl = BubbleSort;
 var isPaused = true;
 var hasStarted = false;
-const staticAls = [BubbleSort, SelectionSort, BogoSort, StalinSort];
+const staticAls = [BubbleSort, SelectionSort, StalinSort];
 const setSize = 1000;
+this.threadIDs = []
 
 const colors = [...Array(setSize)].map(_ => 'black')
 
@@ -35,8 +36,10 @@ function start() {
     
     al = new staticAl(values); 
     al.start(values);
-    interval = setInterval(sort, al.stepRate, al);
+    threadIDs.push(window.requestAnimationFrame(thread));
     $('#play').text('Pause').unbind('click').on('click', pause);
+    $('#speed').attr('disabled', true);
+    $('#slow').attr('disabled', true);
 }
 
 
@@ -51,24 +54,31 @@ function renderValues () {
     let height = canvas.height;
     ctx.clearRect(0, 0, width, height);
     
-    
     values.forEach((x,i) => {
         ctx.fillStyle = colors[i];
         ctx.fillRect(i*width/values.length-1, height - (x)*height/setSize, width/values.length + 1.5, height*(x)/setSize + 1.5);
     });
-
 }
 
-function sort(al, override){
+function thread() {
+    sort();
+
+    window.requestAnimationFrame(thread);
+}
+
+function sort(override){
     if(isPaused && !override) return;
+    console.log()
     al.step(values);
 
     renderValues();
 
     if(al.isFinished){
-        clearInterval(interval);
+        threadIDs.forEach(id => window.cancelAnimationFrame(id));
         renderValues();
     }
+
+    window.requestAnimationFrame(sort);
 }
 
 $(document).ready(() => {
@@ -79,13 +89,27 @@ $(document).ready(() => {
         staticAl = staticAls[+$(this).val()];
     })
 
-    $('#next').on('click', () => { sort(al, true) });
+    $('#speed').on('click', function () { 
+        threadIDs.push(window.requestAnimationFrame(thread));
+        $('#slow').attr('disabled', false)
+        if(threadIDs.length == 10) this.attr('disabled', true)  
+    });
+
+    $('#slow').on('click', function () { 
+        window.cancelAnimationFrame(threadIDs.pop());
+        $('#speed').attr('disabled', false)
+        if(threadIDs.length == 1) this.attr('disabled', true)  
+    });
+
+
     $('#restart').on('click', () => {
-        clearInterval(interval);
+        threadIDs.forEach(id => window.cancelAnimationFrame(id));
         values = randomizeArray();
-        colors.map(_ => 'black');
+        colors.forEach((_,i) => colors[i] = 'black');
         renderValues();
         $('#play').on('click', start).text('Start');
+        $('#speed').attr('disabled', true);
+        $('#slow').attr('disabled', true);
         hasStarted = false;
 
     });
