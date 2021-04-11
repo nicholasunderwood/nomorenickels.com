@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="minesweeper.css">
     <title>Mine Sweeper</title>
 </head>
@@ -17,13 +18,14 @@
     </div>
     <table id='board'>
     </table>
-    <div id="difSel">
-        <div id="easy" class="dif">Easy</div>
-        <div id="med" class="dif selected">Medium</div>
-        <div id="hard" class="dif">Hard</div>
+    <div id="difSel" class="btn-group">
+        <button id="easy" class="dif btn btn-primary">Easy</button>
+        <button id="med" class="dif btn btn-primary" disabled>Medium</button>
+        <button id="hard" class="dif btn btn-primary">Hard</button>
     </div>
 </div>
 
-<script src="minesweeper.js"></script>
+<script src="../jquery-3.3.1.js"></script>
+<script src="./minesweeper2.js"></script>
 </body>
 </html>
