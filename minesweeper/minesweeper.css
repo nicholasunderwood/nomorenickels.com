@@ -1,18 +1,36 @@
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #game{
     font-family: monospace;
-    width: fit-content;
-    margin-left:auto;
-    margin-right:auto;
 }
+
 #board td{
-    width: 25px;
-    height: 25px;
-    border: 1px solid silver;
+    width: 30px;
+    height: 30px;
     text-align: center;
     background-size: 100%;
     font-size: 20px;
-    font-family: monospace;
+    line-height: 20px;
+    background-color: #353E49;
+    color: white;
 }
+
+#board td[state=unknown]{ background-image: url(../png/square.png); }
+#board td[state=flag]{ background-image: url(../png/flag.png); }
+#board td[state=known]{ background-image: none; }
+#board td[state=mine]{ background-image: url(../png/bomb.png); }
+
+
 #board{
     border-collapse: collapse;
     z-index: 0;
@@ -30,9 +48,10 @@
 }
 #score{
     font-size: 25px;
-    width: 476.2;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
 }
 #clock{
     text-align: left;
@@ -49,14 +68,10 @@
 }
 #difSel{
     width: 100%;
+    margin-top: 15px;
     display: flex;
+
 }
-.dif{
-    text-align: center;
-    border: 2px solid black;
-    border-collapse: collapse;
-    background-color: silver;
-    width: 33%;
-    margin: 0;
-    display: inline-block;
+.dif {
+    width: 100%;
 }
