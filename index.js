@@ -43,7 +43,7 @@ function getUnderlineOffset(index) {
 
 function animateBackground(index) {
     let nextState = animationStates[index];
-    let degPerStep = (nextState.heading - lastState.heading)/50;
+    let degPerStep = (nextState.heading - lastState.heading)/59;
     let percentPerStep = (nextState.pos - lastState.pos)/50;
 
 
@@ -93,7 +93,7 @@ var index = 0;
 var w = window.innerWidth
 var isMoving = false
 const numPages = 4;
-const gradLength = 24;
+const gradLength = 18;
 
 const prideOrder = ['lgbt', 'bi', 'ace', 'trans']
 
