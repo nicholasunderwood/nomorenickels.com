@@ -1,6 +1,7 @@
 function slideToPage(index){
-    if(index == lastIndex) return;
-    
+    if(isMoving) return;
+    isMoving = true;
+
     let currentPage = $($(`.wrapper`)[index]);
     currentPage.css('display', 'flex');
 
@@ -29,7 +30,6 @@ function slideToPage(index){
     
     $('#underline').animate({left: boxOffset + "px"}, 500);
 
-
     animateBackground(index);
     
 }
@@ -53,9 +53,6 @@ function animateBackground(index) {
     let inter = setInterval(() => {
         if(step >= 50){ 
             clearInterval(inter);
-            let transState = Math.round(step/50*gradLength);
-            console.log(transState)
-            // $('#container').css(getLinearGradientStyle(nextState.pos, nextState.heading, lastPage, index, gradLength));
             lastState = nextState
             return;
         }
@@ -96,13 +93,13 @@ var index = 0;
 var w = window.innerWidth
 var isMoving = false
 const numPages = 4;
-const gradLength = 15;
+const gradLength = 24;
 
 const prideOrder = ['lgbt', 'bi', 'ace', 'trans']
 
 const animationStates = [
-    {heading: 315, pos: 70},
-    {heading: 225, pos: 70},
+    {heading: 315, pos: 90-gradLength},
+    {heading: 225, pos: 90-gradLength},
     {heading: 225, pos: 20},
     {heading: 315, pos: 20}
 ];
@@ -120,15 +117,14 @@ $('.wrapper:not(:first-child)').css({ left: '120%', display: 'none' });
 $('#underline').css('left', 10 + (w-20)/25 - (.21*w - (w-20)/5)/2 + 'px')
 
 $('.slide').click((e) => {
-    if(isMoving) return;
-    isMoving = true;
-
-
     let slide = $(e.currentTarget);
     index = $('.slide').index(slide);
+    if(index == lastIndex) return;
+
+    console.log('click')
+
+
     slideToPage(index);
-    
-    
 });
 
 $('.arrow.left-arrow').click(() => {
@@ -147,4 +143,4 @@ $(window).resize(() => {
     $('#underline').css({left: getUnderlineOffset(index) + "px"});
 });
 
-$('#container').css(getLinearGradientStyle(lastState.pos, lastState.heading, lastIndex, index, 15));
+$('#container').css(getLinearGradientStyle(lastState.pos, lastState.heading, lastIndex, index, gradLength));

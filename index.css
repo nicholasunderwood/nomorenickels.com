@@ -22,9 +22,9 @@
 
 html{
     height: 100%;
+    width: 100%;
     padding: 0;
     margin: 0;
-    min-width: 550px;
     overflow-x: hidden;
 }
 
@@ -44,7 +44,7 @@ body{
     width: 100%;
     height: fit-content;
     background-color: var(--bg-color-2);
-    font-size: 30px;
+    font-size: larger;
     /* box-shadow: 0 20px 30px rgba(0,0,0,.3); */
     /* margin-bottom: 20px; */
 }
@@ -56,7 +56,9 @@ body{
     align-items: stretch;
     padding: 20px 10px;
     flex-wrap: nowrap;
+    border-bottom: 3px solid var(--accent-color);
 }
+
 #underline{
     position: absolute;
     display: block;
@@ -85,38 +87,72 @@ body{
     display: block;
 }
 .slide {
-    font-size: 20px;
+    font-size: 1.1em;
+}
+
+#about #title{
+    width: 0;
+    min-width: 100%;
+    margin-bottom: 0.8rem;
+    background-color: var(--bg-color-2);
+    border-radius: 0.5rem;
+}
+
+#about h2 {
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+    font-weight: 100;
+    background: linear-gradient(90deg,#ff8a00,#e52e71);
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    -webkit-background-clip: text;
+    white-space: nowrap;
+    background-clip: text;
+    padding: 10px;
+    margin: 0;
 }
 
 
-
-#about .nav {
+#about .nav>div{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
+    gap: 20px;
 }
-#about .nav>* {
-    font-size: 25px;
+
+#about .nav>div>*{
+    background-color: var(--bg-color-2);
+    border-radius: 0.5rem;
 }
+
 #about p {
-    min-width: 330px;
-    flex: 0 1 30%;
-    margin-right: 20px; 
+    flex: 1 1 330px;
+    font-size: 25px;
+    /* min-width: 330px; */
+    width: 10px;
+    padding: 30px;
 }
 #about #links{
-    flex: 0 0 460px;
-    height: fit-content;
+    /* float: right; */
+    /* width: 10px; */
+    flex: 1 1 300px;
+    /* width: 460px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     border: 4px var(--gradient) solid;
-    border-radius: 10px;
     padding: 10px;
-    background-color: var(--bg-color-2);
-    max-width: fit-content;
 }
+.break{
+    flex-basis: 100%;
+    width: 0
+}
+
 #about img{
     height: 150px;
     margin: 20px;
+    /* max-height: 15%; */
 }

@@ -21,7 +21,7 @@
     overflow-y: visible;
 }
 
-#title .marquee{    
+#title h2{    
     width: 470px; 
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
@@ -33,7 +33,7 @@
     -webkit-background-clip: text;
     white-space: nowrap;
     background-clip: text;
-    animation: slide 10s 0s infinite forwards linear;
+    /* animation: slide 10s 0s infinite forwards linear; */
 }
 
 .seperator {
