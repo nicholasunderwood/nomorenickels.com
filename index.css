@@ -60,6 +60,7 @@ body{
     border-bottom: 3px solid var(--accent-color);
 }
 
+
 #underline{
     position: absolute;
     display: block;
@@ -69,6 +70,17 @@ body{
     border-top: none;
     border-radius: 0 0 5px 5px;
     bottom: 10px;
+}
+
+
+
+#nav-wrapper .break {
+    display: none;
+}
+
+@media screen and (max-width: 511px) {
+    #underline {display: none;}
+    #nav-wrapper .break {display:block;}
 }
 .nav-item{
     flex: 0 1 20%;
@@ -109,7 +121,6 @@ body{
     -webkit-text-fill-color: transparent;
     text-shadow: none;
     -webkit-background-clip: text;
-    white-space: nowrap;
     background-clip: text;
     padding: 10px;
     margin: 0;
@@ -132,15 +143,12 @@ body{
 #about p {
     flex: 1 1 330px;
     font-size: 1.5rem;
-    /* min-width: 330px; */
     width: 10px;
     padding: 30px;
 }
+
 #about #links{
-    /* float: right; */
-    /* width: 10px; */
     flex: 1 1 300px;
-    /* width: 460px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
