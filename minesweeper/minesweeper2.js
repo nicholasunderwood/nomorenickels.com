@@ -8,8 +8,7 @@ const board = [];
 const uncoverQueue = [];
 const uncovered = [];
 
-var mines = [];
-var numMines;
+const colors = ['blue', 'green', 'red', 'purple', 'maroon', 'turquoise', 'grey']
 
 class Square{
     constructor(x, y, td){
@@ -32,16 +31,16 @@ class Square{
 
 function makeBoard(width, height) {
     const table = $('#board').empty();
-    board.length = 0; board.push(...([...Array(width)].map(_ => [])));
+    board.length = 0; board.push(...([...Array(height)].map(_ => [])));
     console.log(board)
 
 
     for(let i = 0; i < height; i++){
         const tr = $('<tr>');
         for(let j = 0; j < width; j++){
-            let td = $(`<td x=${i} y=${j} state='unknown'>`)
+            let td = $(`<td x=${j} y=${i} state='unknown'>`)
             tr.append(td);
-            board[i].push(new Square(i,j,td));
+            board[i].push(new Square(j,i,td));
         }
         table.append(tr);
     }
@@ -50,7 +49,7 @@ function makeBoard(width, height) {
 }
 
 function getSquare(x,y){
-    return board[x][y];
+    return board[y][x];
 }
 
 function start(numMines,x,y) {
@@ -58,20 +57,23 @@ function start(numMines,x,y) {
     $('.dif').prop('disabled', true);
 
     const squares = [...new Array(diff[0]*diff[1])].map((_,i) => i);
+
     for(let i = -1; i <= 1; i++){
         for(let j = -1; j <= 1; j++){
             squares.splice((x+i)*diff[0]+y+i,1);
         }
     }
+
+    const mines = []
     while(numMines--){
-        let index = squares[Math.floor(Math.random() * squares.length)];
-        let pos = squares.splice(index, 1)
-        mines = mines.concat(pos);
+        let index = Math.floor(Math.random() * squares.length);
+        let pos = squares.splice(index, 1);
+        mines.push(pos[0]);
     }
 
-    // console.log(mines.join(' '));
     mines.forEach(pos => {
-        board[Math.floor(pos/diff[0])][pos % diff[1]].addMine();
+        console.log(pos)
+        board[pos % diff[1]][Math.floor(pos/diff[0])].addMine();
     });
 
 }
@@ -81,7 +83,7 @@ function end() {
 }
 
 function checkForMine(x, y){
-    return board[x][y].hasMine;
+    return board[y][x].hasMine;
 }
 
 function countSouroundingMines(x, y){
@@ -105,12 +107,13 @@ function uncoverSquare(square){
     
     if(souroudingMines > 0){
         square.td.text(souroudingMines);
+        square.td.css({color: colors[souroudingMines-1]});
     } else {
         for(let i = -1; i <= 1; i++){
             for(let j = -1; j <= 1; j++){
                 if(i == 0 && j == 0) continue;
                 if(x+i >= diff[0] || x+i < 0 || y+j >= diff[1] || y+j < 0) continue;
-                let square = board[x+i][y+j];
+                let square = board[y+j][x+i];
                 if(uncoverQueue.some(queued => queued == square)) continue;
                 if(square.state != 'unknown') continue;
                 uncoverQueue.push(square);
@@ -131,7 +134,7 @@ function onClick(e) {
 
     const td = $(this);
     const [x,y] = [+td.attr('x'), +td.attr('y')];
-    let square = board[x][y];
+    let square = board[y][x];
 
     if(!hasStarted) { start(diff[2],x,y) }
     e.preventDefault();

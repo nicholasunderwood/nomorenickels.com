@@ -8,7 +8,7 @@ function slideToPage(index){
     lastPage.animate({left: index > lastIndex ? '-120%' : '120%'}, 500);
     currentPage.animate({left: '10%'}, { 
         duration: 500,
-        complete: () => { 
+        complete: () => {
             isMoving = false; 
             lastPage.css('display', 'none'); 
             lastPage = currentPage;
