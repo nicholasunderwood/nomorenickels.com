@@ -1,0 +1,169 @@
+:root {
+  --bg-color-1: #000;
+  --bg-color-2: #272f38;
+  --accent-color: #555;
+  --text-color-1: rgba(255, 255, 255, 1);
+  --text-highlight-1: #ff8a00;
+  --text-highlight-2: #e52e71;
+  --gradient: linear-gradient(90deg, #ff8a00, #e52e71);
+}
+
+html,
+body {
+  margin: 0;
+  /* background-image: ; */
+  background-color: black;
+}
+
+body {
+	font-family: "Roboto", sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--text-color-1);
+	background-color: var(--bg-color-1);
+}
+
+*::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+main {
+  /* height: 100; */
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  background-color: black;
+  color: white;
+  flex: 0 0 auto;
+
+  padding: 1em;
+  top: 0px;
+  margin: 0 auto;
+}
+
+.title img {
+  margin: 0 auto;
+  display: block;
+  width: 30%;
+	min-width: 500px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+#about {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 20px;
+  width: 100%;
+}
+
+#about #bio {
+  margin: 1em 0;
+  font-size: large;
+	flex: 1 50 auto;
+}
+
+#about #links {
+  display: flex;
+	flex: 0 0 auto;
+  min-width: 50px;
+	max-width: 50%;
+  flex-direction: row;
+	flex-wrap: wrap;
+  justify-content: center;
+  background-color: var(--bg-color-2);
+  border-radius: 2em;
+}
+
+#about img {
+  height: 5em;
+  margin: 20px;
+  /* max-height: 15%; */
+}
+
+.card {
+  background-color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  padding: 40px;
+  margin: 1em auto;
+}
+
+.card:hover {
+  background-color: grey;
+}
+
+.card iframe {
+  margin: 0 auto;
+  width: 560px;
+  height: 400px;
+  display: block;
+  margin-bottom: 20px;
+}
+
+#filter .btn:focus {
+	outline: none;
+	box-shadow: none;
+
+}
+
+#content {
+  width: 100%;
+}
+
+#content table {
+  width: 100%;
+}
+
+#content table td {
+  width: 5em;
+	height: 5em;
+	background-color: #e52e71;
+}
+
+#content .video {
+	background-color: red;
+}
+
+#content .audio{
+	background-color: green;
+}
+
+#content .episode {
+	background-color: blue;
+}
+
+#content .hidden {
+	background-color: #000 !important;
+}
