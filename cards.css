@@ -14,15 +14,15 @@
 
     display: flex;
     padding-top: 20px;
-    /* background: linear-gradient(
+    background: linear-gradient(
         315deg
         , var(--bg-color-1)
         , var(--bg-color-1) 80%
-        ,#ff8a00 80%
-        ,#e52e71 90%
+        , var(--text-highlight-1) 80%
+        , var(--text-highlight-2) 90%
         , var(--bg-color-1) 90%
         , var(--bg-color-1)
-    ); */
+    );
 
 }
 

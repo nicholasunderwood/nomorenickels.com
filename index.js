@@ -61,13 +61,33 @@ function animateBackground(index) {
         let transState = Math.round(step/50*gradLength);
         let heading = Math.floor(lastState.heading + step*degPerStep);
         let pos =  Math.floor(lastState.pos + step*percentPerStep);
-        $('#container').css(getLinearGradientStyle(pos, heading, lastPage, index, transState));
+        if(usePride){
+            $('#container').css(getFlagLinearGradientStyle(pos, heading, lastPage, index, transState));
+        } else {
+            $('#container').css(getLinearGradientStyle(pos, heading));
+
+        }
     }, 10)
 
 
 }
 
-function getLinearGradientStyle(pos, heading, lastPage, nextPage, transState){
+function getLinearGradientStyle(pos, heading){
+    return {
+        background: `linear-gradient(
+            ${heading}deg
+            ,var(--bg-color-1)
+            ,var(--bg-color-1) ${pos}%
+            ,var(--text-highlight-1) ${pos}%
+            ,var(--text-highlight-2) ${pos+gradLength}%
+            ,var(--bg-color-1) ${pos+gradLength}%
+            ,var(--bg-color-1)
+
+        )`
+    }
+}
+
+function getFlagLinearGradientStyle(pos, heading, lastPage, nextPage, transState){
     return {
         background: `linear-gradient(
             ${heading}deg
@@ -93,7 +113,8 @@ var index = 0;
 var w = window.innerWidth
 var isMoving = false
 const numPages = 4;
-const gradLength = 18;
+const usePride = new Date().getMonth() == 5;
+const gradLength = usePride ? 18 : 10;
 
 const prideOrder = ['lgbt', 'bi', 'ace', 'trans']
 
@@ -143,4 +164,4 @@ $(window).resize(() => {
     $('#underline').css({left: getUnderlineOffset(index) + "px"});
 });
 
-$('#container').css(getLinearGradientStyle(lastState.pos, lastState.heading, lastIndex, index, gradLength));
+if(usePride) $('#container').css(getFlagLinearGradientStyle(lastState.pos, lastState.heading, lastIndex, index, gradLength));
