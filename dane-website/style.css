@@ -23,18 +23,6 @@ body {
 	background-color: var(--bg-color-1);
 }
 
-*::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-*::-webkit-scrollbar-track {
-  background: #1e1e24;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #6649b8;
-}
-
 body {
   height: 100%;
   display: flex;
@@ -49,7 +37,7 @@ main {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  width: 50%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -90,7 +78,7 @@ a {
 
 #about #bio {
   margin: 1em 0;
-  font-size: large;
+  font-size: larger;
 	flex: 1 50 auto;
 }
 
@@ -107,7 +95,7 @@ a {
 }
 
 #about img {
-  height: 5em;
+  height: 4em;
   margin: 20px;
   /* max-height: 15%; */
 }
@@ -136,14 +124,6 @@ a {
 	outline: none;
 	box-shadow: none;
 
-}
-
-#content {
-  width: 100%;
-}
-
-#content table {
-  width: 100%;
 }
 
 #content table td {

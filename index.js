@@ -136,6 +136,8 @@ var lastState = animationStates[0];
 
 $('.wrapper:not(:first-child)').css({ left: '120%', display: 'none' });
 $('#underline').css('left', 10 + (w-20)/25 - (.21*w - (w-20)/5)/2 + 'px')
+maxWidth = $('#links img').reduce((a,b) => Math.max(a, b.width), 0);
+$('#links a').css('width', maxWidth + 'px');
 
 $('.slide').click((e) => {
     let slide = $(e.currentTarget);
