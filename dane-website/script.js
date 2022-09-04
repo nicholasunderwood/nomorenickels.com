@@ -1,22 +1,41 @@
-let table = $('#content table');
-const cols = 3;
-const rows = 4;
-const cellHeight = 9 / 16;
-const modal = $('#content-player');
-const projects = [];
-const imgs = ['IMG_0667', 'IMG_0668', 'IMG_0671', 'IMG_0672', 'IMG_0674', 'IMG_0675', 'IMG_0678', 'IMG_0680']
+
+function optimizeGrid(width, height, numCells){
+    let cols = 0;
+    let best_height = Infinity;
+    for(let p_cols = 1; p_cols <= numCells; p_cols++){
+        let p_rows = Math.ceil(numCells / p_cols);
+        let p_height = width / p_cols * cellHeight * p_rows
+        
+        if(Math.abs(p_height-height) < Math.abs(best_height-height)){
+            cols = p_cols;
+            best_height = p_height;
+        }
+    }
+
+    console.log(best_height, height)
+    return cols;
+
+}
 
 function loadGrid(){
+    console.log('load grid')
     table.empty();
-    // template = $('<button class=\'w-100 h-100\' data-bs-toggle="modal" data-bs-target="#staticBackdrop></button>');
+
+    const win = $('#content');
+    const w = win.width();
+    const h = win.height();
+    console.log(h);
+    cols = optimizeGrid(w,h,numCells)
+
+    console.log(cols);
 
 
-    for(let i = 0; i < rows; i++) {
+    for(let i = 0; i < Math.ceil(numCells / cols); i++) {
         let row = $('<tr>');
         for(let j = 0; j < cols; j++) {
             let index = i*cols+j;
-            if(index >= imgs.length) break;
-            let src = `./thumbnails/${imgs[i*cols+j]}.jpg`;
+            if(index >= numCells) break;
+            let src = `./thumbnails/${imgs[(i*cols+j)%8]}.jpg`;
             let cell = $(`<td><img src=${src}></td>`);
             cell.on('click', (e) => {
                 e.preventDefault();
@@ -29,6 +48,8 @@ function loadGrid(){
 }
 
 function resizeTable() {
+    console.log('resize');
+    return;
     const win = $('#content');
     const w = win.width();
     const h = win.height();
@@ -48,6 +69,14 @@ function resizeTable() {
     });
 
 }
+
+let table = $('#content table');
+const numCells = 16;
+const cellHeight = 9 / 16;
+var cols = 0;
+const modal = $('#content-player');
+const projects = [];
+const imgs = ['IMG_0667', 'IMG_0668', 'IMG_0671', 'IMG_0672', 'IMG_0674', 'IMG_0675', 'IMG_0678', 'IMG_0680']
 
 
 $('#filter .btn').click((e) => {
@@ -72,9 +101,9 @@ $('#filter .btn').click((e) => {
 
 
 $(window).resize(() => {
-    console.log('resize');
-    resizeTable();
+    // resizeTable();
 });
+
 
 loadGrid();
 
