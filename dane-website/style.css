@@ -129,10 +129,10 @@ a {
 #content table td {
   width: 5em;
 	height: 5em;
-	background-color: #e52e71;
+	/* background-color: #e52e71; */
 }
 
-#content .video {
+/* #content .video {
 	background-color: red;
 }
 
@@ -142,8 +142,16 @@ a {
 
 #content .episode {
 	background-color: blue;
+} */
+
+/* #content .hidden {
+	background-color: #000 !important;
+} */
+
+#content img{
+  width: 100%;
 }
 
-#content .hidden {
-	background-color: #000 !important;
+#content .hidden img {
+  opacity: 0;
 }

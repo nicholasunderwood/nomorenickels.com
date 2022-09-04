@@ -1,16 +1,27 @@
 let table = $('#content table');
-const cols = 9;
-const rows = 5;
+const cols = 3;
+const rows = 4;
 const cellHeight = 9 / 16;
+const modal = $('#content-player');
+const projects = [];
+const imgs = ['IMG_0667', 'IMG_0668', 'IMG_0671', 'IMG_0672', 'IMG_0674', 'IMG_0675', 'IMG_0678', 'IMG_0680']
 
 function loadGrid(){
     table.empty();
+    // template = $('<button class=\'w-100 h-100\' data-bs-toggle="modal" data-bs-target="#staticBackdrop></button>');
 
 
     for(let i = 0; i < rows; i++) {
         let row = $('<tr>');
         for(let j = 0; j < cols; j++) {
-            let cell = $('<td>');
+            let index = i*cols+j;
+            if(index >= imgs.length) break;
+            let src = `./thumbnails/${imgs[i*cols+j]}.jpg`;
+            let cell = $(`<td><img src=${src}></td>`);
+            cell.on('click', (e) => {
+                e.preventDefault();
+                modal.modal('show');
+            })
             row.append(cell);
         }
         table.append(row);
@@ -18,10 +29,22 @@ function loadGrid(){
 }
 
 function resizeTable() {
+    const win = $('#content');
+    const w = win.width();
+    const h = win.height();
+    const ratio = w / h;
+    const rows = Math.floor(ratio > 1 ? h / cellHeight : w / cellHeight);
+    let trs = table.find('tr');
+
+    console.log(trs);
         
     $('#content table td').each((i,e) => {
-        e = $(e);
-        e.height(e.width() * cellHeight);
+        if(i % rows == 0) {
+            tr = trs.eq(i / rows);
+            $('#content table').append(tr);
+        }
+
+        tr.append(e);
     });
 
 }
