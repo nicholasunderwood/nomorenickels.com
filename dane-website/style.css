@@ -162,3 +162,7 @@ a {
 #content .hidden img {
   opacity: 0;
 }
+
+.modal-dialog {
+  max-width: 592px;
+}
