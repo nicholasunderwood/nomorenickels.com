@@ -1,20 +1,18 @@
 
 function optimizeGrid(width, height, numCells){
-    let cols = 0;
-    let best_height = Infinity;
-    for(let p_cols = 1; p_cols <= numCells; p_cols++){
-        let p_rows = Math.ceil(numCells / p_cols);
-        let p_height = width / p_cols * cellHeight * p_rows
+    console.log(width, height, numCells)
+    for(let cols = numCells; cols > 0; cols--){
+        let p_rows = Math.ceil(numCells / cols);
+        let p_height = width / cols * cellRatio * p_rows
         
-        if(Math.abs(p_height-height) < Math.abs(best_height-height)){
-            cols = p_cols;
-            best_height = p_height;
+        console.log(p_height, height, cols, cellRatio)
+        if(p_height > height){
+            return cols+1;
         }
+
     }
 
-    console.log(best_height, height)
-    return cols;
-
+    return numCells;
 }
 
 function loadGrid(){
@@ -24,27 +22,30 @@ function loadGrid(){
     const win = $('#content');
     const w = win.width();
     const h = win.height();
-    console.log(h);
-    cols = optimizeGrid(w,h,numCells)
+    console.log('h: ' + h)
+    cols = optimizeGrid(w,h,numCells)-1
+    console.log('cols: ' + cols);
+    const cellWidth = Math.floor(w / cols)
+    const cellHeight = cellWidth * cellRatio
+    let img_names = imgs.concat(imgs).sort(() => Math.random() > 0.5 ? 1 : -1)
 
-    console.log(cols);
 
+    for(let i = 0; i < numCells; i++) {
+        let src = `./thumbnails/${img_names[i]}.jpg`;
+        let cell = $(`<div class='cell'><img src=${src} width='${cellWidth}px' height='${cellHeight}px'></div>`)
+            // .css('width', cellHeight + 'px')
+            // .css('max-height', Math.floor(w / cols * cellHeight) + 'px');
 
-    for(let i = 0; i < Math.ceil(numCells / cols); i++) {
-        let row = $('<tr>');
-        for(let j = 0; j < cols; j++) {
-            let index = i*cols+j;
-            if(index >= numCells) break;
-            let src = `./thumbnails/${imgs[(i*cols+j)%8]}.jpg`;
-            let cell = $(`<td><img src=${src}></td>`);
-            cell.on('click', (e) => {
-                e.preventDefault();
-                modal.modal('show');
-            })
-            row.append(cell);
-        }
-        table.append(row);
+        cell.on('click', (e) => {
+            e.preventDefault();
+            modal.modal('show');
+        });
+
+        win.append(cell);
     }
+
+    win.css('flex', '0 1 auto')
+
 }
 
 function resizeTable() {
@@ -54,7 +55,7 @@ function resizeTable() {
     const w = win.width();
     const h = win.height();
     const ratio = w / h;
-    const rows = Math.floor(ratio > 1 ? h / cellHeight : w / cellHeight);
+    const rows = Math.floor(ratio > 1 ? h / cellRatio : w / cellRatio);
     let trs = table.find('tr');
 
     console.log(trs);
@@ -72,7 +73,7 @@ function resizeTable() {
 
 let table = $('#content table');
 const numCells = 16;
-const cellHeight = 9 / 16;
+const cellRatio = 9 / 16;
 var cols = 0;
 const modal = $('#content-player');
 const projects = [];
@@ -104,12 +105,13 @@ $(window).resize(() => {
     // resizeTable();
 });
 
+setTimeout(() => {
+    loadGrid()
 
-loadGrid();
+}, 1)
+// loadGrid();
 
 $('#content table td').each((i,e) => {
-    e = $(e);
-    e.height(e.width() * cellHeight);
 
     if(i%7 === 0 || i%7 === 3 || i%5 === 0) {
         e.addClass('video');
