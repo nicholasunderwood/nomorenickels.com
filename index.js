@@ -104,7 +104,7 @@ function getFlagLinearGradientStyle(pos, heading, lastPage, nextPage, transState
 function getFlagGradient(start, flag, flagWidth){
     let colors = pride[flag];
     let p = flagWidth/colors.length;
-    return colors.map((hex,i) => `,${hex} ${start+p*i}% ,${hex} ${Math.round(start+p*(i+1))}% `).reduce((a,b) => a+b, '')
+    return colors.map((hex,i) => `,${hex} ${start+p*i}% ,${hex} ${Math.round(start+p*(i+1))}% `)
 }
 
 var lastPage = $('#about');
@@ -136,8 +136,8 @@ var lastState = animationStates[0];
 
 $('.wrapper:not(:first-child)').css({ left: '120%', display: 'none' });
 $('#underline').css('left', 10 + (w-20)/25 - (.21*w - (w-20)/5)/2 + 'px')
-maxWidth = $('#links img').reduce((a,b) => Math.max(a, b.width), 0);
-$('#links a').css('width', maxWidth + 'px');
+// maxWidth = $('#links img').reduce((a,b) => Math.max(a, b.width), 0);
+// $('#links a').css('width', maxWidth + 'px');
 
 $('.slide').click((e) => {
     let slide = $(e.currentTarget);

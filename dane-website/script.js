@@ -1,4 +1,3 @@
-
 function optimizeGrid(width, height, numCells){
     let cols = 0;
     let best_height = Infinity;
@@ -36,7 +35,12 @@ function loadGrid(){
             let index = i*cols+j;
             if(index >= numCells) break;
             let src = `./thumbnails/${imgs[(i*cols+j)%8]}.jpg`;
-            let cell = $(`<td><img src=${src}></td>`);
+            let cell = $(`<td>
+                <img src=${src}>
+                <span class='title'>
+                    ${config.projects[index] && config.projects[index].name || 'Project ' + index}
+                </span>
+            </td>`);
             cell.on('click', (e) => {
                 e.preventDefault();
                 modal.modal('show');
@@ -49,13 +53,6 @@ function loadGrid(){
 
 function resizeTable() {
     console.log('resize');
-    return;
-    const win = $('#content');
-    const w = win.width();
-    const h = win.height();
-    const ratio = w / h;
-    const rows = Math.floor(ratio > 1 ? h / cellHeight : w / cellHeight);
-    let trs = table.find('tr');
 
     console.log(trs);
         

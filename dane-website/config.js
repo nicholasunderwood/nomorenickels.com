@@ -1,4 +1,4 @@
-{
+var config = {
     "email": "danehohmeyer@gmail.com",
     "insta": "https://www.instagram.com/danehohmeyer/",
     "blerb": "If you want to do a shorter bio it should probably be at least this long or longer, because a shorter one would require a comically large font size to make it fit.",
