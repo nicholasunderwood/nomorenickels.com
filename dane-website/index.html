@@ -36,16 +36,12 @@
       <button id="4" type="button" class="btn btn-secondary">All</button>
     </div>
 
-    <div class="input-group">
-      <div class="input-group-text" id="btnGroupAddon2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-          viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
-      </div>
-      <input type="text" class="form-control" placeholder="Search" aria-label="Input group example"
-        aria-describedby="btnGroupAddon2">
+        <div class="input-group">
+            <div class="input-group-text" id="btnGroupAddon2">@</div>
+            <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
+          </div>
+    </div>
+    <div id="content" class="w-100">
     </div>
   </div>
   <div id="content" class="w-100">
@@ -55,34 +51,32 @@
 </main>
 
 <div class="modal fade" id="content-player" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content" style="min-width: 600px; color: black;">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Content Title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" style="min-width: 1200px;">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/n__GJuqLb00" title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        <p>
-          Theses modals are really nice<br>
-          You can put whatever you want in them<br>
-          And they will be centered<br>
-          And they will be scrollable<br>
-          And they will be resizable<br>
-          And they will be closable<br>
-          If you want to add like a content discription you can just add text under the modal<br>
-          Or like the film analog to a dev log where you can talk about the project<br>
-          idk<br>
-          im going to add some extra spaces to see how it behaves with extra text<br>
-          <br><br><br><br><br><br>
-          pretty sexy huh?
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content" style="color: black;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Content Title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/n__GJuqLb00" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>
+                Theses modals are really nice<br>
+                You can put whatever you want in them<br>
+                And they will be centered<br>
+                And they will be scrollable<br>
+                And they will be resizable<br>
+                And they will be closable<br>
+                If you want to add like a content discription you can just add text under the modal<br>
+                Or like the film analog to a dev log where you can talk about the project<br>
+                idk<br>
+                im going to add some extra spaces to see how it behaves with extra text<br>
+                <br><br><br><br><br><br>
+                pretty sexy huh?
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

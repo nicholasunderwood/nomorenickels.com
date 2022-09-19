@@ -82,19 +82,21 @@ a {
 #about #bio {
   margin: 1em 0;
   font-size: larger;
-  flex: 1 50 auto;
+  flex: 1 1 50%;
 }
 
 #about #links {
+  flex: 1 0 0;
   display: flex;
-  flex: 0 0 auto;
   min-width: 50px;
   max-width: 50%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   background-color: var(--bg-color-2);
   border-radius: 2em;
+  padding: 1em;
 }
 
 #about img {
@@ -121,31 +123,31 @@ a {
 }
 
 #content {
-  flex: 1 0 auto;
+  flex: 0 1 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  row-gap: 0;
+  gap: 0;
 }
 
-#content td {
-	position: relative;
-	color:rgba(255, 255, 255, 0)
+#content .cell {
+  overflow: hidden;
 }
 
-#content .title {
-	position: absolute;
-	top: 5px;
-	left: 5px;
-}
-
-#content td:hover{
-	color:rgba(255, 255, 255, 1)
-}
-
-#content img {
+/* #content img {
   width: 100%;
-  height: auto;
-}
+  max-height: 100%;
+} */
 
 #content 
 
 #content .hidden img {
   opacity: 0;
+}
+
+.modal-dialog {
+  max-width: 592px;
 }
