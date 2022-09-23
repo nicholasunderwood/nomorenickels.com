@@ -12,6 +12,7 @@ html {
   margin: 0;
   height: 100%;
 }
+
 body {
   height: 100%;
   margin: 0;
@@ -49,7 +50,6 @@ div.title {
   background-color: black;
   color: white;
   flex: 0 0 auto;
-
   padding: 1em;
   top: 0px;
   margin: 0 auto;
@@ -146,6 +146,26 @@ a {
 
 #content .hidden img {
   opacity: 0;
+}
+
+.modal-content {
+  background-color: black;
+  box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 0.5);
+  color: white !important;
+  border-color: #272f38 !important;
+}
+
+.modal-header {
+  border-color: rgba(255,255,255,0.175) !important;  
+}
+
+.modal-footer {
+  border-color: rgba(255,255,255,0.175) !important;  
+}
+
+.btn-close {
+  color: white !important;
+  filter: invert(1)
 }
 
 .modal-dialog {

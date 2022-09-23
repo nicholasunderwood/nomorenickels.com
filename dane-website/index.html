@@ -36,10 +36,10 @@
       <button id="4" type="button" class="btn btn-secondary">All</button>
     </div>
 
-        <div class="input-group">
-            <div class="input-group-text" id="btnGroupAddon2">@</div>
-            <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
-          </div>
+      <div class="input-group">
+        <div class="input-group-text" id="btnGroupAddon2">@</div>
+        <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
+      </div>
     </div>
     <div id="content" class="w-100">
     </div>
@@ -52,13 +52,51 @@
 
 <div class="modal fade" id="content-player" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content" style="color: black;">
+      <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Content Title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/n__GJuqLb00" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <form>
+              <div class="form-row align-items-center">
+                <div class="col-auto">
+                  <div class="form-check mb-2">
+                    <input value="#000" class="form-check-input" type="color" id="background">
+                    <label class="form-check-label" for="autoSizingCheck">
+                      background
+                    </label>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" id="useShadow" checked>
+                      <label class="form-check-label" for="autoSizingCheck">
+                        shadow
+                      </label>
+                    </div>
+                  </div>
+                <div class="col-auto">
+                  <label class="sr-only" for="inlineFormInput">shadow extent (px)</label>
+                  <input value="10" type="number" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                </div>
+                <div class="col-auto">
+                  <label class="sr-only" for="inlineFormInputGroup">shadow blur (px)</label>
+                  <div class="input-group mb-2">
+                    <input value="10" type="number" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <label class="sr-only" for="inlineFormInputGroup">shadow opacity (0-1)</label>
+                  <div class="input-group mb-2">
+                    <input value="0.5" type="number" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <button type="button" class="btn btn-primary mb-2">Submit</button>
+                </div>
+              </div>
+            </form>
             <p>
                 Theses modals are really nice<br>
                 You can put whatever you want in them<br>

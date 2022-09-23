@@ -121,3 +121,17 @@ $('#content table td').each((i,e) => {
     }
 
 });
+
+
+$('.modal-content button').click((e) => {
+
+    e.preventDefault();
+    inputs = $('.modal input');
+    console.log(`0px 0px ${inputs[2].value} ${inputs[3].value} rgba(255, 255, 255, ${inputs[4].value})`);
+    $('.modal-content').css("background-color", inputs[0].value);
+    $('.modal-content').css("box-shadow", inputs[1].checked ?
+     `0px 0px ${inputs[2].value}px ${inputs[3].value}px rgba(255, 255, 255, ${inputs[4].value})` : 
+     'none'
+    );
+
+})
