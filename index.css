@@ -137,16 +137,19 @@ body {
     gap: 20px;
 }
 
-#about .nav>div>*{
-    background-color: var(--bg-color-2);
+.text-block {
     border-radius: 0.5rem;
+    background-color: var(--bg-color-2);
+}
+
+p.text-block {
+    padding: 30px;
 }
 
 #about p {
-    flex: 1 1 330px;
     font-size: 1.5rem;
+    flex: 1 1 330px;
     width: 10px;
-    padding: 30px;
 }
 
 #about #links{
@@ -167,3 +170,36 @@ body {
     margin: 20px;
     /* max-height: 15%; */
 }
+
+.proj-wrapper p.text-block {
+    font-size: 1.25rem;
+    padding: 30px;
+    max-width: 100%;
+    margin: auto;
+    /* width: calc(54rem + 80px); */
+}
+
+@media only screen and (min-width: 76.875em){
+    .proj-wrapper p.text-block {
+        width: 59rem;
+    }
+}
+
+@media only screen and (max-width: 76.875em) and (min-width: 51.25em) {
+    .proj-wrapper p.text-block {
+        width: 38.5rem;
+    }
+}
+
+
+@media only screen and (max-width: 51.25em){
+    .proj-wrapper p.text-block {
+        margin: 0 20px;
+    }
+
+    .card-border {
+        width: 100% !important;
+    }
+}
+
+
