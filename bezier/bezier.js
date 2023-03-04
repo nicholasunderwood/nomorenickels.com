@@ -39,7 +39,6 @@ class BezierCurve {
     insertPoint(point, index) { this.waypoints.splice(index, 0, point); }
     removePoint(index) {
         this.waypoints.splice(index, 1);
-        if (this.size() < 2) { splines.remove(this); }
     }
 }
 
@@ -72,6 +71,23 @@ function draw() {
     background(220);
     let lastPoint;    
     stroke(0);
+
+    // for(let a=0; a < width; a++){
+    //     for(let b = 0; b < height; b++){
+    //         for (spline in splines) {
+    //             spline = splines[spline];
+    //             for (let i = 1; i < spline.size(); i++) {
+    //                 if (isInline(new Vector2(a,b), spline.getWaypoint(i - 1), spline.getWaypoint(i))) {
+    //                     set(a,b,0);
+    //                     break;
+    //                 }
+    //                 set(a,b, 220)
+    //             }
+    //         }
+    //     }
+    // }
+    // updatePixels();
+
     drawSplines();
     
     stroke(100);
@@ -100,13 +116,55 @@ function mousePressed() {
         let point = spline.waypoints[hoverInfo.pointIndex];
         
         if (keyIsDown(SHIFT)) {
+            if (spline.size() <= 2) {
+                if(hoverInfo.splineIndex > 0 && hoverInfo.splineIndex < splines.length-1){
+                    splines[hoverInfo.splineIndex+1].waypoints[0] = splines[hoverInfo.splineIndex-1].lastPoint()
+                }
+                splines.splice(hoverInfo.splineIndex, 1);
+                return;
+            }
+
             spline.removePoint(hoverInfo.pointIndex);
+            if(hoverInfo.splineIndex + 1 < splines.length){
+                let nextSplineIndex = hoverInfo.splineIndex + 1;
+                console.log(hoverInfo);
+                splines[nextSplineIndex].waypoints[0] = spline.lastPoint();
+            }
+
+
             return;
         }
 
         draggingPoint = point;
     }
 
+}
+
+
+
+
+function maintainContinuity(splineIndex, pointIndex, trans, propCode=3) {
+    let spline = splines[splineIndex]
+
+    // point has no effect on continuity
+    if(
+        (pointIndex > 1 && pointIndex < spline.size() - 1) ||
+        (splineIndex == 1 && pointIndex == 1) ||
+        (splineIndex = splines.length - 1 && pointIndex == spline.size() - 1)
+    ){ return; }
+
+    isEndPoint = pointIndex == 1 || pointIndex == spline.length-1
+
+
+    maintainContinuity()
+    if(isEndPoint)
+
+
+}
+
+function relativeWaypoint(splineIndex, pointIndex, delta){
+    if(delta == 0) return (splineIndex, pointIndex);
+    if(delta > 0)
 }
 
 function mouseDragged(){
@@ -175,7 +233,7 @@ function isOnWaypoint(x, y) {
         for (pointIndex in splines[splineIndex].waypoints) {
             point = splines[splineIndex].waypoints[pointIndex];
             if (Math.sqrt(Math.pow(point.x - x, 2) + Math.pow(point.y - y, 2)) < hoverDistance) {
-                return {'splineIndex': splineIndex, 'pointIndex': pointIndex};
+                return {'splineIndex': +splineIndex, 'pointIndex': +pointIndex};
             }
         }
     }
@@ -212,6 +270,14 @@ function addPoint(x, y) {
 }
 
 function isInline(point, point1, point2) {
+    if(
+        point.x > Math.max(point1.x, point2.x) ||
+        point.x < Math.min(point1.x, point2.x) ||
+        point.y > Math.max(point1.y, point2.y) ||
+        point.y < Math.min(point1.y, point2.y)
+    ){
+        return false;
+    }
     let ux = Math.abs((point.x - point1.x) / (point2.x - point1.x));
     let uy = Math.abs((point.y - point1.y) / (point2.y - point1.y));
     if (ux < 0 || ux > 1 || uy < 0 || uy > 1) {

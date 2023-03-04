@@ -41,7 +41,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    margin: 0 50px;
+    margin: 0 30px;
     font-size: 2em;
     height: 50%;
 }
