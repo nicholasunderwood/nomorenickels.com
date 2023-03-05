@@ -12,36 +12,15 @@ main {
     transform: translate(-50%,-50%);
     width: 75%;
     height: 75%;
+    display: none;
 }
 
-#table-wrapper {
-
-    border-collapse: separate;
-    /* table-layout: fixed; */
-    border-spacing: 0px;
-    border: 7px solid black;
-    margin: 0;
+label{
+    display: inline;
 }
-
-td {
-    height: 20px;
-    width: 20px;
-    max-width: 20px;
-    max-height: 20px;
-    min-height: 20px;
-    min-width: 20px;
+input{
+    width: 100%;
 }
-
-td.bordered {
-    border: 1px solid black;
-}
-
-td.start { background-color: blue; border-color: blue; }
-td.end { background-color: blue; border-color: blue; }
-td.path { background-color: blue; border-color: blue; }
-td.open { background-color: green; border-color: green; }
-td.closed{ background-color: red; border-color: red; }
-td.wall{ background-color: black; border-color: black; }
 
 canvas {
     border: 1px solid black;

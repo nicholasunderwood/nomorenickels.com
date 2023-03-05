@@ -1,15 +1,15 @@
 class Vector2 {
     constructor(x, y) { this.x = x; this.y = y }
 
-    mag() { return Math.hypot(this.x, this.y)}
+    mag() { return Math.hypot(this.x, this.y) }
 
     add(other) { return new Vector2(this.x + other.x, this.y + other.y); }
     sub(other) { return new Vector2(this.x - other.x, this.y - other.y); }
     mult(a) { return new Vector2(this.x * a, this.y * a); }
     neg() { return new Vector2(-this.x, -this.y); }
     dup() { return new Vector2(this.x, this.y); }
-
-    norm() { let mag = this.mag(); return new Vector2(this.x/mag, this.y/mag); }
+    str(k = 2) { let a = Math.pow(10, k); return `{${Math.round(this.x * a) / a}, ${Math.round(this.y * a) / a}}` }
+    norm() { let mag = this.mag(); return new Vector2(this.x / mag, this.y / mag); }
 }
 
 class BezierCurve {
@@ -42,219 +42,354 @@ class BezierCurve {
     }
 }
 
-const DragType = { Anchor: "Anchor", Control: "Control" };
+var cnvs = $('main');
 
-var dragType = DragType.Anchor;
 var draggingPoint = null;
-var followingPoint1 = null;
-var followingPoint2 = null;
+var origDrag = null;
+var dragPointIndex;
+var isSmoothing = false;
+
+
+var aDiff = null;
+var bDiff = null;
+var cDiff = null;
 
 const splines = [];
-const hoverDistance = 30;
+const hoverDistance = 20;
 const splineSize = 50;
-const pointsPerSpline = 30;
-
+const pointsPerSpline = 100;
+var minDrawDist = 10;
 
 function setup() {
-    main = $('main');
-    createCanvas(main.width(), main.height());
+    createCanvas(cnvs.width(), cnvs.height());
+
     let spline = new BezierCurve();
     spline.addPoint(new Vector2(100.0, 100.0));
-    spline.addPoint(new Vector2(400.0, 200.0));
-    spline.addPoint(new Vector2(200.0, 400.0));
-    spline.addPoint(new Vector2(500.0, 500.0));
+    spline.addPoint(new Vector2(250.0, 150.0));
+    spline.addPoint(new Vector2(150.0, 300.0));
+    spline.addPoint(new Vector2(300.0, 300.0));
     splines.push(spline);
+    addPoint(450, 450);
+    addPoint(650, 300);
     drawSplines();
 }
 
 function draw() {
-    background(220);
-    let lastPoint;    
+    background(150);
+
     stroke(0);
-
-    // for(let a=0; a < width; a++){
-    //     for(let b = 0; b < height; b++){
-    //         for (spline in splines) {
-    //             spline = splines[spline];
-    //             for (let i = 1; i < spline.size(); i++) {
-    //                 if (isInline(new Vector2(a,b), spline.getWaypoint(i - 1), spline.getWaypoint(i))) {
-    //                     set(a,b,0);
-    //                     break;
-    //                 }
-    //                 set(a,b, 220)
-    //             }
-    //         }
-    //     }
-    // }
-    // updatePixels();
-
+    fill(0);
     drawSplines();
     
     stroke(100);
-    splines.forEach(spline => {
-        spline.waypoints.forEach(point => {
-            if (lastPoint != null) {
-                line(point.x, point.y, lastPoint.x, lastPoint.y);
-            }
-            lastPoint = point;
-            // stroke();
-        });
-        
-        spline.waypoints.forEach(point => {
-            circle(point.x, point.y, 6.0);
-        })
-    })
+    fill(255);
+    let pnts = getAllPoints();
+    if(pnts.length < 2) return;
+
+    for (let i = 0; i < pnts.length; i++) {
+        if (i != pnts.length-1) {
+            line(pnts[i].x, pnts[i].y, pnts[i+1].x, pnts[i+1].y);
+        };
+
+        circle(pnts[i].x, pnts[i].y, 8.0);
+    }
+
+    cnvs.css({'cursor': isOnWaypoint(mouseX, mouseY) ? draggingPoint ? 'grabbing' : keyIsDown(SHIFT) ? 'url(./cursor.cur), no-drop' : 'grab' : 'default'})
+
 }
 
-function mousePressed() {
-    hoverInfo = isOnWaypoint(mouseX, mouseY);
-    if(hoverInfo == null){
-        addPoint(mouseX, mouseY);
-    } else {
-        
-        let spline = splines[hoverInfo.splineIndex];
-        let point = spline.waypoints[hoverInfo.pointIndex];
-        
-        if (keyIsDown(SHIFT)) {
-            if (spline.size() <= 2) {
-                if(hoverInfo.splineIndex > 0 && hoverInfo.splineIndex < splines.length-1){
-                    splines[hoverInfo.splineIndex+1].waypoints[0] = splines[hoverInfo.splineIndex-1].lastPoint()
+function drawInlineHitbox() {
+    for (let a = 0; a < width; a++) {
+        for (let b = 0; b < height; b++) {
+            for (spline in splines) {
+                spline = splines[spline];
+                for (let i = 1; i < spline.size(); i++) {
+                    if (isInline(new Vector2(a, b), spline.getWaypoint(i - 1), spline.getWaypoint(i))) {
+                        set(a, b, 0);
+                        break;
+                    }
+                    set(a, b, 220)
                 }
-                splines.splice(hoverInfo.splineIndex, 1);
-                return;
             }
+        }
+    }
+    updatePixels();
+}
 
-            spline.removePoint(hoverInfo.pointIndex);
-            if(hoverInfo.splineIndex + 1 < splines.length){
-                let nextSplineIndex = hoverInfo.splineIndex + 1;
+function getAllPoints() {
+    return splines.reduce((a, c) => a.concat(c.waypoints), []);
+}
+
+
+function mousePressed() {
+    let mousePoint = new Vector2(mouseX, mouseY);
+    let hoverInfo = isOnWaypoint(mousePoint.x, mousePoint.y);
+    
+    // add point
+    if (hoverInfo == null) {
+        addPoint(mousePoint.x, mousePoint.y);
+        return;
+    }
+
+    let splineIndex, pointIndex;
+    [splineIndex, pointIndex] = hoverInfo;
+    
+    let spline = splines[splineIndex];
+    let point = spline.waypoints[pointIndex];
+
+    // remove point
+    if (keyIsDown(SHIFT)) {
+
+
+        let needSmoothing = !isFreePoint(splineIndex, pointIndex);
+        if (spline.size() <= 2) {
+            if (splineIndex > 0 && splineIndex < splines.length - 1) {
+                splines[splineIndex + 1].waypoints[0] = splines[splineIndex - 1].lastPoint()
+            }
+            splines.splice(splineIndex, 1);
+        } else {
+            spline.removePoint(pointIndex);
+            
+            if (point == spline.lastPoint() && splineIndex < splines.length - 1) {
+                let nextSplineIndex = splineIndex + 1;
                 console.log(hoverInfo);
                 splines[nextSplineIndex].waypoints[0] = spline.lastPoint();
             }
+            
+        }
 
+        if(needSmoothing){
+            console.log('regain continuity')
+            let isEndPoint = point == spline.lastPoint();
+            if(isEndPoint){
+
+            } else {
+                if(pointIndex != 1) maintainContinuity(splineIndex+1, 1, new Vector2(0,0), 1);
+                else maintainContinuity(splineIndex-1, splines[splineIndex-1].size()-2, new Vector2(0,0), 2);
+            }
+        }
+    } else {
+        // drag point
+        draggingPoint = point;
+        origDrag = point.dup();
+    }
+}
+
+
+
+function mouseDragged() {
+
+    if (draggingPoint == null && !isSmoothing) return;
+
+    isSmoothing = true;
+    let mousePoint = new Vector2(mouseX, mouseY);
+    let difVec = mousePoint.sub(draggingPoint);
+
+    for (let i in splines) {
+        let spline = splines[i]
+        for (let k in spline.waypoints) {
+
+            let point = spline.waypoints[k];
+            if (point.x != draggingPoint.x || point.y != draggingPoint.y) continue;
+
+            if (difVec.x != 0 || difVec.y != 0) maintainContinuity(+i, +k, difVec);
+
+            isSmoothing = false;
+            return;
+        }
+    }
+
+}
+
+
+function mouseReleased() {
+    console.log('mouse released');
+    // return;
+    if (draggingPoint == null) { return; }
+
+    let mousePoint = new Vector2(mouseX, mouseY);
+    let difVec = mousePoint.sub(draggingPoint);
+
+    // draggingPoint.x += difVec.x;
+    // draggingPoint.y += difVec.y;
+
+    for (let i in splines) {
+        let spline = splines[i]
+        for (let k in spline.waypoints) {
+
+            let point = spline.waypoints[k];
+            if (point.x != draggingPoint.x || point.y != draggingPoint.y) continue;
+
+            maintainContinuity(+i, +k, difVec);
+
+
+            draggingPoint = null;
+            origDrag = null;
 
             return;
         }
-
-        draggingPoint = point;
     }
-
 }
 
-
-
-
-function maintainContinuity(splineIndex, pointIndex, trans, propCode=3) {
+function maintainContinuity(splineIndex, pointIndex, trans, propCode = 3) {
     let spline = splines[splineIndex]
 
+
+    // console.log((pointIndex > 1 && pointIndex < spline.size() - 2),(splineIndex == 0 && pointIndex == 0),(splineIndex == splines.length - 1 && pointIndex == spline.size() - 1));
     // point has no effect on continuity
-    if(
-        (pointIndex > 1 && pointIndex < spline.size() - 1) ||
-        (splineIndex == 1 && pointIndex == 1) ||
-        (splineIndex = splines.length - 1 && pointIndex == spline.size() - 1)
-    ){ return; }
-
-    isEndPoint = pointIndex == 1 || pointIndex == spline.length-1
 
 
-    maintainContinuity()
-    if(isEndPoint)
+    console.log((propCode == 3 ? 'drive' : 'drag ' + (propCode == 1 ? 'back' : 'fwd')) + ` <${splineIndex}, ${pointIndex}>`, 'by', trans.str(3));
+    splines[splineIndex].waypoints[pointIndex].x += trans.x
+    splines[splineIndex].waypoints[pointIndex].y += trans.y
+
+    console.log(splineIndex, pointIndex, isFreePoint(splineIndex, pointIndex))
+
+    if (isFreePoint(splineIndex, pointIndex)) {
+        console.log('free point'); 
+        return; 
+    }
 
 
-}
-
-function relativeWaypoint(splineIndex, pointIndex, delta){
-    if(delta == 0) return (splineIndex, pointIndex);
-    if(delta > 0)
-}
-
-function mouseDragged(){
-    if(draggingPoint == null) return;
-
-    let difVec = new Vector2(mouseX, mouseY).sub(draggingPoint);
+    // console.log((propCode == 3) ? 'drive' : 'drag', splineIndex, pointIndex, trans);
+    let isEndPoint = pointIndex == 0 || pointIndex == spline.size() - 1;
+    let isAnchorPoint = pointIndex == 1 || pointIndex == spline.size() - 2;
+    // console.log('end point:', isEndPoint);
 
 
+    let nextSplineIndex, nextTrans;
+    let nextPointIndex = null;
 
-    let trans = [draggingPoint];
-    let rot = [];
-    console.log(draggingPoint)
+    if (propCode & 1 == 1 && (isEndPoint || (pointIndex == 1 && splineIndex != 0))) {
+        // console.log(splineIndex, pointIndex, 'prop back')
+        nextSplineIndex = (!isEndPoint || pointIndex == 0) ? splineIndex - 1 : splineIndex;
+        nextPointIndex = splines[nextSplineIndex].size() - 2;
 
-    for(let i in splines){
-        let spline = splines[i]
-        for(let k in spline.waypoints){
-            let point = spline.waypoints[i];
-            if(point.x == draggingPoint.x && point.y == draggingPoint.y) continue;
-            console.log(point, point == draggingPoint);
+        if (isAnchorPoint) {
+            let prevPoint = splines[splineIndex].firstControl();
+            let waypoint = splines[splineIndex].firstPoint();
+            let nextPoint = splines[nextSplineIndex].lastControl();
 
-            if(k == 0 || k == spline.size()-1){
-                //waypoint
-                // trans.push(spline.waypoints[k == 0 ? k + 1 : k - 1])
-            }
-            
-            if(k == 1 || k == spline.size()-2){
-                // control
-                // rot.push(spline.waypoints[k == 1 ? k - 1 : k + 1])
-            }
+            let mag = nextPoint.sub(waypoint).mag()
+            let newPoint = prevPoint.sub(waypoint).norm().mult(-mag).add(waypoint);
+            nextTrans = newPoint.sub(nextPoint);
+        } else {
+            nextTrans = trans
+        }
+
+        if (nextSplineIndex >= 0) {
+            maintainContinuity(nextSplineIndex, nextPointIndex, nextTrans, 1);
         }
     }
 
+    if ((propCode & 2) == 2 && splineIndex != splines.length - 1 && (isEndPoint || pointIndex == spline.size() - 2)) {
+        // console.log(splineIndex, pointIndex, 'prop forward')
+        nextSplineIndex = (pointIndex == 0) ? splineIndex : splineIndex + 1;
+        nextPointIndex = 1;
+        if (isAnchorPoint) {
+            let prevPoint = splines[splineIndex].lastControl();
+            let waypoint = splines[nextSplineIndex].firstPoint();
+            let nextPoint = splines[nextSplineIndex].firstControl();
 
-    for(i in trans){
-        trans[i].x += difVec.x;
-        trans[i].y += difVec.y;
+            let mag = nextPoint.sub(waypoint).mag()
+            let newPoint = prevPoint.sub(waypoint).norm().mult(-mag).add(waypoint);
+            nextTrans = newPoint.sub(nextPoint);
+        } else {
+            nextTrans = trans
+        }
+        if (nextSplineIndex < splines.length) {
+            maintainContinuity(nextSplineIndex, nextPointIndex, nextTrans, 2)
+        }
     }
 
-    for(i in rot){
+}
 
-    }
+function isFreePoint(splineIndex, pointIndex){
+    let spline = splines[splineIndex];
+    return (
+        (pointIndex > 1 && pointIndex < spline.size() - 2)      ||
+        (splineIndex == 0 && pointIndex < spline.size() - 2)    ||
+        (splineIndex == splines.length - 1 && pointIndex > 1)
+    );
+}
 
-    draggingPoint.x = mouseX;
-    draggingPoint.y = mouseY;
+const maxPointsPerSpline = 50;
+const minPointsPerSpline = 5;
+
+function drawSplinesSmart(){
+    if (splines.length == 0) return;
+    var points = new Array(pointsPerSpline);
+    splines.forEach(spline => {
+        points[0] = spline.getPoint(0);
+        points[pointsPerSpline-1] = spline.getPoint(1);
+
+        for(let i = 0; i < maxPointsPerSpline; i += maxPointsPerSpline/minPointsPerSpline){
+            points[i] = spline.getPoint()
+        }
+
+        Map.clear();
+
+    });
 }
 
 function drawSplines() {
     if (splines.length == 0) return;
     let lastPoint, point;
+
     for (spline in splines) {
         spline = splines[spline];
         lastPoint = spline.getWaypoint(0);
         for (let i = 0; i <= 1; i += 1.0 / pointsPerSpline) {
             point = spline.getPoint(i);
-            circle(point.x, point.y, 3.0);
+            if(point.sub(lastPoint).mag() < minDrawDist) continue;
+
+            circle(point.x, point.y, 2.0);
             line(point.x, point.y, lastPoint.x, lastPoint.y);
             lastPoint = point;
         }
+        
         point = spline.lastPoint();
         line(point.x, point.y, lastPoint.x, lastPoint.y);
     }
 }
 
 function isOnWaypoint(x, y) {
+
+    let minDist = Number.MAX_VALUE;
+    let minPoint = null;
+    let mousePoint = new Vector2(x, y);
+
     for (splineIndex in splines) {
-        for (pointIndex in splines[splineIndex].waypoints) {
+        for (let pointIndex = (splineIndex == 0) ? 0 : 1; pointIndex < splines[splineIndex].size(); pointIndex++) {
+
             point = splines[splineIndex].waypoints[pointIndex];
-            if (Math.sqrt(Math.pow(point.x - x, 2) + Math.pow(point.y - y, 2)) < hoverDistance) {
-                return {'splineIndex': +splineIndex, 'pointIndex': +pointIndex};
+            let dist = mousePoint.sub(point).mag();
+
+            if (dist < minDist) {
+                minDist = dist;
+                minPoint = [+splineIndex, +pointIndex]
             }
         }
     }
-    return null;
+
+    return (minDist < hoverDistance) ? minPoint : null;
 }
 
 function addPoint(x, y) {
     var point = new Vector2(x, y);
-    draggingPoint = point;
     for (spline in splines) {
         spline = splines[spline];
         for (let i = 1; i < spline.size(); i++) {
             if (isInline(point, spline.getWaypoint(i - 1), spline.getWaypoint(i))) {
                 spline.insertPoint(point, i);
+                draggingPoint = point;
                 return;
             }
         }
     }
 
     let newCurve = new BezierCurve();
-    
+
     if (splines.length > 0) {
         let lastSpline = splines[splines.length - 1];
 
@@ -270,12 +405,12 @@ function addPoint(x, y) {
 }
 
 function isInline(point, point1, point2) {
-    if(
+    if (
         point.x > Math.max(point1.x, point2.x) ||
         point.x < Math.min(point1.x, point2.x) ||
         point.y > Math.max(point1.y, point2.y) ||
         point.y < Math.min(point1.y, point2.y)
-    ){
+    ) {
         return false;
     }
     let ux = Math.abs((point.x - point1.x) / (point2.x - point1.x));
@@ -287,8 +422,14 @@ function isInline(point, point1, point2) {
 }
 
 $(document).ready(() => {
-    console.log('ready')
+    console.log('load');
+    let range = $('#res');
 
-});
+    range.val(100-minDrawDist);
+    $('#val').text(minDrawDist);
 
-console.log('load')
+
+    range.on('input', (e) => {
+        minDrawDist = 100 - +e.target.value;
+    })
+})
