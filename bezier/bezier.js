@@ -122,6 +122,8 @@ function getAllPoints() {
 
 
 function mousePressed() {
+    if(mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height){ return; }
+
     let mousePoint = new Vector2(mouseX, mouseY);
     let hoverInfo = isOnWaypoint(mousePoint.x, mousePoint.y);
     
@@ -139,35 +141,37 @@ function mousePressed() {
 
     // remove point
     if (keyIsDown(SHIFT)) {
-
-
-        let needSmoothing = !isFreePoint(splineIndex, pointIndex);
+        let needSmoothing = true;
         if (spline.size() <= 2) {
             if (splineIndex > 0 && splineIndex < splines.length - 1) {
                 splines[splineIndex + 1].waypoints[0] = splines[splineIndex - 1].lastPoint()
             }
             splines.splice(splineIndex, 1);
         } else {
-            spline.removePoint(pointIndex);
+            needSmoothing = !isFreePoint(splineIndex, pointIndex);
             
-            if (point == spline.lastPoint() && splineIndex < splines.length - 1) {
-                let nextSplineIndex = splineIndex + 1;
-                console.log(hoverInfo);
-                splines[nextSplineIndex].waypoints[0] = spline.lastPoint();
-            }
+            // if (pointIndex == spline.lastPoint() && splineIndex < splines.length - 1) {
+            //     let nextSplineIndex = splineIndex + 1;
+            //     splines[nextSplineIndex].waypoints[0] = spline.lastPoint();
+            // }
             
         }
-
+        
         if(needSmoothing){
-            console.log('regain continuity')
             let isEndPoint = point == spline.lastPoint();
-            if(isEndPoint){
+            console.log('regain continuity', isEndPoint);
+            // let isAnchorPoint = pointIndex == 1 || pointIndex == spline.size() - 2;
 
+            if(isEndPoint){
+                splines[splineIndex + 1].waypoints[0] = spline.lastControl();
             } else {
-                if(pointIndex != 1) maintainContinuity(splineIndex+1, 1, new Vector2(0,0), 1);
-                else maintainContinuity(splineIndex-1, splines[splineIndex-1].size()-2, new Vector2(0,0), 2);
+                let trans = spline.getWaypoint(pointIndex+1).mult(0.5).add(spline.getWaypoint(pointIndex-1).mult(0.5)).sub(point);
+                maintainContinuity(splineIndex, pointIndex, trans, 3);
             }
         }
+
+
+        spline.removePoint(pointIndex);
     } else {
         // drag point
         draggingPoint = point;
@@ -377,12 +381,13 @@ function isOnWaypoint(x, y) {
 
 function addPoint(x, y) {
     var point = new Vector2(x, y);
+    draggingPoint = point;
+
     for (spline in splines) {
         spline = splines[spline];
         for (let i = 1; i < spline.size(); i++) {
             if (isInline(point, spline.getWaypoint(i - 1), spline.getWaypoint(i))) {
                 spline.insertPoint(point, i);
-                draggingPoint = point;
                 return;
             }
         }
@@ -420,6 +425,7 @@ function isInline(point, point1, point2) {
     }
     return Math.abs(ux - uy) < 0.2;
 }
+
 
 $(document).ready(() => {
     console.log('load');
