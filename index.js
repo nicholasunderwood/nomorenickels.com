@@ -61,6 +61,7 @@ function animateBackground(index) {
         let transState = Math.round(step/50*gradLength);
         let heading = Math.floor(lastState.heading + step*degPerStep);
         let pos =  Math.floor(lastState.pos + step*percentPerStep);
+
         if(usePride){
             $('#container').css(getFlagLinearGradientStyle(pos, heading, lastPage, index, transState));
         } else {
@@ -93,8 +94,8 @@ function getFlagLinearGradientStyle(pos, heading, lastPage, nextPage, transState
             ${heading}deg
             ,var(--bg-color-1)
             ,var(--bg-color-1) ${pos}%
-            ${getFlagGradient(pos, prideOrder[lastPage], gradLength-transState)}
-            ${getFlagGradient(pos+gradLength-transState, prideOrder[nextPage], transState)}
+            ${transState != gradLength ? getFlagGradient(pos, prideOrder[lastPage], gradLength-transState) : ''}
+            ${transState != 0 ? getFlagGradient(pos+gradLength-transState, prideOrder[nextPage], transState) : ''}
             ,var(--bg-color-1) ${pos+gradLength}%
             ,var(--bg-color-1)
         )`
@@ -104,7 +105,7 @@ function getFlagLinearGradientStyle(pos, heading, lastPage, nextPage, transState
 function getFlagGradient(start, flag, flagWidth){
     let colors = pride[flag];
     let p = flagWidth/colors.length;
-    return colors.map((hex,i) => `,${hex} ${start+p*i}% ,${hex} ${Math.round(start+p*(i+1))}% `)
+    return colors.map((hex,i) => `,${hex} ${start+p*i}% ,${hex} ${Math.round(start+p*(i+1))}%`).reduce((a,b) => a+b);
 }
 
 var lastPage = $('#about');
@@ -126,7 +127,7 @@ const animationStates = [
 ];
 
 const pride = {
-    'bi': ['#D00070', '#8C4799', '#0032A0'],
+    'bi': ['#D00070', '#D00070', '#8C4799', '#0032A0', '#0032A0'],
     'lgbt': ['#FF0018', '#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D'],
     'ace': ['#000000', '#A4A4A4', '#FFFFFF', '#810081'],
     'trans': ['#55CDFC', '#F7A8B8', '#FFFFFF', '#F7A8B8', '#55CDFC']

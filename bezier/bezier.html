@@ -8,10 +8,16 @@
 
 <body>
     <div id="main">
-        <form>
-            <label for="res`" class="form-label">Draw Distance: <span id="val">30</span></label>
-            <input type="range" min="0" max="99" default="70" class="form-range" id="res">
-        </form>
+        <div class="d-flex flex-row">
+            <div class="mr-auto">
+                <label for="res`" class="form-label">Draw Distance: <span id="val">30</span></label>
+                <input type="range" min="0" max="99" default="70" class="form-range" id="res">
+            </div>
+            <div class="btn-group my-2" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" id="clear">Clear</button>
+                <button type="button" class="btn btn-secondary" id="rm">Remove Point</button>
+            </div>
+        </div>
         <main></main>
     </div>
     <script src="../jquery-3.3.1.js"></script>
