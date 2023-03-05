@@ -8,6 +8,7 @@ class Vector2 {
     mult(a) { return new Vector2(this.x * a, this.y * a); }
     neg() { return new Vector2(-this.x, -this.y); }
     dup() { return new Vector2(this.x, this.y); }
+    map(A) { return new Vector2(this.x * A[0][0] + this.y * A[0][1], this.x * A[1][0] + this.y * A[1][1])}
     str(k = 2) { let a = Math.pow(10, k); return `{${Math.round(this.x * a) / a}, ${Math.round(this.y * a) / a}}` }
     norm() { let mag = this.mag(); return new Vector2(this.x / mag, this.y / mag); }
 }
@@ -61,16 +62,17 @@ const pointsPerSpline = 100;
 var minDrawDist = 10;
 
 function setup() {
-    createCanvas(cnvs.width(), cnvs.height());
-
+    p = createCanvas(cnvs.width(), cnvs.height());
+    // p.parent('#main');
     let spline = new BezierCurve();
-    spline.addPoint(new Vector2(100.0, 100.0));
-    spline.addPoint(new Vector2(250.0, 150.0));
-    spline.addPoint(new Vector2(150.0, 300.0));
-    spline.addPoint(new Vector2(300.0, 300.0));
+    let bound = new Vector2(width, height)
+    spline.addPoint(bound.map([[0.1,0], [0,0.1]]));
+    spline.addPoint(bound.map([[0.4,0], [0,0.1]]));
+    spline.addPoint(bound.map([[0.1,0], [0,0.8]]));
+    spline.addPoint(bound.map([[0.4,0], [0,0.4]]));
     splines.push(spline);
-    addPoint(450, 450);
-    addPoint(650, 300);
+    addPoint(bound.map([[0.7,0], [0,0.7]]));
+    addPoint(bound.map([[0.9,0], [0,0.1]]));
     drawSplines();
 }
 
@@ -129,7 +131,7 @@ function mousePressed() {
     
     // add point
     if (hoverInfo == null) {
-        addPoint(mousePoint.x, mousePoint.y);
+        addPoint(new Vector2(mousePoint.x, mousePoint.y));
         return;
     }
 
@@ -379,8 +381,7 @@ function isOnWaypoint(x, y) {
     return (minDist < hoverDistance) ? minPoint : null;
 }
 
-function addPoint(x, y) {
-    var point = new Vector2(x, y);
+function addPoint(point) {
     draggingPoint = point;
 
     for (spline in splines) {
